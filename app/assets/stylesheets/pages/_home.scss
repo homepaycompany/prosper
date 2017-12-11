@@ -1,1 +1,19 @@
-// Specific CSS for your home-page
+.banner {
+  min-height: calc(100vh - 70px);
+  background-image: url("https://usedraft.co/img/hero@1x.png");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .banner-section {
+    padding: 50px;
+    h1 {
+      font-weight: bold;
+      font-size: 52px;
+    }
+    p {
+      font-size: 28px;
+    }
+  }
+}
