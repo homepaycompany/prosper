@@ -26,8 +26,9 @@
   }
   p {
     font-size: 20px;
+    text-align: justify;
   }
-  strong {
+  strong, a {
     color: $green;
   }
 }
