@@ -17,3 +17,76 @@
     }
   }
 }
+
+// General stylesheet applied to landing section
+.landing-section {
+  h1 {
+    font-weight: bold;
+    font-size: 42px;
+  }
+  p {
+    font-size: 20px;
+  }
+  strong {
+    color: $green;
+  }
+}
+
+.landing-section-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.landing-section-media {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+// Specific stylesheet applied to landing section
+.landing-real-estate {
+  min-height: 450px;
+  background-color: #FBFBFB;
+  .landing-section-content, .landing-section-media {
+    height: 450px;
+  }
+}
+
+.landing-studio {
+  min-height: 450px;
+  background-color: white;
+  .landing-section-content, .landing-section-media {
+    height: 450px;
+  }
+}
+
+.landing-products {
+  min-height: 650px;
+  background-color: #FBFBFB;
+  img {
+    max-width: 90%;
+    position: relative;
+    z-index: 10;
+  }
+  // .abstract {
+  //   background: linear-gradient(324.25deg, #9CFFEF 0%, #DCE5FF 74.16%);
+  //   height: 400px;
+  //   width: 400px;
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0;
+  //   transform: rotate(-45deg);
+  // }
+  .landing-section-content, .landing-section-media {
+    height: 650px;
+  }
+}
+
+.landing-team {
+  min-height: 450px;
+  background-color: white;
+  .landing-section-content, .landing-section-media {
+    height: 450px;
+  }
+}
