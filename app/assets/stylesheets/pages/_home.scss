@@ -1,6 +1,5 @@
 .banner {
   min-height: calc(100vh - 70px);
-  background-image: url("https://usedraft.co/img/hero@1x.png");
   background-size: cover;
   display: flex;
   align-items: center;
@@ -30,6 +29,10 @@
   }
   strong, a {
     color: $green;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 
