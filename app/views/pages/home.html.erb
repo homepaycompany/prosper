@@ -4,6 +4,10 @@
       Reshaping real estate
     </h1>
     <p>We are building great products to rethink real estate.</p>
+    <%= form_tag subscribe_path, class: "subscription-form" do %>
+      <%= text_field_tag 'email', nil, placeholder: "Votre email", id: "email_trial_landing" %>
+      <%= button_tag "S'inscrire", id: "submit" %>
+    <% end %>
   </div>
 </section>
 
