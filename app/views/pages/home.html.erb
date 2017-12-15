@@ -3,11 +3,15 @@
     <h1>
       Reshaping real estate
     </h1>
-    <p>We are building great products to rethink real estate.</p>
-    <%= form_tag subscribe_path, class: "subscription-form" do %>
-      <%= text_field_tag 'email', nil, placeholder: "Votre email", id: "email_trial_landing" %>
-      <%= button_tag "S'inscrire", id: "submit" %>
-    <% end %>
+    <h3>We are building great products to rethink real estate.</H3>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        <%= form_tag subscribe_path, class: "subscription-form" do %>
+          <%= text_field_tag 'email', nil, placeholder: "Your email", id: "email_subscription" %>
+          <%= button_tag "Stay tuned", id: "submit" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -73,4 +77,5 @@
         <p>If you are passionate about reinventing an entire industry through innovative technology, Build and our studio companies are the places for you. Check out our <%= link_to "open positions", jobs_path %>.</p>
       </div>
     </div>
-  </div></section>
+  </div>
+</section>
