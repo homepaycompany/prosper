@@ -1,0 +1,82 @@
+.subscription-form {
+  display: flex;
+  justify-content: center;
+  input {
+    background-color: white;
+    color: black;
+    border: solid 1px $green;
+    font-size: 15px;
+    border-radius: 6px 0px 0px 6px;
+    flex: 1;
+    width: 100%;
+    max-width: calc(100% - 140px);
+    height: 45px;
+    padding: 0px 10px;
+  }
+  button {
+    background-color: $green;
+    color: white;
+    border: solid 1px $green;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0px 10px;
+    border-radius: 0px 6px 6px 0px;
+    height: 45px;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: $dark-green;
+    }
+  }
+}
+
+.access-form {
+  margin: 30px 0px;
+  border-radius: 6px;
+  background-color: white;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  color: $black;
+  .access-form-title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    h1 {
+      margin: 0px;
+      padding: 10px;
+      border-radius: 6px 6px 0px 0px;
+      background-color: $green;
+      font-size: 20px;
+      color: white;
+    }
+  }
+  .access-form-inputs {
+    padding: 20px 30px;
+    input {
+      width: 100%;
+      height: 45px;
+      margin: 10px 0px;
+      border: none;
+      border-bottom: solid 1px #e5e5e5;
+      font-size: 15px;
+      &:focus {
+        transition: all 0.4s ease;
+        box-shadow: none;
+        outline: none;
+        border-bottom: solid 1px $green;
+      }
+    }
+  }
+  button {
+    padding: 0px 10px;
+    border-radius: 6px;
+    height: 45px;
+    background-color: $green;
+    color: white;
+    border: solid 1px $green;
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: $dark-green;
+    }
+  }
+}

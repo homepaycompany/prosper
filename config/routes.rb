@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get 'access' => 'pages#access'
   get 'contact' => 'pages#contact'
   get 'jobs' => 'pages#jobs'
+  post :subscribe, controller: :subscriptions, action: :subscribe
+  post :access_request, controller: :accesses, action: :access_request
 end
