@@ -6,4 +6,4 @@ import { smoothAlert } from "../shared/alert.js"
 smoothAlert();
 
 // Javascript for animate.css when scrolling to identified sections
-import { waypoint } from "../shared/waypoint.js"
+import "../shared/landing_page.js"

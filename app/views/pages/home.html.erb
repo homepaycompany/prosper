@@ -27,7 +27,9 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-6 landing-section-media">
-        <%= image_tag "landing-real-estate.png" %>
+        <div id="landing-real-estate-media" style="background-image: url(<%= image_url "landing-real-estate.png" %>)">
+          <%= image_tag "landing-real-estate-content.png", class: 'hidden' %>
+        </div>
       </div>
     </div>
   </div>
@@ -37,7 +39,9 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-6 landing-section-media">
-        <%= image_tag "landing-studio.png" %>
+        <div id="landing-studio-media" style="background-image: url(<%= image_url "landing-studio.png" %>)">
+          <%= image_tag "landing-studio-content.png", class: 'hidden' %>
+        </div>
       </div>
       <div class="col-xs-12 col-sm-6 landing-section-content">
         <h1>
@@ -60,36 +64,20 @@
       </div>
       <div class="col-xs-12 col-sm-6 landing-section-media">
         <div id="landing-products-media" style="background-image: url(<%= image_url "landing-expertise.png" %>)">
-          <div class="row">
-            <div class="col-xs-4">
-              <%= image_tag "landing-expertise-property-development.png", class: 'hidden' %>
-            </div>
-            <div class="col-xs-4">
-              <%= image_tag "landing-expertise-broker.png", class: 'hidden' %>
-            </div>
-            <div class="col-xs-4">
-              <%= image_tag "landing-expertise-construction.png", class: 'hidden' %>
-            </div>
-            <div class="col-xs-4">
-              <%= image_tag "landing-expertise-fund.png", class: 'hidden' %>
-            </div>
-            <div class="col-xs-4">
-              <%= image_tag "landing-expertise-banks.png", class: 'hidden' %>
-            </div>
-            <div class="col-xs-4">
-              <%= image_tag "landing-expertise-insurance.png", class: 'hidden' %>
-            </div>
-          </div>
+          <%= image_tag "landing-expertise-content.png", class: 'hidden' %>
         </div>
       </div>
     </div>
-  </div></section>
+  </div>
+</section>
 
 <section class="landing-section landing-team">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-6 landing-section-media">
-        <%= image_tag "landing-people.png" %>
+        <div id="landing-team-media" style="background-image: url(<%= image_url "landing-team.png" %>)">
+          <%= image_tag "landing-team-content.png", class: 'hidden' %>
+        </div>
       </div>
       <div class="col-xs-12 col-sm-6 landing-section-content">
         <h1>

@@ -61,6 +61,21 @@
   .landing-section-content, .landing-section-media {
     height: 450px;
   }
+  #landing-real-estate-media {
+    height: 450px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    img {
+      -webkit-animation-duration: 3s;
+      -moz-animation-duration: 3s;
+      -o-animation-duration: 3s;
+      -ms-animation-duration: 3s;
+    }
+  }
 }
 
 .landing-studio {
@@ -68,6 +83,21 @@
   background-color: white;
   .landing-section-content, .landing-section-media {
     height: 450px;
+  }
+  #landing-studio-media {
+    height: 450px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    img {
+      -webkit-animation-duration: 3s;
+      -moz-animation-duration: 3s;
+      -o-animation-duration: 3s;
+      -ms-animation-duration: 3s;
+    }
   }
 }
 
@@ -78,13 +108,17 @@
     height: 450px;
   }
   #landing-products-media {
+    height: 450px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 90%;
     padding: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     img {
-      max-width: 120px;
-      margin: 20px 0px;
+      max-width: 90%;
+      max-height: 70%;
       -webkit-animation-duration: 3s;
       -moz-animation-duration: 3s;
       -o-animation-duration: 3s;
@@ -98,5 +132,22 @@
   background-color: white;
   .landing-section-content, .landing-section-media {
     height: 450px;
+  }
+  #landing-team-media {
+    height: 450px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    img {
+      max-width: 90%;
+      -webkit-animation-duration: 3s;
+      -moz-animation-duration: 3s;
+      -o-animation-duration: 3s;
+      -ms-animation-duration: 3s;
+    }
   }
 }
