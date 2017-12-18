@@ -72,24 +72,24 @@
 }
 
 .landing-products {
-  min-height: 650px;
+  min-height: 450px;
   background-color: #FBFBFB;
-  img {
-    max-width: 90%;
-    position: relative;
-    z-index: 10;
-  }
-  // .abstract {
-  //   background: linear-gradient(324.25deg, #9CFFEF 0%, #DCE5FF 74.16%);
-  //   height: 400px;
-  //   width: 400px;
-  //   position: absolute;
-  //   left: 0;
-  //   top: 0;
-  //   transform: rotate(-45deg);
-  // }
   .landing-section-content, .landing-section-media {
-    height: 650px;
+    height: 450px;
+  }
+  #landing-products-media {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    padding: 50px;
+    img {
+      max-width: 120px;
+      margin: 20px 0px;
+      -webkit-animation-duration: 3s;
+      -moz-animation-duration: 3s;
+      -o-animation-duration: 3s;
+      -ms-animation-duration: 3s;
+    }
   }
 }
 
