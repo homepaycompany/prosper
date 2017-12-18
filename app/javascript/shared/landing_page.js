@@ -28,7 +28,7 @@ const realEstateWaypoint = new Waypoint({
     const image = document.querySelector('#landing-real-estate-media img');
     fadeInRight(image);
   },
-  offset: 200
+  offset: 300
 })
 
 const studioWaypoint = new Waypoint({
@@ -37,7 +37,7 @@ const studioWaypoint = new Waypoint({
     const image = document.querySelector('#landing-studio-media img');
     fadeInLeft(image);
   },
-  offset: 200
+  offset: 300
 })
 
 const productsWaypoint = new Waypoint({
@@ -46,7 +46,7 @@ const productsWaypoint = new Waypoint({
     const images = Array.from(document.querySelectorAll('#landing-products-media img'));
     images.forEach(image => fadeIn(image));
   },
-  offset: 200
+  offset: 300
 })
 
 const teamWaypoint = new Waypoint({
@@ -55,5 +55,5 @@ const teamWaypoint = new Waypoint({
     const images = Array.from(document.querySelectorAll('#landing-team-media img'));
     images.forEach(image => fadeIn(image));
   },
-  offset: 400
+  offset: 600
 })
