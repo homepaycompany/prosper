@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   # Studio platorm
   resources :flats, only: [:show, :index]
   get 'profile' => 'devise'
-  get 'wishlist' => 'flats#wishlist'
+  get 'wishlist' => 'wishes#index'
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115102331) do
+ActiveRecord::Schema.define(version: 20180115131702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(version: 20180115102331) do
   end
 
   create_table "flats", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "address"
+    t.integer "price"
+    t.float "average_price"
+    t.integer "size"
+    t.float "average_size"
+    t.integer "floor"
+    t.integer "rooms"
+    t.float "average_rooms"
+    t.integer "bedrooms"
+    t.float "average_bedrooms"
+    t.datetime "date"
+    t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -58,4 +72,15 @@ ActiveRecord::Schema.define(version: 20180115102331) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wishes", force: :cascade do |t|
+    t.bigint "flat_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flat_id"], name: "index_wishes_on_flat_id"
+    t.index ["user_id"], name: "index_wishes_on_user_id"
+  end
+
+  add_foreign_key "wishes", "flats"
+  add_foreign_key "wishes", "users"
 end

@@ -1,0 +1,11 @@
+<div class="section">
+  <% if @wishes.size == 0 %>
+    <p class="text-center">
+      Vous n'avez pas encore sauvegardé d'annonces
+    </p>
+  <% else %>
+    <% @wishes.each do |wish| %>
+      <% wish.flat.title %>
+    <% end %>
+  <% end %>
+</div>
