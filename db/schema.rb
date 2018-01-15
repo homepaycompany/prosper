@@ -43,6 +43,49 @@ ActiveRecord::Schema.define(version: 20180115131702) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "positions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "project_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_positions_on_project_id"
+    t.index ["user_id"], name: "index_positions_on_user_id"
+  end
+
+  create_table "project_steps", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "step_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_steps_on_project_id"
+    t.index ["step_id"], name: "index_project_steps_on_step_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.string "segment"
+    t.string "subsegment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "status"
+    t.string "resources"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -72,6 +115,7 @@ ActiveRecord::Schema.define(version: 20180115131702) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+
   create_table "wishes", force: :cascade do |t|
     t.bigint "flat_id"
     t.bigint "user_id"
@@ -83,4 +127,5 @@ ActiveRecord::Schema.define(version: 20180115131702) do
 
   add_foreign_key "wishes", "flats"
   add_foreign_key "wishes", "users"
+
 end
