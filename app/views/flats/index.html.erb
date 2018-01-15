@@ -20,6 +20,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
+        <% @flats.each do |flat| %>
         <div class="row">
           <div class="col-md-3">
             <div class="box-col-3">
@@ -29,7 +30,7 @@
           <div class="col-md-6">
             <div class="box-col-6-3">
               <h1>Descriptif</h1>
-              <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque voluptas possimus numquam unde nobis, delectus est, sint commodi reiciendis, quo enim laudantium perspiciatis provident quaerat perferendis, dolores laboriosam quisquam repellendus!
+              <h2><%= flat.description %>
               </h2>
             </div>
           </div>
@@ -49,14 +50,14 @@
                   <span class="bolder">* Adresse :</span>
                 </div>
                 <div class="col-md-6 ">
-                  75007 PARIS
+                  <%= flat.address %>
                   <!-- il faut intergrer le code erb pour recuperer l'adresse -->
                 </div>
                 <div class="col-md-6 ">
                   <span class="bolder">* Surface :</span>
                 </div>
                 <div class="col-md-6 ">
-                  230 m2
+                  <%= flat.size %>
                   <!-- il faut intergrer le code erb pour recuperer la surface -->
                 </div>
                 <div class="col-md-6 ">
@@ -70,21 +71,24 @@
                   <span class="bolder">* Prix F.A.I :</span>
                 </div>
                 <div class="col-md-6 ">
-                  230 000 €
+                  <%= flat.price %> €
                   <!-- il faut intergrer le code erb pour recuperer la surface du terrain -->
                 </div>
                 <div class="col-md-6 ">
                   <span class="bolder">* Prix m2 :</span>
                 </div>
                 <div class="col-md-6 ">
-                  1200 €
+                  <%= flat.price / flat.size  %> €
                   <!-- il faut calculer le prix au m2 et donner un code couleur si le prix au m2 est en dessous de la la moyenne -->
                 </div>
                 <div class="col-md-6 ">
                   <span class="bolder">* Date de mise en ligne :</span>
                 </div>
                 <div class="col-md-6 ">
-                  345 j
+                  <p class="<%= "days-alert"  if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) > 90   %>">
+                    <%= ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %>
+                  </p>
+
                   <!-- il faut intergrer le code erb pour recuperer le nombre de jour et definir une regle if > 90 jours cela depasse la moyenne nationale -->
                 </div>
 
@@ -97,6 +101,7 @@
             </div>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
