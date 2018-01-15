@@ -1,0 +1,114 @@
+body {
+  background-color: #F9FCFF;
+}
+
+.weekly-deals {
+  align-items: center;
+}
+
+.details {
+  align-items: center;
+}
+
+.weekly-deals h1 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #EB5757;
+  padding: 30px;
+}
+
+.details h1 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #EB5757;
+  text-decoration: underline;
+  text-decoration-color: #20E8B6;
+  padding: 30px;
+
+}
+
+.card {
+  justify-content: space-around;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 4px 4px 10px #F2F2F2;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  padding: 30px;
+  border-top: 5px solid #20E8B6;
+}
+
+.box-col-3 {
+  height: 160px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 4px 4px 10px #F2F2F2;
+  margin: 10px;
+}
+
+.box-col-6-3 h1 {
+  font-weight: bold;
+  font-size: 20px;
+  color: #EB5757;
+  text-decoration: underline;
+  padding: 2px;
+  text-decoration-color: #EB5757;
+  margin-top: 0px;
+}
+
+.box-col-6 h2 {
+  font-size: 15px;
+  padding: 2px;
+
+}
+
+.box-col-6 h1 {
+  font-weight: bold;
+  font-size: 20px;
+  color: #EB5757;
+  text-decoration: underline;
+  padding: 2px;
+  text-decoration-color: #EB5757;
+  margin-top: 0px;
+}
+
+.box-col-6-3 h2 {
+  font-size: 15px;
+  padding: 2px;
+
+}
+
+.box-col-6-3 {
+  height: 160px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 4px 4px 10px #F2F2F2;
+  margin: 10px;
+}
+
+.box-col-6 {
+  height: 268px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 4px 4px 10px #F2F2F2;
+  margin: 10px;
+  margin-top: 30px;
+}
+
+.img-box {
+  padding: 4px;
+  height: 100%;
+  width: 100%;
+}
+
+.fa-heart-o {
+  color: #20E8B6;
+}
+
+.fa-star {
+  color: #FD9659;
+}
+
+.bolder {
+  font-weight: bold;
+}
