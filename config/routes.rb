@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   post :access_request, controller: :accesses, action: :access_request
 
   # Studio platorm
-  get 'dashboard' => 'projects#index'
+  resources :flats, only: [:show, :index]
 end

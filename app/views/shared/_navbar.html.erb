@@ -9,9 +9,15 @@
 
   <!-- Right Navigation -->
   <div class="navbar-right hidden-xs hidden-sm">
-    <%= link_to "A propos", about_path, class: "navbar-item navbar-link #{active_class(about_path)}" %>
-    <%= link_to "Nous rejoindre", access_path, class: "navbar-item navbar-link #{active_class(access_path)}" %>
-    <%= link_to "Se connecter", new_user_session_path, class: "btn" %>
+    <% if current_user %>
+      <%= link_to "A propos", about_path, class: "navbar-item navbar-link #{active_class(about_path)}" %>
+      <%= link_to "S'inscrire", access_path, class: "navbar-item navbar-link #{active_class(access_path)}" %>
+      <%= link_to "Se connecter", new_user_session_path, class: "btn" %>
+    <% else %>
+      <%= link_to "A propos", about_path, class: "navbar-item navbar-link #{active_class(about_path)}" %>
+      <%= link_to "S'inscrire", access_path, class: "navbar-item navbar-link #{active_class(access_path)}" %>
+      <%= link_to "Se connecter", new_user_session_path, class: "btn" %>
+    <% end %>
   </div>
 
   <!-- Dropdown appearing on mobile only -->
