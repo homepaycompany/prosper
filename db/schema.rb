@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180115131702) do
     t.string "title"
     t.text "description"
     t.string "address"
+    t.string "url"
     t.integer "price"
     t.float "average_price"
     t.integer "size"

@@ -1,3 +1,6 @@
 <div class="section">
-
+  <div class="flat-title text-center">
+    <h1><%= "#{@flat.title} - #{@flat.price}€" %></h1>
+    <%= link_to "Voir l'annonce", @flat.url, class: "btn" %>
+  </div>
 </div>

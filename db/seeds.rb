@@ -12,7 +12,8 @@ flat_1 = Flat.create!(title: "Studio 30m2 Oberkampf", description: "Superbe
          studio de 30m² situé à Oberkampf. Travaux à prévoir", address: "20 rue Oberkampf, Paris",
          floor: 4, rooms: 2, average_rooms: 3, bedrooms: 1, average_bedrooms: 1.4,
          date: DateTime.new(2017, 6, 1, 0, 0, 0, 0), price: 9750, average_price: 10500, size: 30,
-         average_size: 45)
+         average_size: 45, image_url: "https://img6.leboncoin.fr/ad-large/103dcbddfc365bf07ddece080abea8d154b76bd1.jpg",
+         url: "https://www.leboncoin.fr/ventes_immobilieres/1302866170.htm")
 flat_2 = Flat.create!(title: "T3 de 60m2", description: "T3 très lumineux dans le 11ème arrondissement. Travaux à prévoir", address: "20 rue Parmentier, Paris",
          floor: 3, rooms: 3, average_rooms: 3, bedrooms: 2, average_bedrooms: 1.4,
          date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), price: 10050, average_price: 10500, size: 30,
