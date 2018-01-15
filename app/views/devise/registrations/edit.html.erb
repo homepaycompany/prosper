@@ -5,7 +5,7 @@
 
         <h2>Mon profil</h2>
 
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
           <%= f.error_notification %>
 
           <div class="form-inputs">
@@ -15,7 +15,7 @@
             </div>
 
             <div class="form-input">
-              <%= f.input :password, label: "Mot de passe", placeholder:"********", autocomplete: "off", required: false %>
+              <%= f.input :password, label: "Nouveau mot de passe", placeholder:"********", autocomplete: "off", required: false %>
               <i class="fa fa-lock" aria-hidden="true"></i>
             </div>
 
