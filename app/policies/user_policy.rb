@@ -1,11 +1,11 @@
-class FlatPolicy < ApplicationPolicy
+class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope
     end
   end
 
-  def show?
-    true
+  def profile?
+    user
   end
 end

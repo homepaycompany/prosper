@@ -10,9 +10,9 @@
   <!-- Right Navigation -->
   <div class="navbar-right hidden-xs hidden-sm">
     <% if current_user %>
-      <%= link_to "A propos", about_path, class: "navbar-item navbar-link #{active_class(about_path)}" %>
-      <%= link_to "S'inscrire", access_path, class: "navbar-item navbar-link #{active_class(access_path)}" %>
-      <%= link_to "Se connecter", new_user_session_path, class: "btn" %>
+      <%= link_to "Annonces", flats_path, class: "navbar-item navbar-link #{active_class(flats_path)}" %>
+      <%= link_to "Profil", profile_path, class: "navbar-item navbar-link #{active_class(profile_path)}" %>
+      <%= link_to "Se déconnecter", destroy_user_session_path, method: "delete", class: "navbar-item navbar-link #{active_class(destroy_user_session_path)}" %>
     <% else %>
       <%= link_to "A propos", about_path, class: "navbar-item navbar-link #{active_class(about_path)}" %>
       <%= link_to "S'inscrire", access_path, class: "navbar-item navbar-link #{active_class(access_path)}" %>
