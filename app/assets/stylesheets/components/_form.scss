@@ -66,7 +66,20 @@
   }
 }
 
+// Front related to login error
+.has-error {
+  label {
+    color: $red !important;
+  }
+  input {
+    border-color: $red !important;
+  }
+}
+.help-block {
+  color: $red !important;
+}
 
+// Subscription form
 .subscription-form {
   display: flex;
   justify-content: center;

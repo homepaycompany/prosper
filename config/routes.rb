@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, :skip => [:registrations]
+  devise_for :users
 
   # Marketing pages
   root to: 'pages#home'
@@ -11,6 +11,6 @@ Rails.application.routes.draw do
 
   # Studio platorm
   resources :flats, only: [:show, :index]
-  get 'profile' => 'users#profile'
+  get 'profile' => 'devise'
   get 'wishlist' => 'flats#wishlist'
 end
