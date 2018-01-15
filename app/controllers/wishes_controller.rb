@@ -1,6 +1,5 @@
 class WishesController < ApplicationController
-
-  def wishlist
+  def index
     @wishes = policy_scope(Wish)
   end
 end
