@@ -3,5 +3,5 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :omniauthable and :registerable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :invitable, :invite_for => 2.weeks
 
-  has_many :positions, dependent: :destroy
+  has_many :wishes, dependent: :destroy
 end
