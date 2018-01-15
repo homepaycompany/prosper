@@ -1,27 +1,40 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="section">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <div class="form-devise">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+        <h2>Mon profil</h2>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+        <%= simple_form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+          <div class="form-inputs">
+            <div class="form-input">
+              <%= f.input :email, required: true, autofocus: true %>
+              <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            </div>
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+            <div class="form-input">
+              <%= f.input :password, label: "Nouveau mot de passe", placeholder:"********", autocomplete: "off", required: false %>
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            </div>
+
+            <div class="form-input">
+              <%= f.input :password_confirmation, label: "Confirmation du mot de passe", placeholder:"********", required: false %>
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            </div>
+
+            <div class="form-input">
+              <%= f.input :current_password, label: "Mot de passe actuel", hint: "Nous avous besoins de votre mot de passe actuel pour confirmer vos modifications", placeholder:"********", required: true %>
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Mettre à jour" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

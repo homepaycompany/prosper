@@ -22,38 +22,46 @@ function zoomIn(item) {
 }
 
 // Javascript to launch animation effects when scrolling to identified sections
-const realEstateWaypoint = new Waypoint({
-  element: document.querySelector('.landing-real-estate'),
-  handler: function() {
-    const image = document.querySelector('#landing-real-estate-media img');
-    fadeInRight(image);
-  },
-  offset: 300
-})
+if (document.querySelector('.landing-real-estate')) {
+  const realEstateWaypoint = new Waypoint({
+    element: document.querySelector('.landing-real-estate'),
+    handler: function() {
+      const image = document.querySelector('#landing-real-estate-media img');
+      fadeInRight(image);
+    },
+    offset: 300
+  })
+}
 
-const studioWaypoint = new Waypoint({
-  element: document.querySelector('.landing-studio'),
-  handler: function() {
-    const image = document.querySelector('#landing-studio-media img');
-    fadeInLeft(image);
-  },
-  offset: 300
-})
+if (document.querySelector('.landing-studio')) {
+  const studioWaypoint = new Waypoint({
+    element: document.querySelector('.landing-studio'),
+    handler: function() {
+      const image = document.querySelector('#landing-studio-media img');
+      fadeInLeft(image);
+    },
+    offset: 300
+  })
+}
 
-const productsWaypoint = new Waypoint({
-  element: document.querySelector('.landing-products'),
-  handler: function() {
-    const images = Array.from(document.querySelectorAll('#landing-products-media img'));
-    images.forEach(image => fadeIn(image));
-  },
-  offset: 300
-})
+if (document.querySelector('.landing-products')) {
+  const productsWaypoint = new Waypoint({
+    element: document.querySelector('.landing-products'),
+    handler: function() {
+      const images = Array.from(document.querySelectorAll('#landing-products-media img'));
+      images.forEach(image => fadeIn(image));
+    },
+    offset: 300
+  })
+}
 
-const teamWaypoint = new Waypoint({
-  element: document.querySelector('.landing-team'),
-  handler: function() {
-    const images = Array.from(document.querySelectorAll('#landing-team-media img'));
-    images.forEach(image => fadeIn(image));
-  },
-  offset: 600
-})
+if (document.querySelector('.landing-team')) {
+  const teamWaypoint = new Waypoint({
+    element: document.querySelector('.landing-team'),
+    handler: function() {
+      const images = Array.from(document.querySelectorAll('#landing-team-media img'));
+      images.forEach(image => fadeIn(image));
+    },
+    offset: 600
+  })
+}
