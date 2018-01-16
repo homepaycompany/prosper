@@ -35,7 +35,15 @@ body {
   margin-top: 40px;
   margin-bottom: 80px;
   padding: 30px;
-  border-top: 5px solid #20E8B6;
+
+}
+
+.card-add {
+  justify-content: space-around;
+  border-radius: 4px;
+  box-shadow: 4px 4px 10px #F2F2F2;
+  margin-top: 40px;
+  margin-bottom: 80px;
 }
 
 .box-col-3 {
@@ -48,12 +56,13 @@ body {
 
 .box-col-6-3 h1 {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 14px;
   color: #EB5757;
   text-decoration: underline;
   padding: 2px;
   text-decoration-color: #EB5757;
   margin-top: 0px;
+
 }
 
 .box-col-6 h2 {
@@ -73,7 +82,7 @@ body {
 }
 
 .box-col-6-3 h2 {
-  font-size: 15px;
+  font-size: 14px;
   padding: 2px;
 
 }
@@ -82,9 +91,9 @@ body {
   height: 160px;
   border-radius: 4px;
   background-color: white;
-  box-shadow: 4px 4px 10px #F2F2F2;
-  margin: 10px;
+  margin-top: 10px;
 }
+
 
 .box-col-6 {
   height: 268px;
@@ -116,4 +125,13 @@ body {
 .days-alert {
   color: #EB5757;
   font-weight: bold;
+}
+
+.separate {
+  margin-bottom: 10px;
+  border: 2px solid #20E8B6;
+  border-radius: 4px;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: white;
 }
