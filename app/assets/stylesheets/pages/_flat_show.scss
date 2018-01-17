@@ -1,22 +1,47 @@
 // Flat show style
 .flat-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px 30px 0px;
   h1 {
     font-weight: bold;
     font-size: 32px;
+    margin: 0px;
   }
   i {
     color: $green;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 20px;
+  }
+  .btn {
+    margin-left: 50px;
   }
 }
-.flat-image img {
-  max-width: 100%;
-  max-height: 200px;
-  margin: 30px;
-}
 .flat-card {
-  min-height: 200px;
+  min-height: 250px;
   margin: 30px 0px;
   padding: 10px;
   background-color: white;
   border-top: solid 2px $green;
+  h2 {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0px;
+    margin: 10px 0px 20px 0px;
+  }
+  p {
+    font-size: 15px;
+    margin: 0px 0px 10px 0px;
+  }
+}
+.flat-card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    max-width: 100%;
+    max-height: 210px;
+  }
 }

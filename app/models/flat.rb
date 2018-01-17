@@ -12,4 +12,8 @@ class Flat < ApplicationRecord
       self.image_url
     end
   end
+
+  def total_price
+    self.price * self.size
+  end
 end
