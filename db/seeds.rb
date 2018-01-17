@@ -2,7 +2,9 @@ p "Destroying users..."
 User.destroy_all
 
 p "Creating users..."
-user_test = User.create!(email: "test@gmail.com", password: "123456")
+user_admin = User.create!(email: "admin@gmail.com", password: "123456")
+user_test_1 = User.create!(email: "test1@gmail.com", password: "123456")
+user_test_2 = User.create!(email: "test2@gmail.com", password: "123456")
 
 p "Destroying flats..."
 Flat.destroy_all
@@ -38,3 +40,13 @@ flat_6 = Flat.create!(title: "Studio 30m2 Oberkampf", description: "Superbe
          floor: 4, rooms: 4, average_rooms: 3, bedrooms: 2, average_bedrooms: 1.4,
          date: DateTime.new(2017, 6, 1, 0, 0, 0, 0), price: 9750, average_price: 10500, size: 30,
          average_size: 45)
+
+p "Destroying wishes..."
+Wish.destroy_all
+
+p "Creating wishes..."
+wish_1 = Wish.create(flat: flat_1, user: user_test_1)
+wish_2 = Wish.create(flat: flat_2, user: user_test_1)
+wish_3 = Wish.create(flat: flat_6, user: user_test_1)
+wish_4 = Wish.create(flat: flat_3, user: user_test_2)
+wish_5 = Wish.create(flat: flat_4, user: user_test_2)

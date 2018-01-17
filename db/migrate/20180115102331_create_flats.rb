@@ -16,7 +16,6 @@ class CreateFlats < ActiveRecord::Migration[5.1]
       t.integer :bedrooms
       t.float :average_bedrooms
       t.datetime :date
-      t.string :photo
 
       t.timestamps
     end
