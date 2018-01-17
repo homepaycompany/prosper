@@ -24,9 +24,9 @@
           </div>
           <div class="col-xs-4">
             <p>
-              <strong>Prix au m² :</strong>
+              <strong>Prix :</strong>
               <% if @flat.price && (@flat.price > 0) %>
-                <%= number_with_delimiter(@flat.price, :delimiter => ' ') %>€
+                <%= number_with_delimiter(@flat.price, :delimiter => ' ') %>€/m²
               <% else %>
                 n/a
               <% end %>
@@ -54,7 +54,7 @@
           </div>
           <div class="col-xs-12">
             <p><strong>Description</strong></p>
-            <p><%= @flat.description %></p>
+            <p class="flat-description"><%= @flat.description %></p>
           </div>
         </div>
       </div>
