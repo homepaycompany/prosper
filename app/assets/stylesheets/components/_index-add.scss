@@ -114,6 +114,10 @@ body {
   color: #20E8B6;
 }
 
+.fa-heart {
+  color: #20E8B6;
+}
+
 .fa-star {
   color: #FD9659;
 }
@@ -135,3 +139,50 @@ body {
   margin-right: 0px;
   background-color: white;
 }
+
+//css pour les inputs
+
+:focus{outline: none;}
+
+.col-3 {
+  float: left;
+  margin: 40px 3%;
+  position: relative;
+  }
+
+::placeholder {
+  color: #EB5757;
+  font-family:'Pathway Gothic One', sans-serif;
+}
+
+input[type="text"] {
+  font-family: "Raleway", "Helvetica", "sans-serif";
+  font-size: 22px;
+  font-weight: bold;
+  color: #f98484;
+  box-sizing:
+  border-box;
+}
+
+.effect-1 {
+  border: 0;
+  padding: 7px 0;
+  border-bottom: 2px solid #20E8B6;
+  background-color: #F9FCFF;
+}
+
+.effect-1 ~ .focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #20E8B6;
+  transition: 0.4s;
+}
+
+.effect-1:focus ~ .focus-border {
+  width: 100%;
+  transition: 0.4s;
+}
+

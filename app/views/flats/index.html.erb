@@ -7,15 +7,18 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="details text-center">
-        <h1>Quelles villes ?</h1>
+      <div class="col-3">
+        <input class="effect-1" type="text" placeholder="Quelles villes?">
+        <span class="focus-border"></span>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="details text-center">
-        <h1>Quels types de biens ?</h1>
+      <div class="col-3">
+        <input class="effect-1" type="text" placeholder="Quels types de bien?">
+        <span class="focus-border"></span>
       </div>
     </div>
+
   </div>
 
   <div class="row">
@@ -75,7 +78,9 @@
             <div class="box-col-6-3">
               <h1>Date</h1>
               <h2 class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> j</h2>
-              <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+
+                <i id="clicker" class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+
             </div>
           </div>
         </div>
@@ -86,6 +91,3 @@
     </div>
   </div>
 </div>
-
-
-

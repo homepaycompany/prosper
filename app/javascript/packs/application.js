@@ -7,3 +7,5 @@ smoothAlert();
 
 // Javascript for animate.css when scrolling to identified sections
 import "../shared/landing_page.js"
+
+import "../shared/clicker.js"
