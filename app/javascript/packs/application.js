@@ -7,3 +7,7 @@ smoothAlert();
 
 // Javascript for animate.css when scrolling to identified sections
 import "../shared/landing_page.js"
+
+// Javascript for chart
+import { chartJS } from "../shared/chart.js"
+chartJS();

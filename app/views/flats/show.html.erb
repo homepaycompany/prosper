@@ -62,7 +62,8 @@
       <div class="col-xs-12 col-sm-6">
         <div class="flat-card">
           <h2 class="text-center">Historique du prix</h2>
-          <p>Graphique à ajouter</p>
+          <% @price_history = { "01/01/2017": 280, "02/01/2017": 290 } %>
+          <%= line_chart @price_history %>
         </div>
       </div>
 
