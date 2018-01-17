@@ -1,3 +1,78 @@
 <div class="section">
+  <div class="container">
+    <div class="flat-title text-center">
+      <h1><%= "#{@flat.title} - #{number_with_delimiter(@flat.total_price, :delimiter => ' ')}€" %></h1>
+      <% if @flat.in_wishlist? %>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      <% else %>
+       <i class="fa fa-heart-o" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to "Voir l'annonce", @flat.url, class: "btn", target: :_blank %>
+    </div>
 
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="flat-card flat-card-image">
+          <%= image_tag @flat.photo %>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="flat-card">
+          <div class="col-xs-12">
+            <h2 class="text-center">Annonce</h2>
+          </div>
+          <div class="col-xs-4">
+            <p>
+              <strong>Prix :</strong>
+              <% if @flat.price && (@flat.price > 0) %>
+                <%= number_with_delimiter(@flat.price, :delimiter => ' ') %>€/m²
+              <% else %>
+                n/a
+              <% end %>
+            </p>
+          </div>
+          <div class="col-xs-4">
+            <p>
+              <strong>Surface :</strong>
+              <% if @flat.size && (@flat.size > 0) %>
+                <%= number_with_delimiter(@flat.size, :delimiter => ' ') %>m²
+              <% else %>
+                n/a
+              <% end %>
+            </p>
+          </div>
+          <div class="col-xs-4">
+            <p>
+              <strong>Terrain :</strong>
+              <% if @flat.land_size && (@flat.land_size > 0) %>
+                <%= number_with_delimiter(@flat.land_size, :delimiter => ' ') %>m²
+              <% else %>
+                n/a
+              <% end %>
+            </p>
+          </div>
+          <div class="col-xs-12">
+            <p><strong>Description</strong></p>
+            <p class="flat-description"><%= @flat.description %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="flat-card">
+          <h2 class="text-center">Historique du prix</h2>
+          <% @price_history = { "01/01/2017": 280, "02/01/2017": 290 } %>
+          <%= line_chart @price_history %>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="flat-card">
+          <h2 class="text-center">Détail de l'investissement</h2>
+          <p>Module pour l'investissement à ajouter</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
