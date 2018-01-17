@@ -4,8 +4,73 @@
       Vous n'avez pas encore sauvegardé d'annonces
     </p>
   <% else %>
-    <% @wishes.each do |wish| %>
-      <% wish.flat.title %>
-    <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-add">
+            <% @wishes.each do |wish| %>
+              <div class="row separate">
+                <div class="col-md-2">
+                  <div class="box-col-6-3">
+                    <%= image_tag "landing-team-content", {class: "img-box"} %>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="box-col-6-3">
+                    <h1>Descriptif</h1>
+                    <h2><%= wish.flat.description %>
+                    </h2>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="box-col-6-3">
+                    <h1>Adresse</h1>
+                    <h2><%= wish.flat.address%></h2>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="box-col-6-3">
+                    <h1>Etage</h1>
+                    <h2><%= wish.flat.floor%></h2>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="box-col-6-3">
+                    <h1>Surface</h1>
+                    <h2><%= wish.flat.size%> m2</h2>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="box-col-6-3">
+                    <h1>Terrain</h1>
+                    <h2>1200 m2</h2>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="box-col-6-3">
+                    <h1>Prix</h1>
+                    <h2><%= wish.flat.price %>€</h2>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="box-col-6-3">
+                    <h1>Prix / m2</h1>
+                    <h2><%= wish.flat.price / wish.flat.size %>€</h2>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="box-col-6-3">
+                    <h1>Date</h1>
+                    <h2 class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - wish.flat.date.to_f) / 24.hours).round(0) %> j</h2>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+      </div>
+    </div>
   <% end %>
 </div>
+
+
+

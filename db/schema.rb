@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20180116142227) do
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "land_size"
+    t.integer "land_size"
   end
 
   create_table "users", force: :cascade do |t|

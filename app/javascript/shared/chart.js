@@ -1,5 +1,5 @@
 function chartJS() {
-  console.log("Coucou");
+  console.log("Coucou Chartkick");
 }
 
 export { chartJS };

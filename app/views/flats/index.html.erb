@@ -1,9 +1,91 @@
-<div class="section">
-  <ul>
-    <% @flats.each do |flat| %>
-      <li>
-        <%= link_to flat.title, flat_path(flat) %>
-      </li>
-    <% end %>
-  </ul>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="weekly-deals text-center">
+        <h1>Deals de la semaine :</h1>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="details text-center">
+        <h1>Quelles villes ?</h1>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="details text-center">
+        <h1>Quels types de biens ?</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-add">
+        <% @flats.each do |flat| %>
+          <%= link_to flat_path(flat) do %>
+            <div class="row separate">
+              <div class="col-md-2">
+                <div class="box-col-6-3">
+                  <%= image_tag flat.photo, {class: "img-box"} %>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="box-col-6-3">
+                  <h1>Descriptif</h1>
+                  <h2 class="card-add-description"><%= flat.description %>
+                  </h2>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="box-col-6-3">
+                  <h1>Adresse</h1>
+                  <h2><%= flat.address%></h2>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="box-col-6-3">
+                  <h1>Etage</h1>
+                  <h2><%= flat.floor%></h2>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="box-col-6-3">
+                  <h1>Surface</h1>
+                  <h2><%= flat.size%> m2</h2>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="box-col-6-3">
+                  <h1>Terrain</h1>
+                  <h2>1200 m2</h2>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="box-col-6-3">
+                  <h1>Prix</h1>
+                  <h2><%= flat.price %>€</h2>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="box-col-6-3">
+                  <h1>Prix / m2</h1>
+                  <h2><%= flat.price / flat.size %>€</h2>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="box-col-6-3">
+                  <h1>Date</h1>
+                  <h2 class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> j</h2>
+                  <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
