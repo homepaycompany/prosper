@@ -6,21 +6,22 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
+# gem "letter_opener", group: :development
 gem 'pg'
 gem 'puma'
 gem 'rails', '5.1.4'
 gem 'redis'
-gem "letter_opener", group: :development
 
 # Front setup
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
+gem 'bootstrap-slider-rails'
+gem 'chartkick'
 gem 'font-awesome-sass'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-gem 'chartkick'
 
 # Admin rights
 gem 'pundit'
