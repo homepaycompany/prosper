@@ -1,11 +1,13 @@
 <div class="section">
   <div class="container">
     <div class="flat-title text-center">
-      <h1><%= "#{@flat.title} - #{number_with_delimiter(@flat.price, :delimiter => ' ')}€" %></h1>
+     <h1><%= "#{@flat.title} - #{number_with_delimiter(@flat.price, :delimiter => ' ')}€" %></h1>
       <% if @flat.in_wishlist? %>
         <i class="fa fa-heart" aria-hidden="true"></i>
       <% else %>
-       <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <%= link_to flat_wishes_path(@flat), method: "post" do %>
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <% end %>
       <% end %>
       <%= link_to "Voir l'annonce", @flat.url, class: "btn", target: :_blank %>
     </div>

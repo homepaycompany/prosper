@@ -1,8 +1,8 @@
 class Flat < ApplicationRecord
   has_many :wishes, dependent: :destroy
 
-  def in_wishlist?
-    Wish.all.where(flat: self).count >= 1
+  def in_wishlist?(user)
+    Wish.all.where(flat: self, user: user).count >= 1
   end
 
   def photo
