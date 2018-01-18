@@ -7,8 +7,18 @@ class WishesController < ApplicationController
     @flat = Flat.find(params[:flat_id])
     @wish = Wish.new(user: current_user, flat: @flat)
     authorize @wish
-    @wish.save
-    redirect_back fallback_location: root_path
+
+    if @wish.save
+      respond_to do |format|
+        format.html { redirect_to redirect_back fallback_location: root_path }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_back fallback_location: root_path }
+        format.js  # <-- idem
+      end
+    end
   end
 
   def destroy

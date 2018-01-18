@@ -1,0 +1,8 @@
+function refreshWishList(innerHTML) {
+  const newReviewForm = document.getElementById('new_review');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+<% if !@wish.errors.any? %>
+  refreshWishList('<%= j render "reviews/form", restaurant: @restaurant, review: Review.new %>');
+<% end %>
