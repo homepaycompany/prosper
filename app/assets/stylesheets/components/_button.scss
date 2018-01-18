@@ -19,3 +19,26 @@
     color: white;
   }
 }
+
+.btn-red {
+  margin-top: 20px;
+  letter-spacing: 2px;
+  padding: 0 20px;
+  border-radius: 6px;
+  line-height: 40px;
+  background-color: $red;
+  color: white;
+  font-size: 21px;
+  font-weight: bold;
+  text-decoration: none !important;
+  transition-duration: 0.3s;
+  &:hover {
+    color: white;
+    background: #f95f60;
+    border-color: #f95f60;
+  }
+  &:focus, &:active {
+    background-color: $green;
+    color: white;
+  }
+}

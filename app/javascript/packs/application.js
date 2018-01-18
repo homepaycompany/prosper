@@ -11,3 +11,4 @@ import "../shared/landing_page.js"
 // Javascript for chart
 import { chartJS } from "../shared/chart.js"
 chartJS();
+
