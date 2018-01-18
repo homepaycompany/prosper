@@ -4,7 +4,6 @@ class WishesController < ApplicationController
   end
 
   def create
-    raise
     @flat = Flat.find(params[:flat_id])
     @wish = Wish.new(user: current_user, flat: @flat)
     @wish.save

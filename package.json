@@ -5,6 +5,7 @@
     "@rails/webpacker": "^3.1.1",
     "animate.css": "^3.5.2",
     "bootstrap": "3",
+    "bootstrap-slider": "^10.0.0",
     "chartkick": "^2.2.4",
     "coffeescript": "1.12.7",
     "jquery": "^3.2.1",

@@ -12,3 +12,6 @@ import "../shared/landing_page.js"
 import { chartJS } from "../shared/chart.js"
 chartJS();
 
+// Javascript for sliders
+import { slider } from "../shared/slider.js"
+slider();
