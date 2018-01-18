@@ -83,61 +83,7 @@
                 </div>
               </div>
             </div>
-
-          </div>
-          <div class="col-md-3">
-            <div class="box-col-6-3">
-              <h1>Descriptif</h1>
-              <h2><%= flat.description %>
-              </h2>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="box-col-6-3">
-              <h1>Adresse</h1>
-              <h2><%= flat.address%></h2>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="box-col-6-3">
-              <h1>Etage</h1>
-              <h2><%= flat.floor%></h2>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="box-col-6-3">
-              <h1>Surface</h1>
-              <h2><%= flat.size%> m2</h2>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="box-col-6-3">
-              <h1>Terrain</h1>
-              <h2>1200 m2</h2>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="box-col-6-3">
-              <h1>Prix</h1>
-              <h2><%= flat.price %>€</h2>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="box-col-6-3">
-              <h1>Prix / m2</h1>
-              <h2><%= flat.price / flat.size %>€</h2>
-            </div>
-          </div>
-          <div class="col-md-1">
-            <div class="box-col-6-3">
-              <h1>Date</h1>
-              <h2 class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> j</h2>
-
-                <i id="clicker" class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-
-            </div>
-          </div>
-        </div>
+          <% end %>
         <% end %>
       </div>
     </div>
