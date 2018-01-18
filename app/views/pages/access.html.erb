@@ -2,23 +2,23 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-        <h1>
-          Benefit from early access
+        <h1 class="text-center">
+          Utiliser H. au quotidien
         </h1>
         <h3>
-          Sign up now for early access to our customers' private betas. Tell us what you really think and help shape the next wave of property products.
+          Enreistrer vous dès maintenant pour bénéficier des meilleurs tarifs en tant que premiers utilisateurs de H.
         </h3>
         <div class="access-section-form text-center">
           <%= form_tag access_request_path, class: "access-form" do %>
             <div class="access-form-title">
-              <h1>Request an early access</h1>
+              <h1>Demander un accès</h1>
             </div>
             <div class="access-form-inputs">
-              <%= text_field_tag 'first_name', nil, placeholder: "First name" %>
-              <%= text_field_tag 'last_name', nil, placeholder: "Last name" %>
-              <%= text_field_tag 'email', nil, placeholder: "Email address" %>
-              <%= text_field_tag 'company', nil, placeholder: "Company" %>
-              <%= button_tag "Subscribe", id: "submit" %>
+              <%= text_field_tag 'first_name', nil, placeholder: "Prénom" %>
+              <%= text_field_tag 'last_name', nil, placeholder: "Nom" %>
+              <%= text_field_tag 'email', nil, placeholder: "Email" %>
+              <%= text_field_tag 'company', nil, placeholder: "Société" %>
+              <%= button_tag "Se connecter", id: "submit" %>
             </div>
           <% end %>
         </div>
