@@ -1,12 +1,13 @@
-import Slider from 'bootstrap-slider';
+import "bootstrap-slider/dist/css/bootstrap-slider.css";
 
-function slider() {
-  // var slider = new Slider('#ex-1', {
-  //   formatter: function(value) {
-  //     return 'Current value: ' + value;
-  //   }
-  // });
+function addSliders() {
+  new Slider("input#flat-price-slider");
+  new Slider("input#flat-contribution-slider");
+  new Slider("input#flat-interest-slider");
+  new Slider("input#flat-loan-duration-slider");
+  new Slider("input#flat-refurbishment-slider");
+  new Slider("input#flat-selling-price-slider");
 }
 
-export { slider };
+export { addSliders };
 

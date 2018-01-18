@@ -12,6 +12,10 @@ import "../shared/landing_page.js"
 import { chartJS } from "../shared/chart.js"
 chartJS();
 
-// Javascript for sliders
-import { slider } from "../shared/slider.js"
-slider();
+// Javascript for sliders on Flat#show
+import { addSliders } from "../shared/slider.js"
+addSliders();
+
+// Javascript to calculate the investment return
+import { returnCalculation } from "../shared/investment.js"
+returnCalculation();
