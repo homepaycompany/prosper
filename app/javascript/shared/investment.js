@@ -1,6 +1,0 @@
-function returnCalculation() {
-
-}
-
-export { returnCalculation };
-
