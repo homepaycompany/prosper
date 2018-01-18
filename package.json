@@ -5,11 +5,18 @@
     "@rails/webpacker": "^3.1.1",
     "animate.css": "^3.5.2",
     "bootstrap": "3",
+    "chartkick": "^2.2.4",
     "coffeescript": "1.12.7",
     "jquery": "^3.2.1",
     "waypoints": "^4.0.1"
   },
   "devDependencies": {
+    "autoprefixer": "^7.2.5",
+    "cssnano": "^3.10.0",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.10",
+    "sugarss": "^1.0.1",
     "webpack-dev-server": "^2.9.7"
   }
 }

@@ -4,6 +4,8 @@ class CreateFlats < ActiveRecord::Migration[5.1]
       t.string :title
       t.text :description
       t.string :address
+      t.string :url
+      t.string :image_url
       t.integer :price
       t.float :average_price
       t.integer :size
@@ -14,7 +16,6 @@ class CreateFlats < ActiveRecord::Migration[5.1]
       t.integer :bedrooms
       t.float :average_bedrooms
       t.datetime :date
-      t.string :photo
 
       t.timestamps
     end

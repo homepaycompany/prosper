@@ -44,6 +44,19 @@ body {
   box-shadow: 4px 4px 10px #F2F2F2;
   margin-top: 40px;
   margin-bottom: 80px;
+  text-decoration: none;
+  a {
+    color: $black;
+    &:hover {
+      color: $black;
+    }
+  }
+  .card-add-description {
+    line-height: 14px;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .box-col-3 {
