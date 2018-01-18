@@ -73,25 +73,22 @@
 
       <div class="col-xs-12 col-sm-6">
         <div class="flat-card">
-          <h2 class="text-center">Détail de l'investissement</h2>
-          <div class="col-xs-4">
+          <h2 class="text-center">Rentabilité potentielle <span class="<%= @flat.return_rate > 0 ? "flat-positive-return" : "flat-negative-return" %>"><%= number_to_percentage(@flat.return_rate * 100, precision: 1) %></span></h2>
+          <p>
+          </p>
+          <div class="col-xs-6">
             <p>
               <strong>Apport :</strong>
-              12 000€
+              <%= number_with_delimiter((@flat.price * 0.15).to_i, :delimiter => ' ') %> €
             </p>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <p>
               <strong>Emprunt :</strong>
-              180 000€
+              <%= number_with_delimiter((@flat.price * 0.85).to_i, :delimiter => ' ') %> €
             </p>
           </div>
-          <div class="col-xs-4">
-            <p>
-              <strong>Rendement :</strong>
-              23%
-            </p>
-          </div>
+
           <div class="flat-card-investment-assumptions">
             <div class="col-xs-12">
               <p><strong>Hypothèses <i class="fa fa-angle-down" aria-hidden="true"></i></strong></p>

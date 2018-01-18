@@ -19,3 +19,8 @@ addSliders();
 // Javascript to calculate the investment return
 import { returnCalculation } from "../shared/investment.js"
 returnCalculation();
+
+// Javascript to calculate the investment return
+import { showCookies } from "../shared/cookies_management.js"
+showCookies();
+

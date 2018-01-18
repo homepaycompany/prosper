@@ -8,7 +8,32 @@
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <!-- Crisp -->
     <script type="text/javascript"> window.$crisp=[];window.CRISP_WEBSITE_ID="703c312a-9e85-4305-b422-7324d7f4eb24";(function(){ d=document;s=d.createElement("script"); s.src="https://client.crisp.chat/l.js"; s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})(); </script>
+
+    <!-- Cookies -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+      window.addEventListener("load", function(){
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+            "background": "#132b49",
+            "text": "#ffffff"
+          },
+          "button": {
+            "background": "#1acea1",
+            "text": "#ffffff"
+          }
+        },
+        "content": {
+          "message": "Ce site utilise des cookies afin de vous offrir la meilleure expérience possible.",
+          "dismiss": "Accepter les cookies",
+          "link": "En savoir plus"
+        }
+      })});
+    </script>
   </head>
   <body>
     <%= render 'shared/navbar' %>
