@@ -13,7 +13,7 @@ class Flat < ApplicationRecord
     end
   end
 
-  def total_price
-    self.price * self.size
+  def price_per_squared_meter
+    self.price / self.size
   end
 end
