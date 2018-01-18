@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   post :access_request, controller: :accesses, action: :access_request
 
   # Studio platorm
-  resources :flats, only: [:show, :index]
+  resources :flats, only: [:show, :index] do
+    resources :wishes, only: [:create, :destroy]
+  end
   get 'profile' => 'devise'
   get 'wishlist' => 'wishes#index'
 end

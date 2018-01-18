@@ -18,9 +18,7 @@
         <span class="focus-border"></span>
       </div>
     </div>
-
   </div>
-
   <div class="row">
     <div class="col-md-12">
       <div class="card-add">
@@ -79,7 +77,9 @@
                 <div class="box-col-6-3">
                   <h1>Date</h1>
                   <h2 class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> j</h2>
+                  <%= link_to flat_wishes_path(flat), method: "post" do %>
                   <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                  <% end %>
                 </div>
               </div>
             </div>
