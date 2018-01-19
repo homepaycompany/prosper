@@ -22,26 +22,27 @@ function stringToNumber(string) {
 // Function to calculate investment return
 function calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice) {
   const currentMargin = document.querySelector("#flat-return").innerHTML;
-  var interests = 0;
-  var refurbishmentCosts = 0;
-  var notarialCosts = 0;
-  var margin = sellingPrice - price;
-  // console.log(sellingPrice);
-  // console.log(price);
-  // console.log(margin);
-  // var margin = sellingPrice - price - refurbishmentCosts - interests - notarialCosts;
-  var margin_rate = margin / price;
-  ;
-  // console.log(sellingPrice.replace(/\s/g, '').to_f);
+  var size = stringToNumber(document.querySelector("#js-assumption-size").innerHTML);
+  var interests = interest / 100 * (price - contribution) * loanDuration / 12 ;
+  var refurbishmentCosts = refurbishment * size;
+  var notarialCosts = sellingPrice * 0.025 ;
+  var margin = sellingPrice - price - interests - refurbishmentCosts - notarialCosts;
+  console.log(`Prix de revente : ${sellingPrice}`);
+  console.log(`Prix d'acquisition : ${price}`);
+  console.log(`Intérêts : ${interests}`);
+  console.log(`Coûts travaux : ${refurbishmentCosts}`);
+  console.log(`Frais de notaire : ${notarialCosts}`);
+  console.log(`Marge : ${margin}`);
+  var margin_rate = Math.pow((margin / price), (loanDuration / 12));
 
   // Show the new margin rate and change the class if necessary
   document.querySelector("#flat-return").innerHTML = `${(margin_rate * 100).toFixed(1)}%`
-  if (margin_rate > 0 && currentMargin < 0) {
-    document.querySelector("#flat-return").toggleClass("flat-positive-return");
-    document.querySelector("#flat-return").toggleClass("flat-negative-return");
-  } else if (margin_rate < 0 && currentMargin > 0) {
-    document.querySelector("#flat-return").toggleClass("flat-positive-return");
-    document.querySelector("#flat-return").toggleClass("flat-negative-return");
+  if ((margin_rate > 0) && (document.querySelector("#flat-return").classList.value === "flat-negative-return")) {
+    document.querySelector("#flat-return").classList.toggle("flat-positive-return");
+    document.querySelector("#flat-return").classList.toggle("flat-negative-return");
+  } else if ((margin_rate < 0) && (document.querySelector("#flat-return").classList.value === "flat-positive-return")) {
+    document.querySelector("#flat-return").classList.toggle("flat-positive-return");
+    document.querySelector("#flat-return").classList.toggle("flat-negative-return");
   }
 }
 

@@ -40,7 +40,7 @@
             <p>
               <strong>Surface :</strong>
               <% if @flat.size && (@flat.size > 0) %>
-                <%= number_with_delimiter(@flat.size, :delimiter => ' ') %>m²
+                <span id="js-assumption-size"><%= number_with_delimiter(@flat.size, :delimiter => ' ') %></span>m²
               <% else %>
                 n/a
               <% end %>
@@ -112,7 +112,7 @@
                 <p>Taux d'intérêt<p>
                 <p><span id="js-assumption-interest">2.5%</span></p>
               </div>
-              <input id="flat-interest-slider" data-slider-id='flatInterestSlider' type="text" data-slider-min="0" data-slider-max="0.1" data-slider-step="0.005" data-slider-value="0.025"/>
+              <input id="flat-interest-slider" data-slider-id='flatInterestSlider' type="text" data-slider-min="0.005" data-slider-max="0.1" data-slider-step="0.005" data-slider-value="0.025"/>
             </div>
             <div class="col-xs-6">
               <div class="flat-card-investment-assumption">
