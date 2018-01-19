@@ -3,6 +3,7 @@ class AccessesController < ApplicationController
 
   def access_request
     @subscription = Access.new(access_request_params)
+    authorize @subscription
     if @subscription.save
       redirect_to root_path, :flash => { :notice => "We registered your access request for #{@subscription.email}. We will get back to you very soon." }
     elsif @subscription.errors.messages[:email][0] == "is invalid"
