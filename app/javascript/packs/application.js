@@ -1,6 +1,10 @@
 import "bootstrap";
 import "animate.css";
 
+// Javascript to calculate the investment return
+import { showCookies } from "../shared/cookies_management.js"
+showCookies();
+
 // Javascript for fadeing and fadeout effects on alerts
 import { smoothAlert } from "../shared/alert.js"
 smoothAlert();
@@ -12,15 +16,7 @@ import "../shared/landing_page.js"
 import { chartJS } from "../shared/chart.js"
 chartJS();
 
-// Javascript for sliders on Flat#show
-import { addSliders } from "../shared/slider.js"
-addSliders();
-
-// Javascript to calculate the investment return
-import { returnCalculation } from "../shared/investment.js"
+// Javascript to calculate the investment return for sliders on Flat#show
+import { returnCalculation } from "../shared/slider.js"
 returnCalculation();
-
-// Javascript to calculate the investment return
-import { showCookies } from "../shared/cookies_management.js"
-showCookies();
 
