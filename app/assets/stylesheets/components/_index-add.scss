@@ -142,12 +142,15 @@ body {
 }
 
 .separate {
-  margin-bottom: 10px;
+  margin-bottom: 60px;
   border: 2px solid #20E8B6;
   border-radius: 4px;
   margin-left: 0px;
   margin-right: 0px;
   background-color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  position: relative;
 }
 
 //css pour les inputs
@@ -165,51 +168,6 @@ body {
   margin: 0px;
 }
 
-
-
-// //media mobile
-// @media (max-width: 768px) {
-//   .col-3 {
-//     float: none;
-//     margin-left: 0px;
-//     margin-right: 0px;
-//     margin-top: 0px;
-//     margin-bottom: 10px;
-//     width: 100%;
-//   }
-
-//   .separate h1 {
-//     text-align: center;
-//   }
-
-//   .box-short {
-//     height: 65px;
-//     border-radius: 4px;
-//     background-color: white;
-//     margin-top: 10px;
-//   }
-//   .box-short h2 {
-//     text-align: center;
-//   }
-
-//   .box-col-6-3 h1 {
-//     font-weight: bold;
-//     font-size: 14px;
-//     color: #EB5757;
-//     text-decoration: underline;
-//     padding: 2px;
-//     text-decoration-color: #EB5757;
-//     margin-top: 0px;
-//   }
-
-//   .box-col-6-3 h2 {
-//     font-size: 14px;
-//     padding: 2px;
-//   }
-//   .days-alert {
-
-//   }
-// }
 
 ::placeholder {
   color: #EB5757;
@@ -280,11 +238,29 @@ input[type="text"] {
   align-items: center;
 }
 
+.round-desktop {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  background-color: $red;
+  position: absolute;
+  bottom: -20px;
+  right: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -65px;
+  left: 41px;
+ }
+
+.round-desktop {
+ font-size: 20px;
+}
 .box-info-add {
   position: relative;
-  height: 145px;
+  height: 200px;
   padding: 20px 20px 20px 23px;
-  background: $red;
   border-radius: 0 4px 4px 0;
 }
 
@@ -311,7 +287,7 @@ input[type="text"] {
 
 .criteria-numbers {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -332,4 +308,14 @@ input[type="text"] {
   justify-content: center;
   align-items: center;
 }
+
+.details-price h2 {
+  position: static;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  font-weight: bold;
+  font-size: 23px;
+  margin-top: 6px;
+}
+
 // END MOBILE VERSION

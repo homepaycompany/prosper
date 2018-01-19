@@ -60,19 +60,28 @@
 
             <div class="col-xs-12">
               <div class="box-info-add">
-                <div class="details-in-info-add">
+                <div class="details-in-info-add text-center">
                   <h2><%= flat.title %></h2>
                 </div>
                 <div class="details-in-info-add criteria-numbers">
-                  <div class="mini-box-number">
+                  <div class="mini-box-number text-center">
                     <h2><%= flat.rooms %> p</h2>
                   </div>
                   <div class="mini-box-number">
                     <h2><%= flat.bedrooms %> chb</h2>
                   </div>
-                  <div class="mini-box-number">
+                  <div class="mini-box-number text-center">
                     <h2><%= flat.size %> m2</h2>
                   </div>
+                </div>
+                <div class="details-price text-center">
+                  <h2><%= flat.price %> €</h2>
+                </div>
+                <div>
+                  <h2 class="text-center">Rentabilité potentielle
+                    <span class="<%= flat.return_rate > 0 ? "flat-positive-return" : "flat-negative-return" %>"><%= number_to_percentage( flat.return_rate * 100, precision: 1) %>
+                    </span>
+                  </h2>
                 </div>
               </div>
             </div>
@@ -146,6 +155,12 @@
                       <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
                     <% end %>
                   <% end %>
+                </div>
+                <div class="round-desktop">
+
+                    <span class="text-center <%= flat.return_rate > 0 ? "flat-positive-return-in-round" : "flat-negative-return-in-round" %>"><%= number_to_percentage( flat.return_rate * 100, precision: 1) %>
+                    </span>
+
                 </div>
               </div>
             </div>
