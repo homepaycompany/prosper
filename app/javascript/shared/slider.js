@@ -27,12 +27,6 @@ function calculateReturn(price, contribution, interest, loanDuration, refurbishm
   var refurbishmentCosts = refurbishment * size;
   var notarialCosts = sellingPrice * 0.025 ;
   var margin = sellingPrice - price - interests - refurbishmentCosts - notarialCosts;
-  console.log(`Prix de revente : ${sellingPrice}`);
-  console.log(`Prix d'acquisition : ${price}`);
-  console.log(`Intérêts : ${interests}`);
-  console.log(`Coûts travaux : ${refurbishmentCosts}`);
-  console.log(`Frais de notaire : ${notarialCosts}`);
-  console.log(`Marge : ${margin}`);
   var margin_rate = Math.pow((margin / price), (loanDuration / 12));
 
   // Show the new margin rate and change the class if necessary
@@ -66,7 +60,7 @@ function setValue() {
   if (eventSlider == "flatPriceSlider") {
     var newPrice = priceSlider.getValue();
     price.innerHTML = numberToString(newPrice);
-    // contribution.dataset.sliderMax = newPrice;
+    contributionSlider.setAttribute('max', newPrice);
     calculateReturn(newPrice, contributionN, interestN, loanDurationN, refurbishmentN, sellingPriceN)
 
   // Show the new contribution and calculate the new return
