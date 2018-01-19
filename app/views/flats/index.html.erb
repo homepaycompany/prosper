@@ -1,18 +1,38 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-xs-12 col-md-4">
       <div class="weekly-deals text-center">
         <h1>Deals de la semaine :</h1>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="col-3">
+
+    <!-- START version mobile hidden -->
+
+      <div class="visible-xs col-xs-6">
+        <div class="col-3-xs text-center">
+          <input class="effect-1" type="text" placeholder="Quelles villes?">
+          <span class="focus-border"></span>
+        </div>
+      </div>
+
+      <div class="visible-xs col-xs-6">
+        <div class="col-3-xs text-center">
+          <input class="effect-1" type="text" placeholder="Quels types de bien?">
+          <span class="focus-border"></span>
+        </div>
+      </div>
+
+    <!-- END version mobile hidden -->
+
+    <div class="hidden-xs col-xs-6 col-md-4">
+      <div class="col-3 text-center">
         <input class="effect-1" type="text" placeholder="Quelles villes?">
         <span class="focus-border"></span>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="col-3">
+
+    <div class="hidden-xs col-xs-12 col-md-4">
+      <div class="col-3 text-center">
         <input class="effect-1" type="text" placeholder="Quels types de bien?">
         <span class="focus-border"></span>
       </div>
@@ -22,8 +42,49 @@
     <div class="col-md-12">
       <div class="card-add">
         <% @flats.each do |flat| %>
+
+        <!-- // start version mobile// -->
+
+        <%= link_to flat_path(flat) do %>
+          <div class="visible-xs row separate">
+            <div class="col-xs-12">
+              <div class="box-col-6-3 photo-add">
+                <%= image_tag flat.photo, {class: "img-box"} %>
+                <div class="round">
+                  <%= link_to flat_wishes_path(flat), method: "post" do %>
+                  <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12">
+              <div class="box-info-add">
+                <div class="details-in-info-add">
+                  <h2><%= flat.title %></h2>
+                </div>
+                <div class="details-in-info-add criteria-numbers">
+                  <div class="mini-box-number">
+                    <h2><%= flat.rooms %> p</h2>
+                  </div>
+                  <div class="mini-box-number">
+                    <h2><%= flat.bedrooms %> chb</h2>
+                  </div>
+                  <div class="mini-box-number">
+                    <h2><%= flat.size %> m2</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- // END version mobile// -->
+
+        <!-- // start version desktop// -->
+
           <%= link_to flat_path(flat) do %>
-            <div class="row separate">
+            <div class=" hidden-xs row separate">
               <div class="col-md-2">
                 <div class="box-col-6-3">
                   <%= image_tag flat.photo, {class: "img-box"} %>
@@ -36,38 +97,38 @@
                   </h2>
                 </div>
               </div>
-              <div class="col-md-1">
-                <div class="box-col-6-3">
+              <div class="col-md-1 ">
+                <div class="box-col-6-3 box-short">
                   <h1>Adresse</h1>
                   <h2><%= flat.address%></h2>
                 </div>
               </div>
               <div class="col-md-1">
-                <div class="box-col-6-3">
+                <div class="box-col-6-3 box-short">
                   <h1>Etage</h1>
                   <h2><%= flat.floor%></h2>
                 </div>
               </div>
               <div class="col-md-1">
-                <div class="box-col-6-3">
+                <div class="box-col-6-3 box-short">
                   <h1>Surface</h1>
                   <h2><%= flat.size%> m2</h2>
                 </div>
               </div>
               <div class="col-md-1">
-                <div class="box-col-6-3">
+                <div class="box-col-6-3 box-short">
                   <h1>Terrain</h1>
                   <h2>1200 m2</h2>
                 </div>
               </div>
               <div class="col-md-1">
-                <div class="box-col-6-3">
+                <div class="box-col-6-3 box-short">
                   <h1>Prix</h1>
                   <h2><%= flat.price %>€</h2>
                 </div>
               </div>
               <div class="col-md-1">
-                <div class="box-col-6-3">
+                <div class="box-col-6-3 box-short">
                   <h1>Prix / m2</h1>
                   <h2><%= flat.price / flat.size %>€</h2>
                 </div>
@@ -88,6 +149,7 @@
                 </div>
               </div>
             </div>
+            <!-- // END version desktop// -->
           <% end %>
         <% end %>
       </div>
