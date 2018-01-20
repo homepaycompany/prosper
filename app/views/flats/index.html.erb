@@ -116,11 +116,23 @@
               </p>
             </div>
             <div class="col-xs-2">
-              <p><%= flat.size%> m2</p>
+              <p>
+                <strong>Surface</strong>
+                <br>
+                <%= flat.size%> m2
+              </p>
               <% if flat.land_size && flat.land_size > 0 %>
-                <p>Terrain <%= flat.land_size %>m²</p>
+                <p>
+                  <strong>Terrain</strong>
+                  <br>
+                  <%= flat.land_size %>m²
+                </p>
               <% end %>
-              <p><%= flat.price %>€</p>
+              <p>
+                <strong>Prix</strong>
+                <br>
+                <%= flat.price %>€
+              </p>
             </div>
             <div class="col-xs-2">
               <p class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</p>
