@@ -41,9 +41,9 @@
     <!-- START version desktop -->
     <div class="main-container hidden-xs">
       <!-- Map version desktop -->
-      <div id="map" class="hidden-xs">
-        Map to be added
-      </div>
+      <div
+        id="map" data-markers="<%= @markers.to_json %>"
+      ></div>
       <div class="cards-container hidden-xs">
         <div class="flat-cards">
           <div class="flat-cards-headers">
