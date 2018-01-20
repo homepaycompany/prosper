@@ -39,55 +39,12 @@
     </div>
   </div>
 
+  <!-- START version desktop -->
   <div class="main-container">
     <div id="map" class="hidden-xs">
       Map to be added
     </div>
     <div class="cards-container">
-      <!-- <div class="row"> -->
-        <!-- <div class="col-md-12"> -->
-<!--           <div class="card-add">
-            <#% @flats.each do |flat| %>
- -->
-            <!-- // start version mobile// -->
-
-            <%#= link_to flat_path(flat) do %>
-<!--               <div class="visible-xs row separate">
-                <div class="col-xs-12">
-                  <div class="box-col-6-3 photo-add">
-                    <%#= image_tag flat.photo, {class: "img-box"} %>
-                    <div class="round">
-                      <%#= link_to flat_wishes_path(flat), method: "post" do %>
-                      <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-                      <#% end %>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-xs-12">
-                  <div class="box-info-add">
-                    <div class="details-in-info-add">
-                      <h2><%#= flat.title %></h2>
-                    </div>
-                    <div class="details-in-info-add criteria-numbers">
-                      <div class="mini-box-number">
-                        <h2><%#= flat.rooms %> p</h2>
-                      </div>
-                      <div class="mini-box-number">
-                        <h2><%#= flat.bedrooms %> chb</h2>
-                      </div>
-                      <div class="mini-box-number">
-                        <h2><%#= flat.size %> m2</h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <#% end %> -->
-
-            <!-- // END version mobile// -->
-
-            <!-- // start version desktop// -->
     <div class=" hidden-xs flat-cards">
       <div class="flat-cards-headers">
         <div class="col-xs-3">
@@ -95,12 +52,7 @@
         <div class="col-xs-4">
           Descriptif
         </div>
-        <div class="col-xs-2">
-        </div>
-        <div class="col-xs-1">
-          Date
-        </div>
-        <div class="col-xs-1">
+        <div class="col-xs-4">
         </div>
       </div>
       <% @flats.each do |flat| %>
@@ -131,11 +83,20 @@
               <p>
                 <strong>Prix</strong>
                 <br>
-                <%= flat.price %>€
+                <%= number_with_delimiter(flat.price, :delimiter => ' ') %>€
               </p>
             </div>
             <div class="col-xs-2">
-              <p class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</p>
+              <p>
+                <strong>Rentabilité</strong>
+                <br>
+                <span class="<%= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
+              </p>
+              <p>
+                <strong>Date</strong>
+                <br>
+                <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
+              </p>
             </div>
             <div class="col-xs-1">
               <% if flat.in_wishlist?(current_user) %>
@@ -151,7 +112,7 @@
           </div>
         <% end %>
       <% end %>
-      <!-- // END version desktop// -->
     </div>
   </div>
+  <!-- END version desktop -->
 </div>
