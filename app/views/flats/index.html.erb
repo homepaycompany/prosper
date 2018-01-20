@@ -1,118 +1,120 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-md-4">
-      <div class="weekly-deals text-center">
-        <h1>Deals de la semaine :</h1>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-4">
+        <div class="weekly-deals text-center">
+          <h1>Deals de la semaine :</h1>
+        </div>
       </div>
-    </div>
 
-    <!-- START version mobile hidden -->
+      <!-- START version mobile hidden -->
 
-      <div class="visible-xs col-xs-6">
-        <div class="col-3-xs text-center">
+        <div class="visible-xs col-xs-6">
+          <div class="col-3-xs text-center">
+            <input class="effect-1" type="text" placeholder="Quelles villes?">
+            <span class="focus-border"></span>
+          </div>
+        </div>
+
+        <div class="visible-xs col-xs-6">
+          <div class="col-3-xs text-center">
+            <input class="effect-1" type="text" placeholder="Quels types de bien?">
+            <span class="focus-border"></span>
+          </div>
+        </div>
+
+      <!-- END version mobile hidden -->
+
+      <div class="hidden-xs col-xs-6 col-md-4">
+        <div class="col-3 text-center">
           <input class="effect-1" type="text" placeholder="Quelles villes?">
           <span class="focus-border"></span>
         </div>
       </div>
 
-      <div class="visible-xs col-xs-6">
-        <div class="col-3-xs text-center">
+      <div class="hidden-xs col-xs-12 col-md-4">
+        <div class="col-3 text-center">
           <input class="effect-1" type="text" placeholder="Quels types de bien?">
           <span class="focus-border"></span>
         </div>
       </div>
-
-    <!-- END version mobile hidden -->
-
-    <div class="hidden-xs col-xs-6 col-md-4">
-      <div class="col-3 text-center">
-        <input class="effect-1" type="text" placeholder="Quelles villes?">
-        <span class="focus-border"></span>
-      </div>
     </div>
 
-    <div class="hidden-xs col-xs-12 col-md-4">
-      <div class="col-3 text-center">
-        <input class="effect-1" type="text" placeholder="Quels types de bien?">
-        <span class="focus-border"></span>
+    <!-- START version desktop -->
+    <div class="main-container">
+      <div id="map" class="hidden-xs">
+        Map to be added
       </div>
-    </div>
-  </div>
-
-  <!-- START version desktop -->
-  <div class="main-container">
-    <div id="map" class="hidden-xs">
-      Map to be added
-    </div>
-    <div class="cards-container">
-    <div class=" hidden-xs flat-cards">
-      <div class="flat-cards-headers">
-        <div class="col-xs-3">
+      <div class="cards-container">
+      <div class=" hidden-xs flat-cards">
+        <div class="flat-cards-headers">
+          <div class="col-xs-3">
+          </div>
+          <div class="col-xs-4">
+            Descriptif
+          </div>
+          <div class="col-xs-4">
+          </div>
         </div>
-        <div class="col-xs-4">
-          Descriptif
-        </div>
-        <div class="col-xs-4">
-        </div>
-      </div>
-      <% @flats.each do |flat| %>
-        <%= link_to flat_path(flat) do %>
-          <div class="flat-card">
-            <div class="col-xs-3">
-              <div class="flat-card-image">
-                <%= image_tag flat.photo%>
+        <% @flats.each do |flat| %>
+          <%= link_to flat_path(flat) do %>
+            <div class="flat-card">
+              <div class="col-xs-3">
+                <div class="flat-card-image">
+                  <%= image_tag flat.photo%>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <p class="flat-card-description"><%= flat.description %>
+                </p>
+              </div>
+              <div class="col-xs-2">
+                <p>
+                  <strong>Surface</strong>
+                  <br>
+                  <%= flat.size%> m2
+                </p>
+                <% if flat.land_size && flat.land_size > 0 %>
+                  <p>
+                    <strong>Terrain</strong>
+                    <br>
+                    <%= flat.land_size %>m²
+                  </p>
+                <% end %>
+                <p>
+                  <strong>Prix</strong>
+                  <br>
+                  <%= number_with_delimiter(flat.price, :delimiter => ' ') %>€
+                </p>
+              </div>
+              <div class="col-xs-2">
+                <p>
+                  <strong>Rentabilité</strong>
+                  <br>
+                  <span class="<%= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
+                </p>
+                <p>
+                  <strong>Date</strong>
+                  <br>
+                  <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
+                </p>
+              </div>
+              <div class="col-xs-1">
+                <% if flat.in_wishlist?(current_user) %>
+                  <%= link_to flat_wish_path(flat, Wish.where(flat: flat).where(user: current_user).last), method: "delete" do %>
+                    <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to flat_wishes_path(flat), method: "post" do %>
+                    <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
               </div>
             </div>
-            <div class="col-xs-4">
-              <p class="flat-card-description"><%= flat.description %>
-              </p>
-            </div>
-            <div class="col-xs-2">
-              <p>
-                <strong>Surface</strong>
-                <br>
-                <%= flat.size%> m2
-              </p>
-              <% if flat.land_size && flat.land_size > 0 %>
-                <p>
-                  <strong>Terrain</strong>
-                  <br>
-                  <%= flat.land_size %>m²
-                </p>
-              <% end %>
-              <p>
-                <strong>Prix</strong>
-                <br>
-                <%= number_with_delimiter(flat.price, :delimiter => ' ') %>€
-              </p>
-            </div>
-            <div class="col-xs-2">
-              <p>
-                <strong>Rentabilité</strong>
-                <br>
-                <span class="<%= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
-              </p>
-              <p>
-                <strong>Date</strong>
-                <br>
-                <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
-              </p>
-            </div>
-            <div class="col-xs-1">
-              <% if flat.in_wishlist?(current_user) %>
-                <%= link_to flat_wish_path(flat, Wish.where(flat: flat).where(user: current_user).last), method: "delete" do %>
-                  <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                <% end %>
-              <% else %>
-                <%= link_to flat_wishes_path(flat), method: "post" do %>
-                  <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
+    <!-- END version desktop -->
   </div>
-  <!-- END version desktop -->
 </div>
