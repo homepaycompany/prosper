@@ -1,6 +1,6 @@
 <div class="section">
   <div class="container">
-    <div class="flat-title text-center">
+    <div class="show-flat-title text-center">
      <h1 class="page-title"><%= "#{@flat.title} - #{number_with_delimiter(@flat.price, :delimiter => ' ')}€" %></h1>
       <% if @flat.in_wishlist?(current_user) %>
         <%= link_to flat_wish_path(@flat, @flat.wishes.where(user: current_user).last), method: "delete" do %>
@@ -23,10 +23,10 @@
       </div>
 
       <div class="col-xs-12 col-sm-6">
-        <div class="flat-card-header">
+        <div class="show-flat-card-header">
           <h2 class="text-center">Annonce</h2>
         </div>
-        <div class="flat-card">
+        <div class="show-flat-card">
           <div class="col-xs-4">
             <p>
               <strong>Prix :</strong>
@@ -59,26 +59,26 @@
           </div>
           <div class="col-xs-12">
             <p><strong>Description</strong></p>
-            <p class="flat-description"><%= @flat.description %></p>
+            <p class="show-flat-description"><%= @flat.description %></p>
           </div>
         </div>
       </div>
 
       <div class="col-xs-12 col-sm-6">
-        <div class="flat-card-header">
+        <div class="show-flat-card-header">
           <h2 class="text-center">Historique du prix</h2>
         </div>
-        <div class="flat-card">
+        <div class="show-flat-card">
           <% @price_history = { "01/01/2017": 280, "02/01/2017": 290 } %>
           <%#= line_chart @price_history %>
         </div>
       </div>
 
       <div class="col-xs-12 col-sm-6">
-        <div class="flat-card-header">
-          <h2 class="text-center">Rentabilité potentielle <span id="flat-return" class="<%= @flat.return_rate > 0 ? "flat-positive-return" : "flat-negative-return" %>"><%= number_to_percentage(@flat.return_rate * 100, precision: 1) %></span></h2>
+        <div class="show-flat-card-header">
+          <h2 class="text-center">Rentabilité potentielle <span id="flat-return" class="<%= @flat.return_rate > 0 ? "show-flat-positive-return" : "show-flat-negative-return" %>"><%= number_to_percentage(@flat.return_rate * 100, precision: 1) %></span></h2>
         </div>
-        <div class="flat-card">
+        <div class="show-flat-card">
           <p>
           </p>
           <div class="col-xs-6">
@@ -94,47 +94,47 @@
             </p>
           </div>
 
-          <div class="flat-card-investment-assumptions">
+          <div class="show-flat-card-investment-assumptions">
             <div class="col-xs-12">
               <p><strong>Hypothèses <i class="fa fa-angle-down" aria-hidden="true"></i></strong></p>
             </div>
             <div class="col-xs-6">
-              <div class="flat-card-investment-assumption">
+              <div class="show-flat-card-investment-assumption">
                 <p>Prix</p>
                 <p><span id="js-assumption-price"><%= number_with_delimiter(@flat.price, :delimiter => ' ') %></span> €</p>
               </div>
               <input id="flat-price-slider" data-slider-id='flatPriceSlider' type="text" data-slider-min="0" data-slider-max="<%= (@flat.price.to_f * 2).to_i %>" data-slider-step="5000" data-slider-value="<%= @flat.price %>"/>
             </div>
             <div class="col-xs-6">
-              <div class="flat-card-investment-assumption">
+              <div class="show-flat-card-investment-assumption">
                 <p>Apport personnel</p>
                 <p><span id="js-assumption-contribution"><%= number_with_delimiter((@flat.price * 0.15).to_i, :delimiter => ' ') %></span> €</p>
               </div>
               <input id="flat-contribution-slider" data-slider-id='flatContributionSlider' type="text" data-slider-min="0" data-slider-max="<%= @flat.price %>" data-slider-step="5000" data-slider-value="<%= (@flat.price * 0.15).to_i %>"/>
             </div>
             <div class="col-xs-6">
-              <div class="flat-card-investment-assumption">
+              <div class="show-flat-card-investment-assumption">
                 <p>Taux d'intérêt<p>
                 <p><span id="js-assumption-interest">2.5%</span></p>
               </div>
               <input id="flat-interest-slider" data-slider-id='flatInterestSlider' type="text" data-slider-min="0.005" data-slider-max="0.1" data-slider-step="0.005" data-slider-value="0.025"/>
             </div>
             <div class="col-xs-6">
-              <div class="flat-card-investment-assumption">
+              <div class="show-flat-card-investment-assumption">
                 <p>Durée emprunt</p>
                 <p><span id="js-assumption-loan-duration">12</span> mois</p>
               </div>
               <input id="flat-loan-duration-slider" data-slider-id='flatLoanSlider' type="text" data-slider-min="0" data-slider-max="24" data-slider-step="1" data-slider-value="12"/>
             </div>
             <div class="col-xs-6">
-              <div class="flat-card-investment-assumption">
+              <div class="show-flat-card-investment-assumption">
                 <p>Rénovation</p>
                 <p><span id="js-assumption-refurbishment">300</span> €/m²</p>
               </div>
               <input id="flat-refurbishment-slider" data-slider-id='flatRefurbishmentSlider' type="text" data-slider-min="0" data-slider-max="1200" data-slider-step="50" data-slider-value="300"/>
             </div>
             <div class="col-xs-6">
-              <div class="flat-card-investment-assumption">
+              <div class="show-flat-card-investment-assumption">
                 <p>Prix de revente</p>
                 <p><span id="js-assumption-selling-price"><%= number_with_delimiter((@flat.average_price.to_f * @flat.size.to_f).to_i, :delimiter => ' ') %></span> €
               </div>

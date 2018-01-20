@@ -29,6 +29,10 @@
     border-top: none;
     cursor: pointer;
     transition: all ease 0.4s;
+    p {
+      font-size: 15px;
+      margin: 0px 0px 10px 0px;
+    }
     .flat-card-description {
       line-height: 14px;
       height: 100px;
