@@ -7,65 +7,95 @@
       </p>
     <% else %>
 
-    <div class="main-container">
-      <div id="map" class="hidden-xs">
-        Map to be added
-      </div>
-      <div class="cards-container">
-        <div class=" hidden-xs flat-cards">
-          <div class="flat-cards-headers">
-            <div class="col-xs-3">
+      <!-- START version desktop -->
+      <div class="main-container hidden-xs">
+        <div id="map">
+          Map to be added
+        </div>
+        <div class="cards-container">
+          <div class=" hidden-xs flat-cards">
+            <div class="flat-cards-headers">
+              <div class="col-xs-3">
+              </div>
+              <div class="col-xs-4">
+                Description
+              </div>
+              <div class="col-xs-4">
+              </div>
             </div>
-            <div class="col-xs-4">
-              Description
-            </div>
-            <div class="col-xs-4">
-            </div>
-          </div>
-          <% @wishes.each do |wish| %>
-            <%= link_to flat_path(wish.flat) do %>
-              <div class="flat-card">
-                <div class="col-xs-3">
-                  <div class="flat-card-image">
-                    <%= image_tag wish.flat.photo%>
+            <% @wishes.each do |wish| %>
+              <%= link_to flat_path(wish.flat) do %>
+                <div class="flat-card">
+                  <div class="col-xs-3">
+                    <div class="flat-card-image">
+                      <%= image_tag wish.flat.photo%>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <p class="flat-card-description"><%= wish.flat.description %>
+                    </p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p>
+                      <strong>Surface</strong>
+                      <br>
+                      <%= wish.flat.size%> m2
+                    </p>
+                    <% if wish.flat.land_size && wish.flat.land_size > 0 %>
+                      <p>
+                        <strong>Terrain</strong>
+                        <br>
+                        <%= wish.flat.land_size %>m²
+                      </p>
+                    <% end %>
+                    <p>
+                      <strong>Prix</strong>
+                      <br>
+                      <%= number_with_delimiter(wish.flat.price, :delimiter => ' ') %>€
+                    </p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p>
+                      <strong>Rentabilité</strong>
+                      <br>
+                      <span class="<%= wish.flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%= number_to_percentage(wish.flat.return_rate * 100, precision: 1) %></span>
+                    </p>
+                    <p>
+                      <strong>Date</strong>
+                      <br>
+                      <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - wish.flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - wish.flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
+                    </p>
+                  </div>
+                  <div class="col-xs-1">
+                    <% if wish.flat.in_wishlist?(current_user) %>
+                      <%= link_to flat_wish_path(wish.flat, wish), method: "delete" do %>
+                        <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+                      <% end %>
+                    <% else %>
+                      <%= link_to flat_wishes_path(wish.flat), method: "post" do %>
+                        <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                      <% end %>
+                    <% end %>
                   </div>
                 </div>
-                <div class="col-xs-4">
-                  <p class="flat-card-description"><%= wish.flat.description %>
-                  </p>
-                </div>
-                <div class="col-xs-2">
-                  <p>
-                    <strong>Surface</strong>
-                    <br>
-                    <%= wish.flat.size%> m2
-                  </p>
-                  <% if wish.flat.land_size && wish.flat.land_size > 0 %>
-                    <p>
-                      <strong>Terrain</strong>
-                      <br>
-                      <%= wish.flat.land_size %>m²
-                    </p>
-                  <% end %>
-                  <p>
-                    <strong>Prix</strong>
-                    <br>
-                    <%= number_with_delimiter(wish.flat.price, :delimiter => ' ') %>€
-                  </p>
-                </div>
-                <div class="col-xs-2">
-                  <p>
-                    <strong>Rentabilité</strong>
-                    <br>
-                    <span class="<%= wish.flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%= number_to_percentage(wish.flat.return_rate * 100, precision: 1) %></span>
-                  </p>
-                  <p>
-                    <strong>Date</strong>
-                    <br>
-                    <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - wish.flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - wish.flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
-                  </p>
-                </div>
-                <div class="col-xs-1">
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <!-- END version desktop -->
+
+      <!-- START version mobile -->
+      <div id="map-mobile" class="visible-xs">
+        Map to be added
+      </div>
+
+      <div class="cards-container-mobile visible-xs">
+        <% @wishes.each do |wish| %>
+          <%= link_to flat_path(wish.flat) do %>
+            <div class="flat-card-mobile">
+              <div class="col-xs-6">
+                <div class="flat-card-image">
+                  <%= image_tag wish.flat.photo %>
                   <% if wish.flat.in_wishlist?(current_user) %>
                     <%= link_to flat_wish_path(wish.flat, wish), method: "delete" do %>
                       <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
@@ -77,10 +107,43 @@
                   <% end %>
                 </div>
               </div>
-            <% end %>
+              <div class="col-xs-3">
+                <p>
+                  <strong>Surface</strong>
+                  <br>
+                  <%= wish.flat.size%> m2
+                </p>
+                <% if wish.flat.land_size && wish.flat.land_size > 0 %>
+                  <p>
+                    <strong>Terrain</strong>
+                    <br>
+                    <%= wish.flat.land_size %>m²
+                  </p>
+                <% end %>
+                <p>
+                  <strong>Prix</strong>
+                  <br>
+                  <%= number_with_delimiter(wish.flat.price, :delimiter => ' ') %>€
+                </p>
+              </div>
+              <div class="col-xs-3">
+                <p>
+                  <strong>Rentabilité</strong>
+                  <br>
+                  <span class="<%= wish.flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%= number_to_percentage(wish.flat.return_rate * 100, precision: 1) %></span>
+                </p>
+                <p>
+                  <strong>Date</strong>
+                  <br>
+                  <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - wish.flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - wish.flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
+                </p>
+              </div>
+            </div>
           <% end %>
-        </div>
+        <% end %>
       </div>
+      <!-- END version mobile -->
+
     <% end %>
   </div>
 </div>
