@@ -84,6 +84,16 @@
     color: $green;
   }
 }
+.navbar-small-logo a {
+  font-size: 22px;
+  font-weight: 800;
+  color: $black;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  &:hover {
+    color: $green;
+  }
+}
 
 /* Dropdown menu */
 .navbar-dropdown-menu {

@@ -29,7 +29,15 @@
 
   <!-- Dropdown appearing on mobile only -->
   <div class="navbar-item navbar-small-logo hidden-md hidden-lg">
-    <%= image_tag "logo.png" %>
+    <% if current_user %>
+      <%= link_to flats_path, class: "navbar-brand" do %>
+      BUILD
+      <% end %>
+    <% else %>
+      <%= link_to root_path, class: "navbar-brand" do %>
+      BUILD
+      <% end %>
+    <% end %>
   </div>
   <div class="navbar-item hidden-md hidden-lg">
     <div class="dropdown">

@@ -94,23 +94,40 @@
   width: 100%;
 }
 .flat-card-mobile {
-  height: 200px;
+  height: 120px;
   background-color: white;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   border-top: solid 1px $green;
   border-radius: 4px 4px 0px 0px;
   margin-bottom: 20px;
+  padding: 10px 5px;
   i {
     color: $green;
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 400;
-    padding: 10px;
+    padding: 5px;
     background-color: white;
     border-radius: 50%;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   }
+  p {
+    font-size: 12px;
+  }
+  a {
+    color: $light-black;
+  }
 }
-
+.flat-card-image-mobile {
+  img {
+    max-width: 100%;
+  }
+}
+.flat-card-wishlist-mobile {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .weekly-deals {
   align-items: center;

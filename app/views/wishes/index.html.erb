@@ -93,18 +93,9 @@
         <% @wishes.each do |wish| %>
           <%= link_to flat_path(wish.flat) do %>
             <div class="flat-card-mobile">
-              <div class="col-xs-6">
-                <div class="flat-card-image">
+              <div class="col-xs-4">
+                <div class="flat-card-image-mobile">
                   <%= image_tag wish.flat.photo %>
-                  <% if wish.flat.in_wishlist?(current_user) %>
-                    <%= link_to flat_wish_path(wish.flat, wish), method: "delete" do %>
-                      <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                    <% end %>
-                  <% else %>
-                    <%= link_to flat_wishes_path(wish.flat), method: "post" do %>
-                      <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-                    <% end %>
-                  <% end %>
                 </div>
               </div>
               <div class="col-xs-3">
@@ -123,7 +114,7 @@
                 <p>
                   <strong>Prix</strong>
                   <br>
-                  <%= number_with_delimiter(wish.flat.price, :delimiter => ' ') %>€
+                  <%= wish.flat.price / 1000 %>k€
                 </p>
               </div>
               <div class="col-xs-3">
@@ -135,8 +126,21 @@
                 <p>
                   <strong>Date</strong>
                   <br>
-                  <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - wish.flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - wish.flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
+                  <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - wish.flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - wish.flat.date.to_f  ) / 24.hours).round(0) %> j</span>
                 </p>
+              </div>
+              <div class="col-xs-2">
+                <div class="flat-card-wishlist-mobile">
+                  <% if wish.flat.in_wishlist?(current_user) %>
+                    <%= link_to flat_wish_path(wish.flat, wish), method: "delete" do %>
+                      <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to flat_wishes_path(wish.flat), method: "post" do %>
+                      <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>
