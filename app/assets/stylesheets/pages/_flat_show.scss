@@ -20,11 +20,11 @@
   }
 }
 .flat-card {
-  min-height: 270px;
-  margin: 30px 0px;
+  min-height: 230px;
+  margin-bottom: 30px;
   padding: 10px;
   background-color: white;
-  border-top: solid 2px $green;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   h2 {
     font-weight: bold;
     font-size: 18px;
@@ -44,6 +44,20 @@
   .flat-description {
     overflow-y: auto;
     height: 120px;
+  }
+}
+.flat-card-header {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px 4px 0px 0px;
+  background-color: $green;
+  color: white;
+  h2 {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 18px;
   }
 }
 .flat-card-image {
@@ -69,10 +83,20 @@
   }
 }
 .flat-positive-return {
-  color: $dark-green;
+  background-color: white;
+  color: $green;
+  padding: 5px 10px;
+  font-size: 16px;
+  margin-left: 20px;
+  border-radius: 4px;
 }
 .flat-negative-return {
+  background-color: white;
   color: $red;
+  padding: 5px 10px;
+  font-size: 16px;
+  margin-left: 20px;
+  border-radius: 4px;
 }
 
 // Slider style

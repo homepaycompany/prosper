@@ -38,121 +38,108 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card-add">
-        <% @flats.each do |flat| %>
 
-        <!-- // start version mobile// -->
+  <div class="main-container">
+    <div id="map" class="hidden-xs">
+      Map to be added
+    </div>
+    <div class="cards-container">
+      <!-- <div class="row"> -->
+        <!-- <div class="col-md-12"> -->
+<!--           <div class="card-add">
+            <#% @flats.each do |flat| %>
+ -->
+            <!-- // start version mobile// -->
 
-        <%= link_to flat_path(flat) do %>
-          <div class="visible-xs row separate">
-            <div class="col-xs-12">
-              <div class="box-col-6-3 photo-add">
-                <%= image_tag flat.photo, {class: "img-box"} %>
-                <div class="round">
-                  <%= link_to flat_wishes_path(flat), method: "post" do %>
-                  <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-                  <% end %>
+            <%#= link_to flat_path(flat) do %>
+<!--               <div class="visible-xs row separate">
+                <div class="col-xs-12">
+                  <div class="box-col-6-3 photo-add">
+                    <%#= image_tag flat.photo, {class: "img-box"} %>
+                    <div class="round">
+                      <%#= link_to flat_wishes_path(flat), method: "post" do %>
+                      <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                      <#% end %>
+                    </div>
+                  </div>
                 </div>
+
+                <div class="col-xs-12">
+                  <div class="box-info-add">
+                    <div class="details-in-info-add">
+                      <h2><%#= flat.title %></h2>
+                    </div>
+                    <div class="details-in-info-add criteria-numbers">
+                      <div class="mini-box-number">
+                        <h2><%#= flat.rooms %> p</h2>
+                      </div>
+                      <div class="mini-box-number">
+                        <h2><%#= flat.bedrooms %> chb</h2>
+                      </div>
+                      <div class="mini-box-number">
+                        <h2><%#= flat.size %> m2</h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <#% end %> -->
+
+            <!-- // END version mobile// -->
+
+            <!-- // start version desktop// -->
+    <div class=" hidden-xs flat-cards">
+      <div class="flat-cards-headers">
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-4">
+          Descriptif
+        </div>
+        <div class="col-xs-2">
+        </div>
+        <div class="col-xs-1">
+          Date
+        </div>
+        <div class="col-xs-1">
+        </div>
+      </div>
+      <% @flats.each do |flat| %>
+        <%= link_to flat_path(flat) do %>
+          <div class="flat-card">
+            <div class="col-xs-3">
+              <div class="flat-card-image">
+                <%= image_tag flat.photo%>
               </div>
             </div>
-
-            <div class="col-xs-12">
-              <div class="box-info-add">
-                <div class="details-in-info-add">
-                  <h2><%= flat.title %></h2>
-                </div>
-                <div class="details-in-info-add criteria-numbers">
-                  <div class="mini-box-number">
-                    <h2><%= flat.rooms %> p</h2>
-                  </div>
-                  <div class="mini-box-number">
-                    <h2><%= flat.bedrooms %> chb</h2>
-                  </div>
-                  <div class="mini-box-number">
-                    <h2><%= flat.size %> m2</h2>
-                  </div>
-                </div>
-              </div>
+            <div class="col-xs-4">
+              <p class="flat-card-description"><%= flat.description %>
+              </p>
+            </div>
+            <div class="col-xs-2">
+              <p><%= flat.size%> m2</p>
+              <% if flat.land_size && flat.land_size > 0 %>
+                <p>Terrain <%= flat.land_size %>m²</p>
+              <% end %>
+              <p><%= flat.price %>€</p>
+            </div>
+            <div class="col-xs-2">
+              <p class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</p>
+            </div>
+            <div class="col-xs-1">
+              <% if flat.in_wishlist?(current_user) %>
+                <%= link_to flat_wish_path(flat, Wish.where(flat: flat).where(user: current_user).last), method: "delete" do %>
+                  <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+                <% end %>
+              <% else %>
+                <%= link_to flat_wishes_path(flat), method: "post" do %>
+                  <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
             </div>
           </div>
         <% end %>
-
-        <!-- // END version mobile// -->
-
-        <!-- // start version desktop// -->
-
-          <%= link_to flat_path(flat) do %>
-            <div class=" hidden-xs row separate">
-              <div class="col-md-2">
-                <div class="box-col-6-3">
-                  <%= image_tag flat.photo, {class: "img-box"} %>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="box-col-6-3">
-                  <h1>Descriptif</h1>
-                  <h2 class="card-add-description"><%= flat.description %>
-                  </h2>
-                </div>
-              </div>
-              <div class="col-md-1 ">
-                <div class="box-col-6-3 box-short">
-                  <h1>Adresse</h1>
-                  <h2><%= flat.address%></h2>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="box-col-6-3 box-short">
-                  <h1>Etage</h1>
-                  <h2><%= flat.floor%></h2>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="box-col-6-3 box-short">
-                  <h1>Surface</h1>
-                  <h2><%= flat.size%> m2</h2>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="box-col-6-3 box-short">
-                  <h1>Terrain</h1>
-                  <h2>1200 m2</h2>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="box-col-6-3 box-short">
-                  <h1>Prix</h1>
-                  <h2><%= flat.price %>€</h2>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="box-col-6-3 box-short">
-                  <h1>Prix / m2</h1>
-                  <h2><%= flat.price / flat.size %>€</h2>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <div class="box-col-6-3">
-                  <h1>Date</h1>
-                  <h2 class=" <%= 'days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> j</h2>
-                  <% if flat.in_wishlist?(current_user) %>
-                    <%= link_to flat_wish_path(flat, Wish.where(flat: flat).where(user: current_user).last), method: "delete" do %>
-                      <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                    <% end %>
-                  <% else %>
-                    <%= link_to flat_wishes_path(flat), method: "post" do %>
-                      <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <!-- // END version desktop// -->
-          <% end %>
-        <% end %>
-      </div>
+      <% end %>
+      <!-- // END version desktop// -->
     </div>
   </div>
 </div>

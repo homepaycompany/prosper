@@ -1,6 +1,70 @@
-body {
-  background-color: #F9FCFF;
+// Main containers for flats index
+.main-container {
+  display: flex;
 }
+#map {
+  flex: 0 0 450px;
+  height: 100vh;
+  position: sticky !important; /* !important to override Gmaps inline CSS */
+  top: 0 !important;
+  background-color: white;
+}
+.cards-container {
+  padding: 10px;
+}
+
+// Flat cards
+.flat-cards {
+  background-color: white;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  a {
+    color: $light-black;
+  }
+  .flat-card {
+    min-height: 120px;
+    margin-top: 10px;
+    border-bottom: solid 1px $light-gray;
+    border-top: none;
+    cursor: pointer;
+    transition: all ease 0.4s;
+    .flat-card-description {
+      line-height: 14px;
+      height: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .flat-card-image {
+      // width: 200px;
+      height: 100px;
+      overflow: hidden;
+      img {
+        opacity: 0.9;
+        transition: all ease 0.3s;
+        height: 100px;
+        margin: -10px 0 0 0;
+      }
+    }
+    &:hover {
+      border-bottom: solid 1px $green;
+      img {
+        opacity: 1;
+      }
+    }
+  }
+}
+.flat-cards-headers {
+  min-height: 40px;
+  background-color: $green;
+  color: white;
+  padding: 10px;
+  border-radius: 4px 4px 0px 0px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+
+
 
 .weekly-deals {
   align-items: center;
@@ -164,52 +228,6 @@ body {
 .col-3-xs {
   margin: 0px;
 }
-
-
-
-// //media mobile
-// @media (max-width: 768px) {
-//   .col-3 {
-//     float: none;
-//     margin-left: 0px;
-//     margin-right: 0px;
-//     margin-top: 0px;
-//     margin-bottom: 10px;
-//     width: 100%;
-//   }
-
-//   .separate h1 {
-//     text-align: center;
-//   }
-
-//   .box-short {
-//     height: 65px;
-//     border-radius: 4px;
-//     background-color: white;
-//     margin-top: 10px;
-//   }
-//   .box-short h2 {
-//     text-align: center;
-//   }
-
-//   .box-col-6-3 h1 {
-//     font-weight: bold;
-//     font-size: 14px;
-//     color: #EB5757;
-//     text-decoration: underline;
-//     padding: 2px;
-//     text-decoration-color: #EB5757;
-//     margin-top: 0px;
-//   }
-
-//   .box-col-6-3 h2 {
-//     font-size: 14px;
-//     padding: 2px;
-//   }
-//   .days-alert {
-
-//   }
-// }
 
 ::placeholder {
   color: #EB5757;
