@@ -1,14 +1,8 @@
 // Flat show style
-.flat-title {
+.show-flat-title {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0px 30px 0px;
-  h1 {
-    font-weight: bold;
-    font-size: 32px;
-    margin: 0px;
-  }
   i {
     color: $green;
     font-weight: bold;
@@ -19,12 +13,12 @@
     margin-left: 50px;
   }
 }
-.flat-card {
-  min-height: 270px;
-  margin: 30px 0px;
+.show-flat-card {
+  min-height: 230px;
+  margin-bottom: 30px;
   padding: 10px;
   background-color: white;
-  border-top: solid 2px $green;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   h2 {
     font-weight: bold;
     font-size: 18px;
@@ -41,12 +35,31 @@
     font-size: 15px;
     margin: 0px 0px 10px 0px;
   }
-  .flat-description {
+  .show-flat-description {
     overflow-y: auto;
     height: 120px;
   }
 }
-.flat-card-image {
+.show-flat-card-header {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px 4px 0px 0px;
+  background-color: $green;
+  color: white;
+  h2 {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+.show-flat-card-image {
+  min-height: 270px;
+  margin-bottom: 30px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,24 +68,34 @@
     max-height: 210px;
   }
 }
-.flat-card-investment-assumptions {
+.show-flat-card-investment-assumptions {
   h3 {
     margin-bottom: 10px;
   }
   margin-bottom: 20px;
 }
-.flat-card-investment-assumption {
+.show-flat-card-investment-assumption {
   display: flex;
   justify-content: space-between;
   p {
     margin: 0px;
   }
 }
-.flat-positive-return {
-  color: $dark-green;
+.show-flat-positive-return {
+  background-color: white;
+  color: $green;
+  padding: 5px 10px;
+  font-size: 16px;
+  margin-left: 20px;
+  border-radius: 4px;
 }
-.flat-negative-return {
+.show-flat-negative-return {
+  background-color: white;
   color: $red;
+  padding: 5px 10px;
+  font-size: 16px;
+  margin-left: 20px;
+  border-radius: 4px;
 }
 
 // Slider style
