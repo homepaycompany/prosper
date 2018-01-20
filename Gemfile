@@ -6,7 +6,7 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
-# gem "letter_opener", group: :development
+gem "geocoder"
 gem 'pg'
 gem 'puma'
 gem 'rails', '5.1.4'
