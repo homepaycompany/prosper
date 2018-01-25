@@ -20,3 +20,6 @@ chartJS();
 import { returnCalculation } from "../shared/slider.js"
 returnCalculation();
 
+// Javascript to type automaticly
+import { loadDynamicBannerText } from '../shared/typed.js';
+loadDynamicBannerText();

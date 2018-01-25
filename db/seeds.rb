@@ -1,3 +1,5 @@
+# require 'faker'
+
 p "Destroying users..."
 User.destroy_all
 
@@ -54,6 +56,30 @@ flat_6 = Flat.create!(title: "GRAND Type 1 ST VICTOR 7ème",
          average_price: 4200, size: 33, average_size: 45,
          image_url: "https://img3.leboncoin.fr/ad-image/cc160779711addc660d556124e385ef8f3ba5288.jpg",
          url: "https://www.leboncoin.fr/ventes_immobilieres/1370138189.htm?ca=12_s")
+
+
+# puts 'Creating 100 fake restaurants...'
+# 20.times do
+#   flat = Flat.new(
+#     title:    Faker::Company.name,
+#     description: Faker::Lorem.sentence,
+#     address:  "#{Faker::Address.city}",
+#     floor:  (0..6).to_a.sample,
+#     rooms:  (1..7).to_a.sample,
+#     average_rooms:  (1..7).to_a.sample,
+#     bedrooms:  (0..5).to_a.sample,
+#     average_bedrooms:  (0..5).to_a.sample,
+#     date:  DateTime.new(2017, 6, 1, 0, 0, 0, 0),
+#     price:  (100000..500000).to_a.sample,
+#     average_price:  (100000..500000).to_a.sample,
+#     size:  (10..500).to_a.sample,
+#     average_size:  (10..500).to_a.sample,
+#     image_url: Faker::Image.city,
+#     url: Faker::Internet.url,
+#   )
+#   flat.save!
+# end
+# puts 'Finished!'
 
 p "Destroying wishes..."
 Wish.destroy_all
