@@ -1,7 +1,7 @@
 <div class="section">
   <div class="container">
     <div class="show-flat-title text-center">
-     <h1 class="page-title"><%= "#{@flat["title"]} - #{number_with_delimiter(@flat["price"], :delimiter => ' ')}€" %></h1>
+     <h1 class="page-title"><%= "#{@flat["title"]} - #{number_with_delimiter(@flat["price"].round(0), :delimiter => ' ')}€" %></h1>
       <% if in_wishlist?(@flat) %>
         <%= link_to wish_path(policy_scope(Wish).where(flat_url: @flat["url"]).last), method: "delete" do %>
           <i class="fa fa-heart" aria-hidden="true"></i>
@@ -35,7 +35,7 @@
             <p>
               <strong>Prix :</strong>
               <% if price_per_squared_meter(@flat) && (price_per_squared_meter(@flat) > 0) %>
-                <%= number_with_delimiter(price_per_squared_meter(@flat), :delimiter => ' ') %>€/m²
+                <%= number_with_delimiter(price_per_squared_meter(@flat).round(0), :delimiter => ' ') %>€/m²
               <% else %>
                 n/a
               <% end %>

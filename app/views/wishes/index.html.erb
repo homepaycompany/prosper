@@ -54,7 +54,7 @@
                     <p>
                       <strong>Prix</strong>
                       <br>
-                      <%= number_with_delimiter(flat["price"], :delimiter => ' ') %>€
+                      <%= number_with_delimiter(flat["price"].round(0), :delimiter => ' ') if !flat["price"].nil? %>€
                     </p>
                   </div>
                   <div class="col-xs-2">
@@ -66,7 +66,7 @@
                     <p>
                       <strong>Date</strong>
                       <br>
-                      <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat["date"].to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat["date"].to_f  ) / 24.hours).round(0) %> jours</span>
+                      <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> jours</span>
                     </p>
                   </div>
                   <div class="col-xs-1">
@@ -122,9 +122,7 @@
                 <p>
                   <strong>Prix</strong>
                   <br>
-                  <% if !flat["price"].nil? %>
-                    <%= flat["price"] / 1000 %>k€
-                  <% end %>
+                  <%= (flat["price"] / 1000).round(0) if !flat["price"].nil? %>k€
                 </p>
               </div>
               <div class="col-xs-3">
@@ -136,7 +134,7 @@
                 <p>
                   <strong>Date</strong>
                   <br>
-                  <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat["date"].to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat["date"].to_f  ) / 24.hours).round(0) %> j</span>
+                  <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> j</span>
                 </p>
               </div>
               <div class="col-xs-2">
