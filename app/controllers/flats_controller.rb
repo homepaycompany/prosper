@@ -8,13 +8,6 @@ class FlatsController < ApplicationController
   skip_after_action :verify_authorized, only: :show
 
   def index
-    # Add an id to the different flats obtained from the API
-    i = 0
-    @flats.map do |flat|
-      i += 1
-      flat["id"] = i
-    end
-
     # Define markers for the map
     @markers = @flats.map do |flat|
       {
@@ -31,13 +24,20 @@ class FlatsController < ApplicationController
   private
 
   def set_flats
-    uri = URI('https://propertyhubprod.azurewebsites.net/api/RestApi?code=agrTYyfq2t4LSUUmzkpLGVgL8/hgKRa94V0oIN1EEmyPJK6tbMrC/g==')
+    uri = URI("https://propertyhubprod.azurewebsites.net/api/RestApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
     Net::HTTP.start(uri.host, uri.port,
       :use_ssl => uri.scheme == 'https') do |http|
       req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
       req.body = { "City":"Marseille","ZipCode":"13002","DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
       res = http.request req
       @flats = JSON.parse(res.body)
+
+      # Add an id to the different flats obtained from the API
+      i = 0
+      @flats.map do |flat|
+        i += 1
+        flat["id"] = i
+      end
     end
   end
 
