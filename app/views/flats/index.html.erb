@@ -98,7 +98,7 @@
                   <p>
                     <strong>Date</strong>
                     <br>
-                    <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat["date"].to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat["date"].to_f  ) / 24.hours).round(0) %> jours</span>
+                    <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> jours</span>
                   </p>
                 </div>
                 <div class="col-xs-1">
@@ -168,7 +168,7 @@
               <p>
                 <strong>Date</strong>
                 <br>
-                <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat["date"].to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat["date"].to_f  ) / 24.hours).round(0) %> j</span>
+                <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> j</span>
               </p>
             </div>
             <div class="col-xs-2">
