@@ -86,7 +86,7 @@
                   <p>
                     <strong>Prix</strong>
                     <br>
-                    <%= number_with_delimiter(flat["price"], :delimiter => ' ') %>€
+                    <%= number_with_delimiter(flat["price"].round(0), :delimiter => ' ') %>€
                   </p>
                 </div>
                 <div class="col-xs-2">
@@ -155,7 +155,7 @@
                 <strong>Prix</strong>
                 <br>
                 <% if !flat["price"].nil? %>
-                  <%= flat["price"] / 1000 %>k€
+                  <%= (flat["price"] / 1000).round(0) %>k€
                 <% end %>
               </p>
             </div>
