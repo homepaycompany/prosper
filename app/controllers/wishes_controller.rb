@@ -12,8 +12,7 @@ class WishesController < ApplicationController
   end
 
   def create
-    @flat = Flat.find(params[:flat_id])
-    @wish = Wish.new(user: current_user, flat: @flat)
+    @wish = Wish.new(user: current_user, flat_url: params[:flat_url])
     authorize @wish
     @wish.save
     redirect_back fallback_location: root_path
