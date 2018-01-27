@@ -23,7 +23,7 @@
               </div>
             </div>
             <% @wishes.each do |wish| %>
-              <%= link_to flat_path(wish.flat) do %>
+              <%= link_to flat_path(wish.flat(@wished_flats)) do %>
                 <div class="flat-card">
                   <div class="col-xs-3">
                     <div class="flat-card-image">

@@ -3,7 +3,11 @@ module ApplicationHelper
     active = current_page?(link_path) ? "active" : ""
   end
 
-  def in_wishlist?(flat, user)
-    Wish.all.where(flat_url: flat["url"], user: user).count >= 1
+  def in_wishlist?(flat)
+    Wish.all.where(flat_url: flat["url"], user: current_user).count >= 1
+  end
+
+  def price_per_squared_meter(flat)
+    flat["price"] / flat["surface"]
   end
 end

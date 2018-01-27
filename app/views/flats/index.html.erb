@@ -55,7 +55,7 @@
             </div>
           </div>
           <% @flats.each do |flat| %>
-            <%= link_to flat_path(flat) do %>
+            <%= link_to flat_path(flat["id"], flat_url: flat["url"]) do %>
               <div class="flat-card">
                 <div class="col-xs-3">
                   <div class="flat-card-image">
@@ -102,7 +102,7 @@
                   </p>
                 </div>
                 <div class="col-xs-1">
-                  <% if in_wishlist?(flat, current_user) %>
+                  <% if in_wishlist?(flat) %>
                     <%= link_to wish_path(policy_scope(Wish).where(flat_url: flat["url"]).last), method: "delete" do %>
                       <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
                     <% end %>
@@ -127,7 +127,7 @@
 
     <div class="cards-container-mobile visible-xs">
       <% @flats.each do |flat| %>
-        <%= link_to flat_path(flat) do %>
+        <%= link_to flat_path(flat["id"], flat_url: flat["url"]) do %>
           <div class="flat-card-mobile">
             <div class="col-xs-4">
               <div class="flat-card-image-mobile">
@@ -173,7 +173,7 @@
             </div>
             <div class="col-xs-2">
               <div class="flat-card-wishlist-mobile">
-                <% if in_wishlist?(flat, current_user) %>
+                <% if in_wishlist?(flat) %>
                   <%= link_to wish_path(policy_scope(Wish).where(flat_url: flat["url"]).last), method: "delete" do %>
                     <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
                   <% end %>

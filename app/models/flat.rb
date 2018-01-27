@@ -1,8 +1,4 @@
 class Flat < ApplicationRecord
-  def price_per_squared_meter
-    self.price / self.size
-  end
-
   def return_rate
     @selling_price = (self.size.to_f * self.average_price.to_f)
     @notarial_costs = (0.025 * @selling_price)
