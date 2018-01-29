@@ -8,8 +8,17 @@ class FlatsController < ApplicationController
   skip_after_action :verify_authorized, only: :show
 
   def index
+    # Select n first elements according to pagination
+    @current_page = params["pg"].to_i
+    @page_number = (@flats.length / 10.to_f).ceil
+    if @current_page.nil?
+      @selected_flats = @flats.first(10)
+    else
+      @selected_flats = @flats[@current_page..(@current_page + 10)]
+    end
+
     # Define markers for the map
-    @markers = @flats.map do |flat|
+    @markers = @selected_flats.map do |flat|
       {
         lat: flat["latitude"],
         lng: flat["longitude"],
@@ -17,6 +26,9 @@ class FlatsController < ApplicationController
       }
     end
   end
+
+  # def select
+  # end
 
   def show
   end

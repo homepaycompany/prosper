@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 
   # Studio platorm
 
-  resources :flats, only: [:show, :index] do
-  end
+  resources :flats, only: [:show, :index]
+  # post "flats/:id", to: "flats#select"
 
   resources :wishes, only: [:create, :destroy]
   get 'wishlist' => 'wishes#index'
