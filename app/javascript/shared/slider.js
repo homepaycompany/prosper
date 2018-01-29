@@ -1,13 +1,15 @@
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
 
 
-// Creation of sliders
-const priceSlider = new Slider("input#flat-price-slider");
-const contributionSlider = new Slider("input#flat-contribution-slider");
-const interestSlider = new Slider("input#flat-interest-slider");
-const loanDurationSlider = new Slider("input#flat-loan-duration-slider");
-const refurbishmentSlider = new Slider("input#flat-refurbishment-slider");
-const sellingPriceSlider = new Slider("input#flat-selling-price-slider");
+// Creation of sliders if on page Flat#show
+if (document.querySelector('.show-flat-card-investment-assumptions') !== null) {
+  const priceSlider = new Slider("input#flat-price-slider");
+  const contributionSlider = new Slider("input#flat-contribution-slider");
+  const interestSlider = new Slider("input#flat-interest-slider");
+  const loanDurationSlider = new Slider("input#flat-loan-duration-slider");
+  const refurbishmentSlider = new Slider("input#flat-refurbishment-slider");
+  const sellingPriceSlider = new Slider("input#flat-selling-price-slider");
+}
 
 // Function to add spaces for thousands
 function numberToString(number) {
