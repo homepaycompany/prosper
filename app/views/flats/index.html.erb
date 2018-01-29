@@ -1,43 +1,6 @@
 <div class="section">
   <div class="container">
     <div class="row">
-<!--       <div class="col-xs-12 col-md-4">
-        <div class="weekly-deals text-center">
-          <h1>Deals de la semaine :</h1>
-        </div>
-      </div>
- -->
-      <!-- START version mobile hidden -->
-<!--         <div class="visible-xs col-xs-12">
-          <div class="col-3-xs text-center">
-            <input class="effect-1" type="text" placeholder="Quelles villes?">
-            <span class="focus-border"></span>
-          </div>
-        </div>
-
-        <div class="visible-xs col-xs-12">
-          <div class="col-3-xs text-center">
-            <input class="effect-1" type="text" placeholder="Quels types de bien?">
-            <span class="focus-border"></span>
-          </div>
-        </div> -->
-      <!-- END version mobile hidden -->
-
-<!--       <div class="hidden-xs col-xs-6 col-md-4">
-        <div class="col-3 text-center">
-          <input class="effect-1" type="text" placeholder="Quelles villes?">
-          <span class="focus-border"></span>
-        </div>
-      </div>
-
-      <div class="hidden-xs col-xs-12 col-md-4">
-        <div class="col-3 text-center">
-          <input class="effect-1" type="text" placeholder="Quels types de bien?">
-          <span class="focus-border"></span>
-        </div>
-      </div>
-    </div>
- -->
     <!-- START version desktop -->
     <div class="main-container hidden-xs">
       <!-- Map version desktop -->
@@ -54,7 +17,7 @@
             <div class="col-xs-4">
             </div>
           </div>
-          <% @flats.each do |flat| %>
+          <% @selected_flats.each do |flat| %>
             <%= link_to flat_path(flat["id"], flat_url: flat["url"]) do %>
               <div class="flat-card">
                 <div class="col-xs-3">
@@ -122,6 +85,13 @@
             <% end %>
           <% end %>
         </div>
+        <div class="pagination">
+          <strong><%= link_to "Précedent", flats_path(pg: [(@current_page - 1), 1].max) %></strong>
+          <% for i in (1..@page_number) do %>
+            <%= link_to i, flats_path(pg: i), class: "#{ 'pagination-active' if @current_page === i }" %>
+          <% end %>
+          <strong><%= link_to "Suivant", flats_path(pg: [(@current_page + 1), @page_number].min) %></strong>
+        </div>
       </div>
     </div>
     <!-- END version desktop -->
@@ -132,7 +102,7 @@
     </div>
 
     <div class="cards-container-mobile visible-xs">
-      <% @flats.each do |flat| %>
+      <% @selected_flats.each do |flat| %>
         <%= link_to flat_path(flat["id"], flat_url: flat["url"]) do %>
           <div class="flat-card-mobile">
             <div class="col-xs-4">

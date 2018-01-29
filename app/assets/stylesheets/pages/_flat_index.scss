@@ -155,64 +155,22 @@
 
 }
 
-//css pour les inputs
-
-:focus{outline: none;}
-
-.col-3 {
-  float: left;
-  margin: 40px 3%;
-  position: relative;
+// Pagination style
+.pagination {
+  a {
+    color: $black;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    &:hover {
+      color: $green;
+    }
   }
-
-
-.col-3-xs {
-  margin: 0px;
-}
-
-::placeholder {
-  color: #EB5757;
-  font-family:'Pathway Gothic One', sans-serif;
-}
-
-input[type="text"] {
-  font-family: "Raleway", "Helvetica", "sans-serif";
-  font-size: 22px;
-  font-weight: bold;
-  color: #f98484;
-  box-sizing:
-  border-box;
-}
-
-.effect-1 {
-  border: 0;
-  padding: 7px 0;
-  border-bottom: 2px solid #20E8B6;
-  background-color: #F9FCFF;
-}
-
-.effect-1 ~ .focus-border {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background-color: #20E8B6;
-  transition: 0.4s;
-}
-
-.effect-1:focus ~ .focus-border {
-  width: 100%;
-  transition: 0.4s;
-}
-
-.show {
-  display: block !important;
-}
-.hidden {
-  display: none !important;
-  visibility: hidden !important;
-}
-.invisible {
-  visibility: hidden;
+  .pagination-active {
+    border-radius: 50%;
+    padding: 3px;
+    color: white;
+    background-color: $green;
+    font-weight: 700;
+  }
 }
