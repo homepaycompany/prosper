@@ -27,9 +27,6 @@ class FlatsController < ApplicationController
     end
   end
 
-  # def select
-  # end
-
   def show
   end
 

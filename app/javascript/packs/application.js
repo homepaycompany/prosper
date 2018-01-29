@@ -20,3 +20,6 @@ chartJS();
 import { returnCalculation } from "../shared/slider.js"
 returnCalculation();
 
+// Javascript to submit forms on Flat#index
+import { formSubmit } from "../shared/submit.js"
+formSubmit();
