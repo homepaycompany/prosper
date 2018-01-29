@@ -157,6 +157,7 @@
 
 // Pagination style
 .pagination {
+  margin: 10px 0px 20px 0px;
   a {
     color: $black;
     font-size: 12px;
@@ -166,9 +167,15 @@
       color: $green;
     }
   }
-  .pagination-active {
+  .pagination-number {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
     border-radius: 50%;
-    padding: 3px;
+    display: inline-block;
+  }
+  .pagination-active {
     color: white;
     background-color: $green;
     font-weight: 700;

@@ -7,8 +7,18 @@ class WishesController < ApplicationController
     @flat_urls = @wishes.map { |wish| wish["flat_url"] }
     @wished_flats = @flats.select { |flat| @flat_urls.include?(flat["url"]) }
 
+    # Select n first elements according to pagination
+    @current_page = params["pg"].to_i
+    @page_number = (@wished_flats.length / 10.to_f).ceil
+    if @current_page.nil?
+      @selected_flats = @wished_flats.first(10)
+    else
+      @selected_flats = @wished_flats[@current_page..(@current_page + 10)]
+    end
+
+
     # Define markers for the map
-    @markers = @wished_flats.map do |flat|
+    @markers = @selected_flats.map do |flat|
       {
         lat: flat["latitude"],
         lng: flat["longitude"],
