@@ -13,10 +13,9 @@ Rails.application.routes.draw do
   post :subscribe, controller: :subscriptions, action: :subscribe
   post :access_request, controller: :accesses, action: :access_request
 
-  # Studio platorm
 
-  resources :flats, only: [:show, :index]
-  # post "flats/:id", to: "flats#select"
+  resources :flats, only: [:index]
+  post "flats/:id", to: "flats#show", as: "flat"
 
   resources :wishes, only: [:create, :destroy]
   get 'wishlist' => 'wishes#index'
