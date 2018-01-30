@@ -8,9 +8,7 @@
       </div>
     </div>
     <div class="row">
-
       <!-- START elements pour le dropdown -->
-
       <div class="col-md-3 text-center btn-champs">
         <div class="btn-group">
           <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,64 +69,60 @@
 
     </div>
 
-    <!-- START version desktop -->
-    <div class="container">
-      <div class="row box-image">
-        <div class="col-xs-12">
-          <% @selected_flats.each do |flat| %>
-            <%= link_to flat_path(flat) do %>
-              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-hg-1-5th card-add">
-                <div class="box-container">
-                  <div class="row">
-                    <div class="box-image">
-                      <%= image_tag flat.photo%>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="box-details-add text-center">
-                        <p><strong>Prix F.A.I :</strong> <br> <%=  flat.price %> €</p>
+<!--     <%#= link_to flat_path(flat) do %>
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-hg-1-5th card-add">
+        <div class="box-container">
+          <div class="row">
+            <div class="box-image">
+              <%#= image_tag flat.photo%>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box-details-add text-center">
+                <p><strong>Prix F.A.I :</strong> <br> <%#=  flat.price %> €</p>
 
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="box-details-add text-center">
-                        <p><strong>Prix / m2 :</strong> <br> <%=(flat.price / flat.size) %> €
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="box-details-add text-center">
-                        <p> <strong>Date :</strong>
-                          <br>
-                          <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
-                        </p>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="box-details-add-red text-center">
-                        <p>
-                         <strong>Renta :</strong>
-                         <br>
-                         <span class="<%= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="box-details-add text-center">
-                        <p><strong>Adresse :</strong>
-                          <br>
-                          <%= flat.address %>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
+            </div>
+            <div class="col-md-6">
+              <div class="box-details-add text-center">
+                <p><strong>Prix / m2 :</strong> <br> <%#=(flat.price / flat.size) %> €
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box-details-add text-center">
+                <p> <strong>Date :</strong>
+                  <br>
+                  <span class=" <%#= 'flat-card-days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%#= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="box-details-add-red text-center">
+                <p>
+                 <strong>Renta :</strong>
+                 <br>
+                 <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="box-details-add text-center">
+                <p><strong>Adresse :</strong>
+                  <br>
+                  <%#= flat.address %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <#% end %> -->
 
     <!-- START version desktop -->
     <div class="main-container hidden-xs">
