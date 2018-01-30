@@ -37,7 +37,7 @@ class FlatsController < ApplicationController
     Net::HTTP.start(uri.host, uri.port,
       :use_ssl => uri.scheme == 'https') do |http|
       req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-      req.body = { "City":"Marseille","ZipCode":"13002","DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
+      req.body = { "City": current_user.city,"ZipCode": current_user.zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
       res = http.request req
       @flats = JSON.parse(res.body).sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
 
