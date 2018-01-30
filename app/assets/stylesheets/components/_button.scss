@@ -20,26 +20,25 @@
   }
 }
 
-.btn-red {
-  margin-top: 20px;
-  letter-spacing: 2px;
-  padding: 5px 20px;
+.white-btn {
+  padding: 0 20px;
   border-radius: 6px;
   line-height: 40px;
-  background-color: $red;
+  height: 40px;
+  background-color: $black;
+  border: solid 1px $green;
   color: white;
-  font-size: 21px;
+  font-size: 14px;
   font-weight: bold;
   text-decoration: none !important;
   transition-duration: 0.3s;
-  border-color: #f95f60;
   &:hover {
-    color: white;
-    background: #f95f60;
-    border-color: #f95f60;
+    color: $green;
+    // background: $dark-green;
+    // border-color: $dark-green;
   }
   &:focus, &:active {
-    background-color: #f95f60;
-    color: white;
+    // background-color: $green;
+    color: $green;
   }
 }

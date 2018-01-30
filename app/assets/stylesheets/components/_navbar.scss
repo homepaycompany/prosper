@@ -1,7 +1,7 @@
 /* Main navbar */
 .navbar {
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: white;
+  background: $black;
+  // border-bottom: solid 1px #2a415e;
   height: 70px;
   width: 100%;
   margin: 0px;
@@ -52,20 +52,19 @@
 
 /* Navbar link */
 .navbar-link {
-  color: $black;
+  color: white;
   font-size: 14px;
   font-weight: bold;
   line-height: 26px;
   padding: 20px 0px;
   margin: 0px 20px;
-  border-bottom: solid 3px white;
   transition: all 0.3s ease;
   &:hover {
     color: $green;
     text-decoration: none;
   }
   &:focus {
-    color: $light-black;
+    color: white;
     text-decoration: none;
   }
 }
@@ -77,7 +76,7 @@
 .navbar-logo a {
   font-size: 30px;
   font-weight: 800;
-  color: $black;
+  color: white;
   transition: all 0.3s ease;
   cursor: pointer;
   &:hover {
@@ -87,7 +86,7 @@
 .navbar-small-logo a {
   font-size: 22px;
   font-weight: 800;
-  color: $black;
+  color: white;
   transition: all 0.3s ease;
   cursor: pointer;
   &:hover {
