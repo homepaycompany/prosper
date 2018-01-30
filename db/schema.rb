@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120211414) do
+ActiveRecord::Schema.define(version: 20180130091900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,26 +25,8 @@ ActiveRecord::Schema.define(version: 20180120211414) do
   end
 
   create_table "flats", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "address"
-    t.string "url"
-    t.string "image_url"
-    t.integer "price"
-    t.float "average_price"
-    t.integer "size"
-    t.float "average_size"
-    t.integer "floor"
-    t.integer "rooms"
-    t.float "average_rooms"
-    t.integer "bedrooms"
-    t.float "average_bedrooms"
-    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "land_size"
-    t.float "latitude"
-    t.float "longitude"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,6 +50,8 @@ ActiveRecord::Schema.define(version: 20180120211414) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.string "city"
+    t.string "zip_code"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
@@ -77,14 +61,12 @@ ActiveRecord::Schema.define(version: 20180120211414) do
   end
 
   create_table "wishes", force: :cascade do |t|
-    t.bigint "flat_id"
+    t.string "flat_url"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["flat_id"], name: "index_wishes_on_flat_id"
     t.index ["user_id"], name: "index_wishes_on_user_id"
   end
 
-  add_foreign_key "wishes", "flats"
   add_foreign_key "wishes", "users"
 end
