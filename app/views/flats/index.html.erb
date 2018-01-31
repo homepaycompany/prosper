@@ -1,165 +1,48 @@
 <div class="section">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-md-12">
-        <p>
-          <span id="banner-typed-text"></span>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <!-- START elements pour le dropdown -->
-      <div class="col-md-3 text-center btn-champs">
-        <div class="btn-group">
-          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            BUDGET ?
-          </button>
-          <div class="dropdown-menu">
-            <div class="show-flat-card-investment-assumption">
-              <p>Prix</p>
-              <p><span id="js-assumption-price">1000</span> €</p>
-            </div>
-            <input id="flat-selling-price-slider" data-slider-id='flatSellingPriceSlider' type="text" data-slider-min="0" data-slider-max="23"/>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 text-center btn-champs">
-        <div class="btn-group">
-          <button type="button" class="btn   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            TYPE DE BIEN ?
-          </button>
-          <div class="dropdown-menu ">
-            <a class="dropdown-item" href="#">Action</a><br>
-            <a class="dropdown-item" href="#">Another action</a><br>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 text-center btn-champs">
-        <div class="btn-group">
-          <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            PRIX DE VENTE ?
-          </button>
-          <div class="dropdown-menu">
-            <div class="show-flat-card-investment-assumption">
-              <p>Prix de vente</p>
-              <span id="js-assumption-selling-price">120</span> €
-            </div>
-            <input id="flat-selling-price-slider" data-slider-id='flatSellingPriceSlider' type="text" data-slider-min="0" data-slider-max="23"/>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 text-center btn-champs">
-        <div class="btn-group">
-          <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            RENTABILITE ?
-          </button>
-          <div class="dropdown-menu">
-            <div class="show-flat-card-investment-assumption">
-              <p>Quelle rentabilité cherchez vous ?</p>
-              <span id="js-assumption-selling-price">120</span> €
-            </div>
-            <input id="flat-selling-price-slider" data-slider-id='flatSellingPriceSlider' type="text" data-slider-min="0" data-slider-max="23"/>
-          </div>
-        </div>
-      </div>
-
-    <!-- START elements pour le dropdown -->
-
-    </div>
-
-<!--     <%#= link_to flat_path(flat) do %>
-      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-hg-1-5th card-add">
-        <div class="box-container">
-          <div class="row">
-            <div class="box-image">
-              <%#= image_tag flat.photo%>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="box-details-add text-center">
-                <p><strong>Prix F.A.I :</strong> <br> <%#=  flat.price %> €</p>
-
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="box-details-add text-center">
-                <p><strong>Prix / m2 :</strong> <br> <%#=(flat.price / flat.size) %> €
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="box-details-add text-center">
-                <p> <strong>Date :</strong>
-                  <br>
-                  <span class=" <%#= 'flat-card-days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) %> >90 " ><%#= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
-                </p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="box-details-add-red text-center">
-                <p>
-                 <strong>Renta :</strong>
-                 <br>
-                 <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="box-details-add text-center">
-                <p><strong>Adresse :</strong>
-                  <br>
-                  <%#= flat.address %>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <#% end %> -->
 
     <!-- START version desktop -->
+    <div class="flats-filters hidden-xs">
+      <%= link_to "Filtres", "javascript:void(0)", class: "white-btn" %>
+      <div class="flats-order">
+        <p>Tri :</p>
+        <p class="flats-order-item">Superficie</p>
+        <p class="flats-order-item">Prix</p>
+        <p class="flats-order-item">Date</p>
+        <p class="flats-order-item">Rendement</p>
+      </div>
+    </div>
+
     <div class="main-container hidden-xs">
       <!-- Map version desktop -->
       <div id="map" data-markers="<%= @markers.to_json %>"
       ></div>
       <div class="cards-container hidden-xs">
         <% if @selected_flats.length > 0 %>
-          <div class="flat-cards">
-            <div class="flat-cards-headers">
-              <div class="col-xs-3">
-              </div>
-              <div class="col-xs-4">
-                Description
-              </div>
-              <div class="col-xs-4">
-              </div>
-            </div>
+          <div class="flat-cards col-xs-12">
             <% @selected_flats.each do |flat| %>
-              <%= form_tag flat_path(flat["id"]), data: { form: flat['id'] }, class: "flat-card-form" do %>
+              <div class="col-xs-6">
+                <%= form_tag flat_path(flat["id"]), data: { form: flat['id'] }, class: "flat-card-form" do %>
                   <%= hidden_field_tag 'flat_url', flat["url"] %>
                   <%= link_to 'javascript:void(0)', data: { form: flat['id'] } do %>
                     <div class="flat-card">
-                      <div class="col-xs-3">
-                        <div class="flat-card-image">
+                        <div class="col-xs-12 flat-card-image">
                           <% if flat["images"].first.nil? %>
                             <%= image_tag ("default_flat.png") %>
                           <% else %>
                             <%= image_tag flat["images"].first %>
                           <% end %>
+                          <% if in_wishlist?(flat) %>
+                            <%= link_to wish_path(policy_scope(Wish).where(flat_url: flat["url"]).last), method: "delete" do %>
+                              <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+                            <% end %>
+                          <% else %>
+                            <%= link_to wishes_path(flat_url: flat["url"]), method: "post" do %>
+                              <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                            <% end %>
+                          <% end %>
                         </div>
-                      </div>
-                      <div class="col-xs-4">
-                        <p class="flat-card-description"><%= flat["description"] %>
-                        </p>
-                      </div>
-                      <div class="col-xs-2">
+                      <div class="col-xs-6 flat-card-description">
                         <p>
                           <strong>Surface</strong>
                           <br>
@@ -172,23 +55,29 @@
                             <%= flat["plotSurface"] %>m²
                           </p>
                         <% end %>
+                      </div>
+                      <div class="col-xs-6 flat-card-description">
                         <p>
                           <strong>Prix</strong>
                           <br>
                           <%= number_with_delimiter(flat["price"].round(0), :delimiter => ' ') if !flat["price"].nil? %>€
                         </p>
                       </div>
-                      <div class="col-xs-2">
+                      <div class="col-xs-6 flat-card-description">
                         <p>
                           <strong>Rentabilité</strong>
                           <br>
                           <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
                         </p>
+                      </div>
+                      <div class="col-xs-6 flat-card-description">
                         <p>
                           <strong>Date</strong>
                           <br>
                           <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f) / 24.hours).round(0) > 10 %>  " >
-                            <% if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) > 0 %>
+                            <% if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) == 1 %>
+                              <%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> jour
+                            <% elsif ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) > 1 %>
                               <%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> jours
                             <% elsif ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) == 0 %>
                               Aujourd'hui
@@ -196,20 +85,10 @@
                           </span>
                         </p>
                       </div>
-                      <div class="col-xs-1">
-                        <% if in_wishlist?(flat) %>
-                          <%= link_to wish_path(policy_scope(Wish).where(flat_url: flat["url"]).last), method: "delete" do %>
-                            <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                          <% end %>
-                        <% else %>
-                          <%= link_to wishes_path(flat_url: flat["url"]), method: "post" do %>
-                            <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-                          <% end %>
-                        <% end %>
-                      </div>
                     </div>
                   <% end %>
-              <% end %>
+                <% end %>
+              </div>
             <% end %>
           </div>
           <div class="pagination">

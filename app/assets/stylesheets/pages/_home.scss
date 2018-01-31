@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  color: white;
   .banner-section {
     padding: 50px;
     h1 {
@@ -57,7 +58,7 @@
 // Specific stylesheet applied to landing section
 .landing-real-estate {
   min-height: 450px;
-  background-color: #FBFBFB;
+  background-color: white;
   .landing-section-content, .landing-section-media {
     height: 450px;
   }
@@ -81,7 +82,8 @@
 
 .landing-studio {
   min-height: 450px;
-  background-color: white;
+  background-color: $black;
+  color: white;
   .landing-section-content, .landing-section-media {
     height: 450px;
   }
@@ -104,7 +106,7 @@
 
 .landing-products {
   min-height: 450px;
-  background-color: #FBFBFB;
+  background-color: white;
   .landing-section-content, .landing-section-media {
     height: 450px;
   }
@@ -130,7 +132,8 @@
 
 .landing-team {
   min-height: 450px;
-  background-color: white;
+  background-color: $black;
+  color: white;
   .landing-section-content, .landing-section-media {
     height: 450px;
   }
