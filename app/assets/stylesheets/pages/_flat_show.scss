@@ -12,6 +12,9 @@
   .btn {
     margin-left: 50px;
   }
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 .show-flat-card {
   min-height: 230px;
@@ -122,3 +125,6 @@
     border-top-color: $dark-blue !important;
   }
 }
+
+
+
