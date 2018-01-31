@@ -1,7 +1,8 @@
 <div class="section">
   <div class="container">
+
     <!-- START version desktop -->
-    <div class="flats-filters">
+    <div class="flats-filters hidden-xs">
       <%= link_to "Filtres", "javascript:void(0)", class: "white-btn" %>
       <div class="flats-order">
         <p>Tri :</p>
@@ -12,7 +13,6 @@
       </div>
     </div>
 
-    <!-- START version desktop -->
     <div class="main-container hidden-xs">
       <!-- Map version desktop -->
       <div id="map" data-markers="<%= @markers.to_json %>"
