@@ -23,6 +23,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 
+
 # Admin rights
 gem 'pundit'
 
