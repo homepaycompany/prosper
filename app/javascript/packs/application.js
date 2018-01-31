@@ -27,7 +27,3 @@ returnCalculation();
 // Javascript to submit forms on Flat#index
 import { formSubmit } from "../shared/submit.js"
 formSubmit();
-
-// Javascript to submit forms on Flat#index
-import { carouselFlat } from "../shared/carousel.js"
-carouselFlat();
