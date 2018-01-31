@@ -21,9 +21,13 @@ import { returnCalculation } from "../shared/slider.js"
 returnCalculation();
 
 // Javascript to type automaticly
-import { loadDynamicBannerText } from '../shared/typed.js';
-loadDynamicBannerText();
+// import { loadDynamicBannerText } from '../shared/typed.js';
+// loadDynamicBannerText();
 
 // Javascript to submit forms on Flat#index
 import { formSubmit } from "../shared/submit.js"
 formSubmit();
+
+// Javascript to submit forms on Flat#index
+import { carouselFlat } from "../shared/carousel.js"
+carouselFlat();
