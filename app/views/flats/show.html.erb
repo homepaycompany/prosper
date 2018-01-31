@@ -159,11 +159,11 @@
       <%#= link_to "#carouselImages", class: "carousel-control-prev", data: { slide: "prev" }, role: "button" do %>
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Précédent</span>
-      <% end %>
+      <#% end %>
       <%#= link_to "#carouselImages", class: "carousel-control-next", data: { slide: "next" }, role: "button" do %>
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span style="color: red;">Suivant</span>
-      <% end %>
+      <#% end %>
     </div> -->
 
     <div class="row">
@@ -250,6 +250,5 @@
     </div>
   </div>
 </div>
-<div id="map" data-markers="<%= @markers.to_json %>"
-      >
+<div id="map" data-markers="<%= @markers.to_json %>">
 </div>
