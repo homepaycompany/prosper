@@ -1,14 +1,14 @@
 // Main containers for flats index
+body {
+    background-color: #132b49;
+  }
+
 .container {
   @media (max-width: 732px) {
     padding-left: 0px;
     padding-right: 0px;
   }
 }
-
-body {
-    background-color: #132b49;
-  }
 
 .main-container {
   display: flex;
@@ -71,13 +71,13 @@ body {
 .flat-cards {
   @media (max-width: 732px) {
     padding-left: 0px;
-    padding-right: 0px;
+    padding-right: 20px;
   }
   a {
     color: $light-black;
   }
   .flat-card {
-    background-color: #F4F4F4;
+    background-color: white;
     min-height: 377px;
     margin-bottom: 30px;
     border-radius: 4px;
@@ -259,13 +259,14 @@ body {
   }
 }
 
-<<<<<<< HEAD
+
 .flat-card-description-address {
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-top: 10px;
-=======
+}
+
 .filter {
   border-color: $green;
   display: flex;
