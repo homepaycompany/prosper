@@ -15,7 +15,6 @@ class FlatsController < ApplicationController
       @selected_flats = @flats.first(10)
     else
       @selected_flats = @flats[(@current_page * 10 + 1)..(@current_page * 10 + 10)]
-      raise
     end
 
     # Define markers for the map
