@@ -26,23 +26,23 @@
                   <%= hidden_field_tag 'flat_url', flat["url"] %>
                   <%= link_to 'javascript:void(0)', data: { form: flat['id'] } do %>
                     <div class="flat-card">
-                        <div class="col-xs-12 flat-card-image">
-                          <% if flat["images"].first.nil? %>
-                            <%= image_tag ("default_flat.png") %>
-                          <% else %>
-                            <%= image_tag flat["images"].first %>
+                      <div class="col-xs-12 flat-card-image">
+                        <% if flat["images"].first.nil? %>
+                          <%= image_tag ("default_flat.png") %>
+                        <% else %>
+                          <%= image_tag flat["images"].first %>
+                        <% end %>
+                        <% if in_wishlist?(flat) %>
+                          <%= link_to wish_path(policy_scope(Wish).where(flat_url: flat["url"]).last), method: "delete" do %>
+                            <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
                           <% end %>
-                          <% if in_wishlist?(flat) %>
-                            <%= link_to wish_path(policy_scope(Wish).where(flat_url: flat["url"]).last), method: "delete" do %>
-                              <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                            <% end %>
-                          <% else %>
-                            <%= link_to wishes_path(flat_url: flat["url"]), method: "post" do %>
-                              <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
-                            <% end %>
+                        <% else %>
+                          <%= link_to wishes_path(flat_url: flat["url"]), method: "post" do %>
+                            <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
                           <% end %>
-                        </div>
-                      <div class="col-xs-6 flat-card-description">
+                        <% end %>
+                      </div>
+                      <div class="col-xs-6 flat-card-description text-center">
                         <p>
                           <strong>Surface</strong>
                           <br>
@@ -56,21 +56,23 @@
                           </p>
                         <% end %>
                       </div>
-                      <div class="col-xs-6 flat-card-description">
+                      <div class="col-xs-6 flat-card-description text-center">
                         <p>
                           <strong>Prix</strong>
                           <br>
                           <%= number_with_delimiter(flat["price"].round(0), :delimiter => ' ') if !flat["price"].nil? %>€
                         </p>
                       </div>
-                      <div class="col-xs-6 flat-card-description-renta">
-                        <p>
-                          <strong>Rentabilité</strong>
-                          <br>
-                          <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
-                        </p>
-                      </div>
                       <div class="col-xs-6 flat-card-description">
+                        <div class="description-renta text-center">
+                          <p>
+                            <strong>Rentabilité</strong>
+                            <br>
+                            <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-xs-6 flat-card-description text-center">
                         <p>
                           <strong>Date</strong>
                           <br>
@@ -84,6 +86,16 @@
                             <% end %>
                           </span>
                         </p>
+                      </div>
+                      <div class="col-xs-12 flat-card-description-address text-center">
+                        <p>
+                          <strong>Adresse</strong>
+                          <br>
+                          <span>
+                            <%= flat["city"] %>
+                          </span>
+                        </p>
+
                       </div>
                     </div>
                   <% end %>
@@ -104,77 +116,112 @@
     <!-- END version desktop -->
 
     <!-- START version mobile -->
-    <div id="map-mobile" class="visible-xs">
-      Map to be added
-    </div>
+      <div class="cards-container visible-xs">
+        <div class="flats-filters">
+          <%= link_to "Filtres", "javascript:void(0)", class: "white-btn" %>
+          <!-- <div class="flats-order">
+            <p>Tri :</p>
+            <p class="flats-order-item">Superficie</p>
+            <p class="flats-order-item">Prix</p>
+            <p class="flats-order-item">Date</p>
+            <p class="flats-order-item">Rendement</p>
+          </div> -->
+        </div>        <% if @selected_flats.length > 0 %>
+          <div class="flat-cards col-xs-12">
+            <% @selected_flats.each do |flat| %>
+              <div class="col-xs-12">
+                <%= form_tag flat_path(flat["id"]), data: { form: flat['id'] }, class: "flat-card-form" do %>
+                  <%= hidden_field_tag 'flat_url', flat["url"] %>
+                  <%= link_to 'javascript:void(0)', data: { form: flat['id'] } do %>
+                    <div class="flat-card">
+                      <div class="col-xs-12 flat-card-image">
+                        <% if flat["images"].first.nil? %>
+                          <%= image_tag ("default_flat.png") %>
+                        <% else %>
+                          <%= image_tag flat["images"].first %>
+                        <% end %>
+                        <% if in_wishlist?(flat) %>
+                          <%= link_to wish_path(policy_scope(Wish).where(flat_url: flat["url"]).last), method: "delete" do %>
+                            <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
+                          <% end %>
+                        <% else %>
+                          <%= link_to wishes_path(flat_url: flat["url"]), method: "post" do %>
+                            <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                      </div>
+                      <div class="col-xs-6 flat-card-description text-center">
+                        <p>
+                          <strong>Surface</strong>
+                          <br>
+                          <%= flat["surface"] %> m2
+                        </p>
+                        <% if flat["plotSurface"] && flat["plotSurface"] > 0 %>
+                          <p>
+                            <strong>Terrain</strong>
+                            <br>
+                            <%= flat["plotSurface"] %>m²
+                          </p>
+                        <% end %>
+                      </div>
+                      <div class="col-xs-6 flat-card-description text-center">
+                        <p>
+                          <strong>Prix</strong>
+                          <br>
+                          <%= number_with_delimiter(flat["price"].round(0), :delimiter => ' ') if !flat["price"].nil? %>€
+                        </p>
+                      </div>
+                      <div class="col-xs-6 flat-card-description">
+                        <div class="description-renta text-center">
+                          <p>
+                            <strong>Rentabilité</strong>
+                            <br>
+                            <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-xs-6 flat-card-description text-center">
+                        <p>
+                          <strong>Date</strong>
+                          <br>
+                          <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f) / 24.hours).round(0) > 10 %>  " >
+                            <% if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) == 1 %>
+                              <%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> jour
+                            <% elsif ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) > 1 %>
+                              <%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> jours
+                            <% elsif ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) == 0 %>
+                              Aujourd'hui
+                            <% end %>
+                          </span>
+                        </p>
+                      </div>
+                      <div class="col-xs-12 flat-card-description-address text-center">
+                        <p>
+                          <strong>Adresse</strong>
+                          <br>
+                          <span>
+                            <%= flat["city"] %>
+                          </span>
+                        </p>
 
-    <div class="cards-container-mobile visible-xs">
-      <% @selected_flats.each do |flat| %>
-        <%= link_to flats_path(flat["id"]), method: 'post' do %>
-          <div class="flat-card-mobile">
-            <div class="col-xs-4">
-              <div class="flat-card-image-mobile">
-                <% if flat["images"].first.nil? %>
-                  <%= image_tag ("default_flat.png") %>
-                <% else %>
-                  <%= image_tag flat["images"].first %>
-                <% end %>
-              </div>
-            </div>
-            <div class="col-xs-3">
-              <p>
-                <strong>Surface</strong>
-                <br>
-                <%= flat["surface"] %> m2
-              </p>
-              <% if flat["plotSurface"] && flat["plotSurface"] > 0 %>
-                <p>
-                  <strong>Terrain</strong>
-                  <br>
-                  <%= flat["plotSurface"] %>m²
-                </p>
-              <% end %>
-              <p>
-                <strong>Prix</strong>
-                <br>
-                <%= (flat["price"] / 1000).round(0) if !flat["price"].nil? %>k€
-              </p>
-            </div>
-            <div class="col-xs-3">
-              <p>
-                <strong>Rentabilité</strong>
-                <br>
-                <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
-              </p>
-              <p>
-                <strong>Date</strong>
-                <br>
-                <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f) / 24.hours).round(0) > 10 %>  " >
-                  <% if ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) > 0 %>
-                    <%= ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) %> jours
-                  <% elsif ((DateTime.now.to_f - DateTime.strptime(flat["date"]).to_f  ) / 24.hours).round(0) == 0 %>
-                    Aujourd'hui
-                  <% end %>
-                </span>
-              </p>
-            </div>
-            <div class="col-xs-2">
-              <div class="flat-card-wishlist-mobile">
-                <% if in_wishlist?(flat) %>
-                  <%= link_to wish_path(policy_scope(Wish).where(flat_url: flat["url"]).last), method: "delete" do %>
-                    <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                  <% end %>
-                <% else %>
-                  <%= link_to wishes_path(flat_url: flat["url"]), method: "post" do %>
-                    <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                      </div>
+                    </div>
                   <% end %>
                 <% end %>
               </div>
-            </div>
+            <% end %>
+          </div>
+          <div class="pagination">
+            <strong><%= link_to "Précedent", flats_path(pg: [(@current_page - 1), 1].max) %></strong>
+            <% for i in (1..@page_number) do %>
+              <%= link_to i, flats_path(pg: i), class: "pagination-number #{ 'pagination-active' if (@current_page === i) || (@current_page === 0 && i === 1) }" %>
+            <% end %>
+            <strong><%= link_to "Suivant", flats_path(pg: [(@current_page + 1), @page_number].min) %></strong>
           </div>
         <% end %>
-      <% end %>
+      </div>
     </div>
     <!-- END version mobile -->
   </div>
 </div>
+

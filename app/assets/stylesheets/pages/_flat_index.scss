@@ -1,4 +1,11 @@
 // Main containers for flats index
+.container {
+  @media (max-width: 732px) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
 .main-container {
   display: flex;
 }
@@ -14,6 +21,9 @@
 }
 .cards-container {
   padding-left: 10px;
+  @media (max-width: 732px) {
+    padding-left: 0px;
+  }
 }
 
 // Flats filters
@@ -22,6 +32,9 @@
   margin-top: 40px;
   margin-bottom: 40px;
   justify-content: space-between;
+  @media (max-width: 732px) {
+    justify-content: space-around;
+  }
   .flats-order {
     display: inline-flex;
     p {
@@ -51,12 +64,16 @@
 
 // Flat cards
 .flat-cards {
+  @media (max-width: 732px) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
   a {
     color: $light-black;
   }
   .flat-card {
     background-color: #F4F4F4;
-    min-height: 300px;
+    min-height: 377px;
     margin-bottom: 30px;
     border-radius: 4px;
     cursor: pointer;
@@ -76,6 +93,7 @@
       overflow: hidden;
       padding: 0px;
       img {
+        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(1, rgba(0, 0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 1)), color-stop(1, rgba(0, 0, 0, 0)));
         width: 100%;
         opacity: 0.9;
         transition: all ease 0.3s;
@@ -96,17 +114,8 @@
       font-weight: 400;
     }
     .flat-card-description {
-      padding: 5px;
+      padding: 10px;
       height: 50px;
-      p {
-        padding: 0px;
-      }
-    }
-
-    .flat-card-description-renta {
-      padding: 5px;
-      height: 50px;
-      border: solid 1px $red;
       p {
         padding: 0px;
       }
@@ -131,6 +140,14 @@
   border-radius: 4px 4px 0px 0px;
   font-weight: bold;
   font-size: 16px;
+}
+
+.description-renta {
+  color: #34e7b7;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 // Mobile responsiveness of flat cards
@@ -230,4 +247,11 @@
     background-color: $green;
     font-weight: 700;
   }
+}
+
+.flat-card-description-address {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
 }
