@@ -1,4 +1,8 @@
 // Main containers for flats index
+
+body {
+    background-color: #132b49;
+  }
 .main-container {
   display: flex;
 }
@@ -120,12 +124,13 @@
 }
 .flat-cards-headers {
   min-height: 40px;
-  background-color: $green;
+
   color: white;
   padding: 10px;
   border-radius: 4px 4px 0px 0px;
   font-weight: bold;
   font-size: 16px;
+  display: flex;
 }
 
 // Mobile responsiveness of flat cards
@@ -177,7 +182,10 @@
 
 .weekly-deals {
   align-items: center;
+  background-color: #EB5757;
+  border-radius: 4px;
 }
+
 
 .details {
   align-items: center;
@@ -186,8 +194,9 @@
 .weekly-deals h1 {
   font-size: 22px;
   font-weight: bold;
-  color: #EB5757;
+  color: white;
   padding: 30px;
+  text-transform: uppercase;
 }
 
 .details h1 {
@@ -225,4 +234,114 @@
     background-color: $green;
     font-weight: 700;
   }
+}
+
+.filter {
+  border-color: $green;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+}
+
+.card-add {
+  height: 100%;
+  width: 252px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  margin: 12px;
+  position: relative;
+  border-radius: 4px;
+  padding: 0px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07), 0 1px 0 0 rgba(0, 0, 0, 0.03);
+
+}
+
+.box-photo-add {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 185px;
+}
+
+.box-photo-add img {
+  vertical-align: middle;
+  width: 100%;
+  height: 185px;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.box-details-add {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 12px;
+  border-radius: 4px;
+}
+
+.box-details-add p {
+  font-size: 15px;
+  margin: 10px;
+  color: #132b49;
+}
+
+
+
+.box-details-add-red {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: solid 1px $red;
+  margin-top: 12px;
+  border-radius: 4px;
+}
+
+.box-details-add-red p {
+  font-size: 16px;
+  margin: 10px;
+  color: #132b49;
+}
+
+.box-container {
+  height: 100%;
+  width: 252px;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.box-image img {
+  vertical-align: middle;
+  width: 100%;
+  height: 185px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.placehilder {
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn-champs button {
+  width: 200px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  color: white;
+  background: #1ACEA1;
+  border-color: #1ACEA1;
+}
+
+#text_en_avant {
+  font-size: 18px;
+  margin: 10px;
+  color: #132b49;
 }
