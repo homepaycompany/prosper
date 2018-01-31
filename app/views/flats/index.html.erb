@@ -2,14 +2,53 @@
   <div class="container">
     <!-- START version desktop -->
     <div class="flats-filters hidden-xs">
-      <%= link_to "Filtres", "javascript:void(0)", class: "white-btn" %>
+      <button type="button" class="btn dark-btn" data-toggle="modal" data-target="#filterModal">
+        Filtres
+      </button>
+
+      <!-- Filters modal -->
+      <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="filterModalLabel">Filtres de recherche</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= form_tag flats_path, class: "filter-form", method: "get" do %>
+                <div class="filter-form-inputs">
+                  <%= hidden_field_tag pg: @current_page %>
+                  <%= hidden_field_tag sort: @sort_type %>
+                  <%= label_tag "Prix" %>
+                  <%= text_field_tag 'filter-price' %>
+                  <%= label_tag "Rendement" %>
+                  <%= text_field_tag 'filter-return' %>
+                  <%= label_tag "Surface" %>
+                  <%= text_field_tag 'filter-surface' %>
+                  <%= label_tag "Nombre de pièces" %>
+                  <%= text_field_tag 'filter-rooms' %>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn white-btn" data-dismiss="modal">Fermer</button>
+              <%= button_tag "Filtrer", id: "submit", class: "btn" %>
+              <!-- <button type="button" class="btn">Filtrer</button> -->
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
       <div class="sortbar">
         <p>Tri :</p>
-        <% if params["sort"] == "a-surface" %>
+        <% if @sort_type == "a-surface" %>
           <%= link_to flats_path(pg: @current_page, sort: "d-surface"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
             Superficie <i class="fa fa-angle-up" aria-hidden="true"></i>
           <% end %>
-        <% elsif params["sort"] == "d-surface" %>
+        <% elsif @sort_type == "d-surface" %>
           <%= link_to flats_path(pg: @current_page, sort: "a-surface"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
           Superficie <i class="fa fa-angle-down" aria-hidden="true"></i>
           <% end %>
@@ -17,11 +56,11 @@
           <%= link_to "Superficie", flats_path(pg: @current_page, sort: "d-surface"), class: "sortbar-i", id: "sortbar-i-surface" %>
         <% end %>
 
-        <% if params["sort"] == "a-price" %>
+        <% if @sort_type == "a-price" %>
           <%= link_to flats_path(pg: @current_page, sort: "d-price"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
             Prix <i class="fa fa-angle-up" aria-hidden="true"></i>
           <% end %>
-        <% elsif params["sort"] == "d-price" %>
+        <% elsif @sort_type == "d-price" %>
           <%= link_to flats_path(pg: @current_page, sort: "a-price"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
             Prix <i class="fa fa-angle-down" aria-hidden="true"></i>
           <% end %>
@@ -29,11 +68,11 @@
           <%= link_to "Prix", flats_path(pg: @current_page, sort: "d-price"), class: "sortbar-i", id: "sortbar-i-price" %>
         <% end %>
 
-        <% if params["sort"] == "a-date" %>
+        <% if @sort_type == "a-date" %>
           <%= link_to flats_path(pg: @current_page, sort: "d-date"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
             Date <i class="fa fa-angle-up" aria-hidden="true"></i>
           <% end %>
-        <% elsif params["sort"] == "d-date" %>
+        <% elsif @sort_type == "d-date" %>
           <%= link_to flats_path(pg: @current_page, sort: "a-date"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
             Date <i class="fa fa-angle-down" aria-hidden="true"></i>
           <% end %>
@@ -41,11 +80,11 @@
           <%= link_to "Date", flats_path(pg: @current_page, sort: "d-date"), class: "sortbar-i", id: "sortbar-i-date" %>
         <% end %>
 
-        <% if params["sort"] == "a-return" %>
+        <% if @sort_type == "a-return" %>
           <%= link_to flats_path(pg: @current_page, sort: "d-return"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
             Rendement <i class="fa fa-angle-up" aria-hidden="true"></i>
           <% end %>
-        <% elsif params["sort"] == "d-return" %>
+        <% elsif @sort_type == "d-return" %>
           <%= link_to flats_path(pg: @current_page, sort: "a-return"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
             Rendement <i class="fa fa-angle-down" aria-hidden="true"></i>
           <% end %>

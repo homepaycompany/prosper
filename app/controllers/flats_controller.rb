@@ -11,6 +11,7 @@ class FlatsController < ApplicationController
     # Select n first elements according to pagination
     @current_page = params["pg"].to_i
     @page_number = (@flats.length / 10.to_f).ceil
+    @sort_type = params["sort"]
     if @current_page.nil?
       @selected_flats = @flats.first(10)
     else
@@ -49,19 +50,19 @@ class FlatsController < ApplicationController
       res = http.request req
 
       # Sort flats according to the criteria chosen by the visitor
-      if params["sort"] == "a-price"
+      if @sort_type == "a-price"
         @flats = JSON.parse(res.body).sort_by { |flat| flat["price"].to_f }
-      elsif params["sort"] == "d-price"
+      elsif @sort_type == "d-price"
         @flats = JSON.parse(res.body).sort_by { |flat| -flat["price"].to_f }
-      elsif params["sort"] == "a-surface"
+      elsif @sort_type == "a-surface"
         @flats = JSON.parse(res.body).sort_by { |flat| flat["surface"].to_f }
-      elsif params["sort"] == "d-surface"
+      elsif @sort_type == "d-surface"
         @flats = JSON.parse(res.body).sort_by { |flat| -flat["surface"].to_f }
-      elsif params["sort"] == "a-return"
+      elsif @sort_type == "a-return"
         @flats = JSON.parse(res.body).sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
-      elsif params["sort"] == "d-return"
+      elsif @sort_type == "d-return"
         @flats = JSON.parse(res.body).sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
-      elsif params["sort"] == "a-date"
+      elsif @sort_type == "a-date"
         @flats = JSON.parse(res.body).sort_by { |flat| DateTime.strptime(flat["date"]).to_f }
       else
         @flats = JSON.parse(res.body).sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
