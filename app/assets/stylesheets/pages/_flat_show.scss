@@ -1,6 +1,7 @@
 // Flat show style
 .show-flat-container {
   background-color: white;
+
   border-radius: 4px;
   padding: 20px 40px;
   margin-bottom: 30px;
@@ -8,6 +9,7 @@
     padding: 2px;
     position: relative;
   }
+
   p {
     font-size: 15px;
     margin: 0px 0px 10px 0px;
@@ -40,8 +42,34 @@
       }
     }
   }
+  .show-flat-images {
+    padding: 0px 0px 0px 50px;
+    margin-bottom: 30px;
+    .carousel-indicators {
+      li {
+        border: solid 1px $green;
+      }
+      .active {
+        background-color: $green;
+      }
+    }
+    .carousel-control {
+      background-image: none;
+      width: 20%;
+    }
+    .glyphicon {
+      color: $green;
+    }
+    .carousel-inner {
+      img {
+        max-width: 100%;
+        max-height: 300px;
+        margin: auto;
+      }
+    }
+  }
   .show-flat-information {
-    padding: 0px 50px;
+    padding: 0px 50px 0px 0px;
     margin-bottom: 20px;
     @media (max-width: 732px) {
     padding: 4px;
@@ -52,14 +80,6 @@
     }
     p {
       display: inline;
-    }
-  }
-  .show-flat-image {
-    padding: 0px 50px;
-    margin-bottom: 30px;
-    img {
-      max-width: 100%;
-      max-height: 210px;
     }
   }
   .show-flat-description {
@@ -165,6 +185,7 @@
   }
 }
 
+// Style of mobile application
 .titre-show-compare {
   height: 70px;
   display: flex;

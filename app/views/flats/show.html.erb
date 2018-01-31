@@ -3,123 +3,154 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="show-flat-container">
-          <div class="show-flat-title">
-            <h1 class="page-title text-center"><%= "#{@flat["title"]} - #{number_with_delimiter(@flat["price"].round(0), :delimiter => ' ')}€" %></h1>
-            <% if in_wishlist?(@flat) %>
-              <%= link_to wish_path(policy_scope(Wish).where(flat_url: @flat["url"]).last), method: "delete" do %>
-                  <i class="fa fa-heart" aria-hidden="true"></i>
-              <% end %>
-            <% else %>
-              <%= link_to wishes_path(flat_url: @flat["url"]), method: "post" do %>
-                <i class="fa fa-heart-o" aria-hidden="true"></i>
-              <% end %>
-            <% end %>
-            <%= link_to "Voir l'annonce", @flat["url"], class: "btn", target: :_blank %>
-          </div>
-          <div class="show-flat-information">
-            <div class="row">
-              <div class="col-xs-1">
-                <p><strong>Prix</strong></p>
-              </div>
-              <div class="col-xs-3">
-                <p>
-                  <% if price_per_squared_meter(@flat) && (price_per_squared_meter(@flat) > 0) %>
-                    <%= number_with_delimiter(price_per_squared_meter(@flat).round(0), :delimiter => ' ') %>€/m²
-                  <% else %>
-                    n/a
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="show-flat-title">
+                <h1 class="page-title text-center"><%= "#{@flat["title"]} - #{number_with_delimiter(@flat["price"].round(0), :delimiter => ' ')}€" %></h1>
+                <% if in_wishlist?(@flat) %>
+                  <%= link_to wish_path(policy_scope(Wish).where(flat_url: @flat["url"]).last), method: "delete" do %>
+                      <i class="fa fa-heart" aria-hidden="true"></i>
                   <% end %>
-                </p>
-                <br>
-                <p>
-                  ([TBC] en moyenne)
-                </p>
-              </div>
-              <div class="col-xs-1">
-                <p><strong>Surface</strong></p>
-              </div>
-              <div class="col-xs-3">
-                <p>
-                  <% if @flat["surface"] && (@flat["surface"] > 0) %>
-                    <span id="js-assumption-size"><%= number_with_delimiter(@flat["surface"], :delimiter => ' ') %></span>m²
-                  <% else %>
-                    n/a
+                <% else %>
+                  <%= link_to wishes_path(flat_url: @flat["url"]), method: "post" do %>
+                    <i class="fa fa-heart-o" aria-hidden="true"></i>
                   <% end %>
-                </p>
-                <br>
-                <p>
-                  ([TBC] en moyenne)
-                </p>
-              </div>
-              <div class="col-xs-1">
-                <p><strong>Terrain</strong></p>
-              </div>
-              <div class="col-xs-3">
-                <p>
-                  <% if @flat["plotSurface"] && (@flat["plotSurface"] > 0) %>
-                    <%= number_with_delimiter(@flat["plotSurface"], :delimiter => ' ') %>m²
-                  <% else %>
-                    n/a
-                  <% end %>
-                </p>
-                <br>
-                <p>
-                  ([TBC] en moyenne)
-                </p>
-              </div>
-              <div class="col-xs-1">
-                <p><strong>Pièces</strong></p>
-              </div>
-              <div class="col-xs-3">
-                <p>
-                  <% if @flat["rooms"] && (@flat["rooms"] > 0) %>
-                    <span id="js-assumption-size"><%= number_with_delimiter(@flat["rooms"], :delimiter => ' ') %></span>
-                  <% else %>
-                    n/a
-                  <% end %>
-                </p>
-                <br>
-                <p>
-                  ([TBC] en moyenne)
-                </p>
-              </div>
-              <div class="col-xs-1">
-                <p><strong>Chambres</strong></p>
-              </div>
-              <div class="col-xs-3">
-                <p>
-                  [TBC]
-                </p>
-                <br>
-                <p>
-                  ([TBC] en moyenne)
-                </p>
-              </div>
-              <div class="col-xs-1">
-                <p><strong>Date</strong></p>
-              </div>
-              <div class="col-xs-3">
-                <p>
-                  <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f) / 24.hours).round(0) > 10 %>  " >
-                    <% if ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) == 1 %>
-                      <%= ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) %> jour
-                    <% elsif ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) > 1 %>
-                      <%= ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) %> jours
-                    <% elsif ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) == 0 %>
-                      Aujourd'hui
-                    <% end %>
-                  </span>
-                </p>
-                <br>
-                <p>90 jours en moyenne</p>
+                <% end %>
+                <%= link_to "Voir l'annonce", @flat["url"], class: "btn", target: :_blank %>
               </div>
             </div>
-          </div>
-          <div class="show-flat-image">
-            <% if @flat["images"].first.nil? %>
-              <%= image_tag ("default_flat.png") %>
-            <% else %>
-              <%#= image_tag @flat["images"].first %>
-            <% end %>
+
+            <div class="col-xs-6">
+              <div class="show-flat-images">
+                <% if @flat["images"].first.nil? %>
+                  <%= image_tag ("default_flat.png") %>
+                <% else %>
+                  <div id="carousel-flat-images" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <% for i in (0..@flat["images"].length-1) do %>
+                        <li data-target="#carousel-flat-images" data-slide-to="<%= i %>" class="<%= "active" if i == 0 %>"></li>
+                      <% end %>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                      <% @flat["images"].each_with_index do |image, index| %>
+                        <div class="item <%= "active" if index == 0 %>">
+                          <%= image_tag @flat["images"][index] %>
+                        </div>
+                      <% end %>
+                    </div>
+                    <%= link_to "#carousel-flat-images", class: "left carousel-control", data: { slide: "prev"}, role: "button" do %>
+                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                      <span class="sr-only">Précédent</span>
+                    <% end %>
+                    <%= link_to "#carousel-flat-images", class: "right carousel-control", data: { slide: "next"}, role: "button" do %>
+                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                      <span class="sr-only">Suivant</span>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="show-flat-information">
+                <div class="row">
+                  <div class="col-xs-2">
+                    <p><strong>Prix</strong></p>
+                  </div>
+                  <div class="col-xs-4">
+                    <p>
+                      <% if price_per_squared_meter(@flat) && (price_per_squared_meter(@flat) > 0) %>
+                        <%= number_with_delimiter(price_per_squared_meter(@flat).round(0), :delimiter => ' ') %>€/m²
+                      <% else %>
+                        n/a
+                      <% end %>
+                    </p>
+                    <br>
+                    <p>
+                      ([TBC] en moyenne)
+                    </p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p><strong>Surface</strong></p>
+                  </div>
+                  <div class="col-xs-4">
+                    <p>
+                      <% if @flat["surface"] && (@flat["surface"] > 0) %>
+                        <span id="js-assumption-size"><%= number_with_delimiter(@flat["surface"], :delimiter => ' ') %></span>m²
+                      <% else %>
+                        n/a
+                      <% end %>
+                    </p>
+                    <br>
+                    <p>
+                      ([TBC] en moyenne)
+                    </p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p><strong>Terrain</strong></p>
+                  </div>
+                  <div class="col-xs-4">
+                    <p>
+                      <% if @flat["plotSurface"] && (@flat["plotSurface"] > 0) %>
+                        <%= number_with_delimiter(@flat["plotSurface"], :delimiter => ' ') %>m²
+                      <% else %>
+                        n/a
+                      <% end %>
+                    </p>
+                    <br>
+                    <p>
+                      ([TBC] en moyenne)
+                    </p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p><strong>Pièces</strong></p>
+                  </div>
+                  <div class="col-xs-4">
+                    <p>
+                      <% if @flat["rooms"] && (@flat["rooms"] > 0) %>
+                        <span id="js-assumption-size"><%= number_with_delimiter(@flat["rooms"], :delimiter => ' ') %></span>
+                      <% else %>
+                        n/a
+                      <% end %>
+                    </p>
+                    <br>
+                    <p>
+                      ([TBC] en moyenne)
+                    </p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p><strong>Chambres</strong></p>
+                  </div>
+                  <div class="col-xs-4">
+                    <p>
+                      [TBC]
+                    </p>
+                    <br>
+                    <p>
+                      ([TBC] en moyenne)
+                    </p>
+                  </div>
+                  <div class="col-xs-2">
+                    <p><strong>Date</strong></p>
+                  </div>
+                  <div class="col-xs-4">
+                    <p>
+                      <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f) / 24.hours).round(0) > 10 %>  " >
+                        <% if ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) == 1 %>
+                          <%= ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) %> jour
+                        <% elsif ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) > 1 %>
+                          <%= ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) %> jours
+                        <% elsif ((DateTime.now.to_f - DateTime.strptime(@flat["date"]).to_f  ) / 24.hours).round(0) == 0 %>
+                          Aujourd'hui
+                        <% end %>
+                      </span>
+                    </p>
+                    <br>
+                    <p>90 jours en moyenne</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="show-flat-description">
@@ -131,6 +162,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -386,33 +418,6 @@
       </div>
     </div>
 
-<!--     <div id="carouselImages" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselImages" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselImages" data-slide-to="1"></li>
-        <li data-target="#carouselImages" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <%#= image_tag @flat["images"][1], class: "d-block w-100" %>
-        </div>
-        <div class="carousel-item">
-          <%#= image_tag @flat["images"][2], class: "d-block w-100" %>
-        </div>
-        <div class="carousel-item">
-          <%#= image_tag @flat["images"][3], class: "d-block w-100" %>
-        </div>
-      </div>
-      <%#= link_to "#carouselImages", class: "carousel-control-prev", data: { slide: "prev" }, role: "button" do %>
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Précédent</span>
-      <#% end %>
-      <%#= link_to "#carouselImages", class: "carousel-control-next", data: { slide: "next" }, role: "button" do %>
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span style="color: red;">Suivant</span>
-      <#% end %>
-    </div> -->
-
     <div class="row">
       <!-- Flat card with price history -->
       <div class="col-xs-12 col-sm-6">
@@ -496,11 +501,6 @@
       </div>
     </div>
   </div>
-</div>
-
-<!-- END version mobile -->
-
-
-<div id="map" class="hidden-xs" data-markers="<%= @markers.to_json %>">
-
+  <div id="map" style="height: 450px;" data-markers="<%= @markers.to_json %>">
+  </div>
 </div>
