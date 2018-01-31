@@ -12,13 +12,14 @@
       </div>
     </div>
 
+    <!-- START version desktop -->
     <div class="main-container hidden-xs">
       <!-- Map version desktop -->
       <div id="map" data-markers="<%= @markers.to_json %>"
       ></div>
       <div class="cards-container hidden-xs">
         <% if @selected_flats.length > 0 %>
-          <div class="flat-cards">
+          <div class="flat-cards col-xs-12">
             <% @selected_flats.each do |flat| %>
               <div class="col-xs-6">
                 <%= form_tag flat_path(flat["id"]), data: { form: flat['id'] }, class: "flat-card-form" do %>
