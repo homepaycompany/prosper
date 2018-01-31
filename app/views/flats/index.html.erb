@@ -6,24 +6,51 @@
       <div class="sortbar">
         <p>Tri :</p>
         <% if params["sort"] == "a-surface" %>
-          <%= link_to "Superficie", flats_path(pg: @current_page, sort: "d-surface"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" %>
+          <%= link_to flats_path(pg: @current_page, sort: "d-surface"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
+            Superficie <i class="fa fa-angle-up" aria-hidden="true"></i>
+          <% end %>
+        <% elsif params["sort"] == "d-surface" %>
+          <%= link_to flats_path(pg: @current_page, sort: "a-surface"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
+          Superficie <i class="fa fa-angle-down" aria-hidden="true"></i>
+          <% end %>
         <% else %>
-          <%= link_to "Superficie", flats_path(pg: @current_page, sort: "a-surface"), class: "sortbar-i #{"sortbar-i-active" if (params["sort"] == "a-surface" || params["sort"] == "d-surface")}", id: "sortbar-i-surface" %>
+          <%= link_to "Superficie", flats_path(pg: @current_page, sort: "d-surface"), class: "sortbar-i", id: "sortbar-i-surface" %>
         <% end %>
+
         <% if params["sort"] == "a-price" %>
-          <%= link_to "Prix", flats_path(pg: @current_page, sort: "d-price"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" %>
+          <%= link_to flats_path(pg: @current_page, sort: "d-price"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
+            Prix <i class="fa fa-angle-up" aria-hidden="true"></i>
+          <% end %>
+        <% elsif params["sort"] == "d-price" %>
+          <%= link_to flats_path(pg: @current_page, sort: "a-price"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
+            Prix <i class="fa fa-angle-down" aria-hidden="true"></i>
+          <% end %>
         <% else %>
-          <%= link_to "Prix", flats_path(pg: @current_page, sort: "a-price"), class: "sortbar-i #{"sortbar-i-active" if (params["sort"] == "a-price" || params["sort"] == "d-price")}", id: "sortbar-i-price" %>
+          <%= link_to "Prix", flats_path(pg: @current_page, sort: "d-price"), class: "sortbar-i", id: "sortbar-i-price" %>
         <% end %>
+
         <% if params["sort"] == "a-date" %>
-          <%= link_to "Date", flats_path(pg: @current_page, sort: "d-date"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" %>
+          <%= link_to flats_path(pg: @current_page, sort: "d-date"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
+            Date <i class="fa fa-angle-up" aria-hidden="true"></i>
+          <% end %>
+        <% elsif params["sort"] == "d-date" %>
+          <%= link_to flats_path(pg: @current_page, sort: "a-date"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
+            Date <i class="fa fa-angle-down" aria-hidden="true"></i>
+          <% end %>
         <% else %>
-          <%= link_to "Date", flats_path(pg: @current_page, sort: "a-date"), class: "sortbar-i #{"sortbar-i-active" if (params["sort"] == "a-date" || params["sort"] == "d-date")}", id: "sortbar-i-date" %>
+          <%= link_to "Date", flats_path(pg: @current_page, sort: "d-date"), class: "sortbar-i", id: "sortbar-i-date" %>
         <% end %>
+
         <% if params["sort"] == "a-return" %>
-          <%= link_to "Rendement", flats_path(pg: @current_page, sort: "d-return"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" %>
+          <%= link_to flats_path(pg: @current_page, sort: "d-return"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
+            Rendement <i class="fa fa-angle-up" aria-hidden="true"></i>
+          <% end %>
+        <% elsif params["sort"] == "d-return" %>
+          <%= link_to flats_path(pg: @current_page, sort: "a-return"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
+            Rendement <i class="fa fa-angle-down" aria-hidden="true"></i>
+          <% end %>
         <% else %>
-          <%= link_to "Rendement", flats_path(pg: @current_page, sort: "a-return"), class: "sortbar-i #{"sortbar-i-active" if (params["sort"] == "a-return" || params["sort"] == "d-return")}", id: "sortbar-i-return" %>
+          <%= link_to "Rendement", flats_path(pg: @current_page, sort: "d-return"), class: "sortbar-i", id: "sortbar-i-return" %>
         <% end %>
       </div>
     </div>
