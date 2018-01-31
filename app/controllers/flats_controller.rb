@@ -28,6 +28,12 @@ class FlatsController < ApplicationController
   end
 
   def show
+    # Define markers for the map
+    raise
+    @marker = @flat
+    @marker[:lat] @marker["latitude"]
+    @marker[:lng] @marker["longitude"]
+    @marker[:infoWindow] = { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat["title"] }) }
   end
 
   private
