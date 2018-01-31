@@ -47,7 +47,25 @@ class FlatsController < ApplicationController
       req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
       req.body = { "City": current_user.city,"ZipCode": current_user.zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
       res = http.request req
-      @flats = JSON.parse(res.body).sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
+
+      # Sort flats according to the criteria chosen by the visitor
+      if params["sort"] == "a-price"
+        @flats = JSON.parse(res.body).sort_by { |flat| flat["price"].to_f }
+      elsif params["sort"] == "d-price"
+        @flats = JSON.parse(res.body).sort_by { |flat| -flat["price"].to_f }
+      elsif params["sort"] == "a-surface"
+        @flats = JSON.parse(res.body).sort_by { |flat| flat["surface"].to_f }
+      elsif params["sort"] == "d-surface"
+        @flats = JSON.parse(res.body).sort_by { |flat| -flat["surface"].to_f }
+      elsif params["sort"] == "a-return"
+        @flats = JSON.parse(res.body).sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
+      elsif params["sort"] == "d-return"
+        @flats = JSON.parse(res.body).sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
+      elsif params["sort"] == "a-date"
+        @flats = JSON.parse(res.body).sort_by { |flat| DateTime.strptime(flat["date"]).to_f }
+      else
+        @flats = JSON.parse(res.body).sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
+      end
 
       # Add an id to the different flats obtained from the API
       i = 0

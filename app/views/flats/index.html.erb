@@ -88,7 +88,11 @@
                         <p>
                           <strong>Surface</strong>
                           <br>
-                          <%= flat["surface"] %> m2
+                          <% if flat["surface"] %>
+                           <%= "#{flat["surface"]} m²" %>
+                          <% else %>
+                            n/a
+                          <% end %>
                         </p>
                         <% if flat["plotSurface"] && flat["plotSurface"] > 0 %>
                           <p>
