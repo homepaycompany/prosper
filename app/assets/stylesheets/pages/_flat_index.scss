@@ -40,7 +40,7 @@ body {
   @media (max-width: 732px) {
     justify-content: space-around;
   }
-  .flats-order {
+  .sortbar {
     display: inline-flex;
     p {
       color: white;
@@ -49,11 +49,18 @@ body {
       font-size: 14px;
       font-weight: bold;
     }
-    .flats-order-item {
+    a.sortbar-i {
+      height: 40px;
+      line-height: 40px;
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: bold;
       background-color: white;
       color: $black;
-      cursor: pointer;
       border-right: solid 1px $black;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.4s ease;
       &:nth-child(2) {
         border-radius: 8px 0px 0px 8px;
       }
@@ -62,6 +69,15 @@ body {
       }
       &:hover {
         color: $green;
+      }
+    }
+    a.sortbar-i-active {
+      background-color: $green;
+      color: white;
+      transition: all 0.4s ease;
+      &:hover {
+        background-color: $dark-green;
+        color: white;
       }
     }
   }
