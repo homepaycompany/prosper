@@ -131,6 +131,33 @@
       </div>
     </div>
 
+    <div id="carouselImages" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselImages" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselImages" data-slide-to="1"></li>
+        <li data-target="#carouselImages" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= image_tag @flat["images"][1], class: "d-block w-100" %>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag @flat["images"][2], class: "d-block w-100" %>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag @flat["images"][3], class: "d-block w-100" %>
+        </div>
+      </div>
+      <%= link_to "#carouselImages", class: "carousel-control-prev", data: { slide: "prev" }, role: "button" do %>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Précédent</span>
+      <% end %>
+      <%= link_to "#carouselImages", class: "carousel-control-next", data: { slide: "next" }, role: "button" do %>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span style="color: red;">Suivant</span>
+      <% end %>
+    </div>
+
     <div class="row">
       <!-- Flat card with price history -->
       <div class="col-xs-12 col-sm-6">
