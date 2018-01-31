@@ -29,11 +29,13 @@ class FlatsController < ApplicationController
 
   def show
     # Define markers for the map
-    raise
-    @marker = @flat
-    @marker[:lat] @marker["latitude"]
-    @marker[:lng] @marker["longitude"]
-    @marker[:infoWindow] = { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat["title"] }) }
+    @markers = @flats.select { |flat| flat["url"] == params[:flat_url] }.map do |flat|
+      {
+        lat: flat["latitude"],
+        lng: flat["longitude"],
+        infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat["title"] }) }
+      }
+    end
   end
 
   private
