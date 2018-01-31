@@ -1,19 +1,93 @@
+<div class="container">
+  <div class="typed-banner">
+    <p>
+      <span id="banner-typed-text"></span>
+  </p>
+  </div>
+</div>
+
 <div class="section">
   <div class="container">
-    <div class="show-flat-title text-center">
-     <h1 class="page-title"><%= "#{@flat["title"]} - #{number_with_delimiter(@flat["price"].round(0), :delimiter => ' ')}€" %></h1>
-      <% if in_wishlist?(@flat) %>
-        <%= link_to wish_path(policy_scope(Wish).where(flat_url: @flat["url"]).last), method: "delete" do %>
-          <i class="fa fa-heart" aria-hidden="true"></i>
-        <% end %>
-      <% else %>
-        <%= link_to wishes_path(flat_url: @flat["url"]), method: "post" do %>
-          <i class="fa fa-heart-o" aria-hidden="true"></i>
-        <% end %>
-      <% end %>
-      <%= link_to "Voir l'annonce", @flat["url"], class: "btn", target: :_blank %>
+    <div class="row">
+      <div class="box-show-compare">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="titre-show-compare">
+              <div class="show-flat-title text-center">
+                <i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i>
+                <h1 class="page-title"><%= "#{@flat.title} - #{number_with_delimiter(@flat.price, :delimiter => ' ')}€" %>
+                </h1>
+                <% if @flat.in_wishlist?(current_user) %>
+                    <%= link_to flat_wish_path(@flat, @flat.wishes.where(user: current_user).last), method: "delete" do %>
+                      <i class="fa fa-heart" aria-hidden="true"></i>
+                    <% end %>
+                <% else %>
+                    <%= link_to flat_wishes_path(@flat), method: "post" do %>
+                      <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                    <% end %>
+                <% end %>
+                <%= link_to "Voir l'annonce", @flat.url, class: "btn", target: :_blank %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="container no-margin">
+              <div class="row">
+                <div class="col-md-2 case-box-details-legende">
+                  <p>Détails du bien</p>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <span><%= "#{number_with_delimiter(@flat.price, :delimiter => ' ')}€" %></span>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <span><%= @flat.size %> m2</span>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <span><%= @flat.rooms %> pièces</span>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <span><%= @flat.bedrooms %> chambres</span>
+                </div>
+                <div class="col-md-2 case-box-details">
+                    <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - @flat.date.to_f) / 24.hours).round(0) %> >90 " ><%= ((DateTime.now.to_f - @flat.date.to_f  ) / 24.hours).round(0) %> jours</span>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2 case-box-details-legende">
+                  <p>Moyenne marché</p>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <p> Prix moyen :
+                  <br>
+                  <span><%= "#{number_with_delimiter(@flat.average_price, :delimiter => ' ')}€" %></span>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <p> Surface moyenne :
+                  <br>
+                  <span><%= @flat.average_size %></span>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <p> Pièce moyenne :
+                  <br>
+                  <span><%= @flat.average_rooms %></span>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <p> Chambre moyenne :
+                  <br>
+                  <span><%= @flat.average_bedrooms %></span>
+                </div>
+                <div class="col-md-2 case-box-details">
+                  <span>90 jours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <div class="show-flat-card-image">
@@ -149,4 +223,7 @@
       </div>
     </div>
   </div>
+</div>
+<div id="map" data-markers="<%= @markers.to_json %>"
+      >
 </div>
