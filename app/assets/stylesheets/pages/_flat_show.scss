@@ -1,7 +1,7 @@
 // Flat show style
 .show-flat-container {
   background-color: white;
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 6px 6px;
   padding: 0px 40px;
   margin-bottom: 20px;
   p {
@@ -25,28 +25,31 @@
   }
   .show-flat-information {
     padding: 0px 50px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    .col-xs-3 {
+      margin-bottom: 10px;
+    }
     p {
       display: inline;
     }
   }
   .show-flat-image {
     padding: 0px 50px;
+    margin-bottom: 30px;
     img {
       max-width: 100%;
       max-height: 210px;
     }
   }
   .show-flat-description {
-    padding: 0px 50px;
-    margin-bottom: 10px;
+    padding: 0px 50px 10px 50px;
   }
 }
 
 .show-flat-card {
   min-height: 230px;
   margin-bottom: 30px;
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 6px 6px;
   padding: 10px;
   background-color: white;
   h2 {

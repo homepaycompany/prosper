@@ -114,12 +114,11 @@
       </div>
 
       <div class="show-flat-image">
-        <div class="flat-card-image-header"></div>
-          <% if @flat["images"].first.nil? %>
-            <%= image_tag ("default_flat.png") %>
-          <% else %>
-            <%= image_tag @flat["images"].first %>
-          <% end %>
+        <% if @flat["images"].first.nil? %>
+          <%= image_tag ("default_flat.png") %>
+        <% else %>
+          <%#= image_tag @flat["images"].first %>
+        <% end %>
       </div>
 
       <div class="show-flat-description">
@@ -133,6 +132,7 @@
     </div>
 
     <div class="row">
+      <!-- Flat card with price history -->
       <div class="col-xs-12 col-sm-6">
         <div class="show-flat-card-header">
           <h2 class="text-center">Historique du prix</h2>
@@ -143,13 +143,12 @@
         </div>
       </div>
 
+      <!-- Flat card with return calculation -->
       <div class="col-xs-12 col-sm-6">
         <div class="show-flat-card-header">
           <h2 class="text-center">Rentabilité potentielle [TBC]<span id="flat-return" class="<%#= @flat.return_rate > 0 ? "show-flat-positive-return" : "show-flat-negative-return" %>"><%#= number_to_percentage(@flat.return_rate * 100, precision: 1) %></span></h2>
         </div>
         <div class="show-flat-card">
-          <p>
-          </p>
           <div class="col-xs-6">
             <p>
               <strong>Apport :</strong>
@@ -205,9 +204,10 @@
             <div class="col-xs-6">
               <div class="show-flat-card-investment-assumption">
                 <p>Prix de revente</p>
-                <!-- <p><span id="js-assumption-selling-price"><%#= number_with_delimiter((@flat.average_price.to_f * @flat.size.to_f).to_i, :delimiter => ' ') %></span> € -->
+                <p><span id="js-assumption-selling-price"><%#= number_with_delimiter((@flat.average_price.to_f * @flat.size.to_f).to_i, :delimiter => ' ') %>5000</span> €
               </div>
               <!-- <input id="flat-selling-price-slider" data-slider-id='flatSellingPriceSlider' type="text" data-slider-min="0" data-slider-max="<%#= (@flat.average_price.to_f * @flat.size.to_f * 3).to_i %>" data-slider-step="5000" data-slider-value="<%#= (@flat.average_price.to_f * @flat.size.to_f).to_i %>"/> -->
+              <input id="flat-selling-price-slider" data-slider-id='flatSellingPriceSlider' type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="5000" data-slider-value="5000"/>
             </div>
           </div>
         </div>
