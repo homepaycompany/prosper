@@ -12,49 +12,100 @@
   background-color: white;
 }
 .cards-container {
-  padding: 10px;
+  padding-left: 10px;
+}
+
+// Flats filters
+.flats-filters {
+  display: flex;
+  justify-content: space-between;
+  .flats-order {
+    display: inline-flex;
+    p {
+      color: white;
+      padding: 0 20px;
+      line-height: 40px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .flats-order-item {
+      background-color: white;
+      color: $black;
+      cursor: pointer;
+      border-right: solid 1px $black;
+      &:nth-child(2) {
+        border-radius: 8px 0px 0px 8px;
+      }
+      &:nth-child(5) {
+        border-radius: 0px 8px 8px 0px;
+      }
+      &:hover {
+        color: $green;
+      }
+    }
+  }
 }
 
 // Flat cards
 .flat-cards {
-  background-color: white;
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   a {
     color: $light-black;
   }
   .flat-card {
-    min-height: 120px;
-    margin-top: 10px;
-    border-bottom: solid 1px $light-gray;
-    box-shadow: none;
-    border-top: none;
+    background-color: #F4F4F4;
+    min-height: 300px;
+    margin-bottom: 20px;
+    border-radius: 0px 0px 6px 6px;
     cursor: pointer;
     transition: all ease 0.4s;
+    &:hover {
+      background-color: white;
+      img {
+        opacity: 1;
+      }
+    }
     p {
       font-size: 15px;
       margin: 0px 0px 10px 0px;
     }
-    .flat-card-description {
-      line-height: 14px;
-      height: 100px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
     .flat-card-image {
-      // width: 200px;
-      height: 100px;
+      height: 200px;
       overflow: hidden;
+      padding: 0px;
       img {
+        width: 100%;
         opacity: 0.9;
         transition: all ease 0.3s;
-        height: 100px;
-        margin: -10px 0 0 0;
+        height: 200px;
       }
     }
     i {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background-color: white;
+      padding: 6px 5px 5px 5px;
+      border-radius: 50%;
       color: $green;
-      font-size: 22px;
+      font-size: 16px;
       font-weight: 400;
+    }
+    .flat-card-description {
+      padding: 5px;
+      height: 50px;
+      p {
+        padding: 0px;
+      }
+      &:nth-child(3) {
+        border-right: solid 1px $black;
+        border-bottom: solid 1px $black;
+      }
+      &:nth-child(4) {
+        border-bottom: solid 1px $black;
+      }
+      &:nth-child(5) {
+        border-right: solid 1px $black;
+      }
     }
     .flat-card-days-alert {
       color: $red;
@@ -64,12 +115,6 @@
     }
     .flat-card-positive-return {
       color: $dark-green;
-    }
-    &:hover {
-      border-bottom: solid 1px $green;
-      img {
-        opacity: 1;
-      }
     }
   }
 }
