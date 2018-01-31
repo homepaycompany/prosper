@@ -48,6 +48,11 @@
 .navbar-item {
   cursor: pointer;
   padding: 0 20px;
+  i {
+    @media (max-width: 732px) {
+      color: white;
+    }
+  }
 }
 
 /* Navbar link */

@@ -1,8 +1,15 @@
 // Main containers for flats index
-
 body {
     background-color: #132b49;
   }
+
+.container {
+  @media (max-width: 732px) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
 .main-container {
   display: flex;
 }
@@ -14,15 +21,25 @@ body {
   position: sticky !important; /* !important to override Gmaps inline CSS */
   top: 0 !important;
   background-color: white;
+  border-radius: 4px;
 }
 .cards-container {
   padding-left: 10px;
+  margin-right: -20px;
+  @media (max-width: 732px) {
+    padding-left: 0px;
+  }
 }
 
 // Flats filters
 .flats-filters {
   display: flex;
+  margin-top: 40px;
+  margin-bottom: 40px;
   justify-content: space-between;
+  @media (max-width: 732px) {
+    justify-content: space-around;
+  }
   .flats-order {
     display: inline-flex;
     p {
@@ -52,14 +69,18 @@ body {
 
 // Flat cards
 .flat-cards {
+  @media (max-width: 732px) {
+    padding-left: 0px;
+    padding-right: 20px;
+  }
   a {
     color: $light-black;
   }
   .flat-card {
-    background-color: #F4F4F4;
-    min-height: 300px;
-    margin-bottom: 20px;
-    border-radius: 0px 0px 6px 6px;
+    background-color: white;
+    min-height: 377px;
+    margin-bottom: 30px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all ease 0.4s;
     &:hover {
@@ -77,10 +98,13 @@ body {
       overflow: hidden;
       padding: 0px;
       img {
+        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(1, rgba(0, 0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 1)), color-stop(1, rgba(0, 0, 0, 0)));
         width: 100%;
         opacity: 0.9;
         transition: all ease 0.3s;
         height: 200px;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
       }
     }
     i {
@@ -91,26 +115,17 @@ body {
       padding: 6px 5px 5px 5px;
       border-radius: 50%;
       color: $green;
-      font-size: 16px;
+      font-size: 25px;
       font-weight: 400;
     }
     .flat-card-description {
-      padding: 5px;
+      padding: 10px;
       height: 50px;
       p {
         padding: 0px;
       }
-      &:nth-child(3) {
-        border-right: solid 1px $black;
-        border-bottom: solid 1px $black;
-      }
-      &:nth-child(4) {
-        border-bottom: solid 1px $black;
-      }
-      &:nth-child(5) {
-        border-right: solid 1px $black;
-      }
     }
+
     .flat-card-days-alert {
       color: $red;
     }
@@ -131,6 +146,14 @@ body {
   font-weight: bold;
   font-size: 16px;
   display: flex;
+}
+
+.description-renta {
+  color: #34e7b7;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 // Mobile responsiveness of flat cards
@@ -234,6 +257,14 @@ body {
     background-color: $green;
     font-weight: 700;
   }
+}
+
+
+.flat-card-description-address {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .filter {
