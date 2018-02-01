@@ -27,3 +27,7 @@ returnCalculation();
 // Javascript to submit forms on Flat#index
 import { formSubmit } from "../shared/submit.js"
 formSubmit();
+
+// Javascript to change the format of filter on Flat#Index
+import { filter } from "../shared/filter.js"
+filter();

@@ -106,6 +106,9 @@ body {
       }
     }
   }
+  .modal-content {
+    border-radius: 6px;
+  }
   .form-inputs {
     input {
       border-radius: 6px;
@@ -113,7 +116,7 @@ body {
       background-color: #fff;
       background-image: none;
       border: 1px solid #ccc;
-      padding: 5px;
+      padding: 5px 10px;
       margin-bottom: 20px;
       &:focus {
         transition: all 0.4s ease;
@@ -126,6 +129,25 @@ body {
       position: absolute;
       right: 70px;
       top: 5px;
+    }
+    .room-filter {
+      transition: all 0.4s ease;
+      input {
+        display: none;
+      }
+      .room-filter-label {
+        position: inherit;
+        padding: 5px 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 400;
+      }
+      .active {
+        background-color: $green;
+        color: white;
+        border: 1px solid $green;
+      }
     }
   }
 }

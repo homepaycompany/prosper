@@ -8,10 +8,14 @@ class FlatsController < ApplicationController
   skip_after_action :verify_authorized, only: :show
 
   def index
-    # Select n first elements according to pagination
+    # Current page selected by the user
     @current_page = params["pg"].to_i
-    @page_number = (@flats.length / 10.to_f).ceil
+
+    # Sort type selected by visitor
     @sort_type = params["sort"]
+
+    # Select n first elements according to pagination
+    @page_number = (@flats.length / 10.to_f).ceil
     if @current_page.nil?
       @selected_flats = @flats.first(10)
     else

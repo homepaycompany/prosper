@@ -53,12 +53,28 @@
                       <%= label_tag "Nombre de pièces" %>
                     </div>
                     <div class="col-xs-12">
-                      <%= radio_button_tag 'rooms-1', 'no', true %>
-                      <%= radio_button_tag 'rooms-2', 'no', true %>
-                      <%= radio_button_tag 'rooms-3', 'no', true %>
-                      <%= radio_button_tag 'rooms-4', 'no', true %>
-                      <%= radio_button_tag 'rooms-5', 'no', true %>
-                      <%= number_field(:rooms, :size, in: 1..100) %>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-1', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-1"].to_i == 1 %>">Studio</span>
+                      </label>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-2', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-2"].to_i == 1 %>">2</span>
+                      </label>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-3', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-3"].to_i == 1 %>">3</span>
+                      </label>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-4', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-4"].to_i == 1 %>">4</span>
+                      </label>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-5', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-5"].to_i == 1 %>">5+</span>
+                      </label>
+
+
                     </div>
                   </div>
                 </div>
