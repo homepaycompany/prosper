@@ -1,7 +1,7 @@
 <div class="pagination">
   <strong><%= link_to "Précedent", flats_path(pg: [(@current_page - 1), 1].max) %></strong>
   <% if (@page_number > 5) && (@current_page <= 3) %>
-    <% for i in (1..@current_page+1) do %>
+    <% for i in (1..[@current_page,1].max+1) do %>
       <%= link_to i, flats_path(pg: i), class: "pagination-number #{ 'pagination-active' if (@current_page === i) || (@current_page === 0 && i === 1) }" %>
     <% end %>
     ...

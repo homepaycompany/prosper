@@ -17,7 +17,7 @@ class FlatsController < ApplicationController
     if @current_page.nil?
       @selected_flats = @flats.first(10)
     else
-      @selected_flats = @flats[((@current_page-1) * 10 + 1)..(@current_page * 10)]
+      @selected_flats = @flats[(([@current_page, 1].max-1) * 10 + 1)..([@current_page, 1].max * 10)]
     end
 
     # Define markers for the map
@@ -79,7 +79,7 @@ class FlatsController < ApplicationController
     elsif @sort_type == "a-date"
       @flats.sort_by! { |flat| DateTime.strptime(flat["date"]).to_f }
     else
-      @flats.sort_by { |flat| -DateTime.strptime(flat["date"]).to_f }
+      @flats.sort_by! { |flat| -DateTime.strptime(flat["date"]).to_f }
     end
   end
 
