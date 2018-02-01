@@ -4,6 +4,7 @@
     <div class="flats-filters hidden-xs">
       <%= render "shared/search/filter" %>
       <%= render "shared/search/sortbar" %>
+    </div>
 
     <div class="main-container hidden-xs">
       <!-- Map version desktop -->
@@ -99,13 +100,7 @@
               </div>
             <% end %>
           </div>
-          <div class="pagination">
-            <strong><%= link_to "Précedent", flats_path(pg: [(@current_page - 1), 1].max) %></strong>
-            <% for i in (1..@page_number) do %>
-              <%= link_to i, flats_path(pg: i), class: "pagination-number #{ 'pagination-active' if (@current_page === i) || (@current_page === 0 && i === 1) }" %>
-            <% end %>
-            <strong><%= link_to "Suivant", flats_path(pg: [(@current_page + 1), @page_number].min) %></strong>
-          </div>
+          <%= render "shared/search/pagination" %>
         <% end %>
       </div>
     </div>
@@ -122,7 +117,8 @@
             <p class="flats-order-item">Date</p>
             <p class="flats-order-item">Rendement</p>
           </div> -->
-        </div>        <% if @selected_flats.length > 0 %>
+        </div>
+        <% if @selected_flats.length > 0 %>
           <div class="flat-cards col-xs-12">
             <% @selected_flats.each do |flat| %>
               <div class="col-xs-12">
@@ -206,13 +202,7 @@
               </div>
             <% end %>
           </div>
-          <div class="pagination">
-            <strong><%= link_to "Précedent", flats_path(pg: [(@current_page - 1), 1].max) %></strong>
-            <% for i in (1..@page_number) do %>
-              <%= link_to i, flats_path(pg: i), class: "pagination-number #{ 'pagination-active' if (@current_page === i) || (@current_page === 0 && i === 1) }" %>
-            <% end %>
-            <strong><%= link_to "Suivant", flats_path(pg: [(@current_page + 1), @page_number].min) %></strong>
-          </div>
+          <%= render "shared/search/pagination" %>
         <% end %>
       </div>
     </div>
