@@ -1,0 +1,83 @@
+<!-- Filters modal -->
+<button type="button" class="btn dark-btn" data-toggle="modal" data-target="#filterModal">
+  Filtres
+</button>
+
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalLabel">Filtres de recherche</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_tag flats_path, class: "filter-form", method: "get" do %>
+          <div class="form-inputs">
+            <%= hidden_field_tag 'pg', @current_page %>
+            <%= hidden_field_tag 'sort', @sort_type %>
+            <div class="row">
+              <div class="col-xs-12">
+                <%= label_tag "Budget" %>
+              </div>
+              <div class="col-xs-6">
+                <%= text_field_tag 'price_min', params['price_min'], placeholder: "Budget min", include_blank: false %><span>€</span>
+              </div>
+              <div class="col-xs-6">
+                <%= text_field_tag 'price_max', params['price_max'], placeholder: "Budget max", include_blank: false %><span>€</span>
+              </div>
+              <div class="col-xs-12">
+                <%= label_tag "Rendement" %>
+              </div>
+              <div class="col-xs-6">
+                <%= text_field_tag 'return_min', params['return_min'], placeholder: "Rendement min", include_blank: false %><span>%</span>
+              </div>
+              <div class="col-xs-6">
+                <%= text_field_tag 'return_max', params['return_max'], placeholder: "Rendement max", include_blank: false %><span>%</span>
+              </div>
+              <div class="col-xs-12">
+                <%= label_tag "Surface" %>
+              </div>
+              <div class="col-xs-6">
+                <%= text_field_tag 'surface_min', params['surface_min'], placeholder: "Surface min", include_blank: false %><span>m²</span>
+              </div>
+              <div class="col-xs-6">
+                <%= text_field_tag 'surface_max', params['surface_max'], placeholder: "Surface max", include_blank: false %><span>m²</span>
+              </div>
+              <div class="col-xs-12">
+                <%= label_tag "Nombre de pièces" %>
+              </div>
+              <div class="col-xs-12">
+                <label class="room-filter">
+                  <%= check_box_tag 'room_1', '1', false %>
+                  <span class="room-filter-label <%= "active" if params["room_1"].to_i == 1 %>">Studio</span>
+                </label>
+                <label class="room-filter">
+                  <%= check_box_tag 'room_2', '1', false %>
+                  <span class="room-filter-label <%= "active" if params["room_2"].to_i == 1 %>">2</span>
+                </label>
+                <label class="room-filter">
+                  <%= check_box_tag 'room_3', '1', false %>
+                  <span class="room-filter-label <%= "active" if params["room_3"].to_i == 1 %>">3</span>
+                </label>
+                <label class="room-filter">
+                  <%= check_box_tag 'room_4', '1', false %>
+                  <span class="room-filter-label <%= "active" if params["room_4"].to_i == 1 %>">4</span>
+                </label>
+                <label class="room-filter">
+                  <%= check_box_tag 'room_5', '1', false %>
+                  <span class="room-filter-label <%= "active" if params["room_5"].to_i == 1 %>">5+</span>
+                </label>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn white-btn" data-dismiss="modal">Fermer</button>
+        <%= button_tag "Filtrer", id: "submit", class: "btn" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
