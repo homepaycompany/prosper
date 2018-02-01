@@ -18,17 +18,49 @@
             </div>
             <div class="modal-body">
               <%= form_tag flats_path, class: "filter-form", method: "get" do %>
-                <div class="filter-form-inputs">
+                <div class="form-inputs">
                   <%= hidden_field_tag pg: @current_page %>
                   <%= hidden_field_tag sort: @sort_type %>
-                  <%= label_tag "Prix" %>
-                  <%= text_field_tag 'filter-price' %>
-                  <%= label_tag "Rendement" %>
-                  <%= text_field_tag 'filter-return' %>
-                  <%= label_tag "Surface" %>
-                  <%= text_field_tag 'filter-surface' %>
-                  <%= label_tag "Nombre de pièces" %>
-                  <%= text_field_tag 'filter-rooms' %>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <%= label_tag "Budget" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'price-min', nil, placeholder: "Budget min" %><span>€</span>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'price-max', nil,placeholder: "Budget max" %><span>€</span>
+                    </div>
+                    <div class="col-xs-12">
+                      <%= label_tag "Rendement" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'return-min', nil, placeholder: "Rendement min" %><span>%</span>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'return-max', nil, placeholder: "Rendement max" %><span>%</span>
+                    </div>
+                    <div class="col-xs-12">
+                      <%= label_tag "Surface" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'surface-min', nil, placeholder: "Surface min" %><span>m²</span>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'surface-max', nil, placeholder: "Surface max" %><span>m²</span>
+                    </div>
+                    <div class="col-xs-12">
+                      <%= label_tag "Nombre de pièces" %>
+                    </div>
+                    <div class="col-xs-12">
+                      <%= radio_button_tag 'rooms-1', 'no', true %>
+                      <%= radio_button_tag 'rooms-2', 'no', true %>
+                      <%= radio_button_tag 'rooms-3', 'no', true %>
+                      <%= radio_button_tag 'rooms-4', 'no', true %>
+                      <%= radio_button_tag 'rooms-5', 'no', true %>
+                      <%= number_field(:rooms, :size, in: 1..100) %>
+                    </div>
+                  </div>
                 </div>
             </div>
             <div class="modal-footer">
