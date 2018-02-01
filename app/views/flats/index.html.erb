@@ -2,14 +2,101 @@
   <div class="container">
     <!-- START version desktop -->
     <div class="flats-filters hidden-xs">
-      <%= link_to "Filtres", "javascript:void(0)", class: "white-btn" %>
+      <button type="button" class="btn dark-btn" data-toggle="modal" data-target="#filterModal">
+        Filtres
+      </button>
+
+      <!-- Filters modal -->
+      <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="filterModalLabel">Filtres de recherche</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= form_tag flats_path, class: "filter-form", method: "get" do %>
+                <div class="form-inputs">
+                  <%= hidden_field_tag pg: @current_page %>
+                  <%= hidden_field_tag sort: @sort_type %>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <%= label_tag "Budget" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'price-min', nil, placeholder: "Budget min" %><span>€</span>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'price-max', nil,placeholder: "Budget max" %><span>€</span>
+                    </div>
+                    <div class="col-xs-12">
+                      <%= label_tag "Rendement" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'return-min', nil, placeholder: "Rendement min" %><span>%</span>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'return-max', nil, placeholder: "Rendement max" %><span>%</span>
+                    </div>
+                    <div class="col-xs-12">
+                      <%= label_tag "Surface" %>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'surface-min', nil, placeholder: "Surface min" %><span>m²</span>
+                    </div>
+                    <div class="col-xs-6">
+                      <%= text_field_tag 'surface-max', nil, placeholder: "Surface max" %><span>m²</span>
+                    </div>
+                    <div class="col-xs-12">
+                      <%= label_tag "Nombre de pièces" %>
+                    </div>
+                    <div class="col-xs-12">
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-1', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-1"].to_i == 1 %>">Studio</span>
+                      </label>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-2', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-2"].to_i == 1 %>">2</span>
+                      </label>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-3', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-3"].to_i == 1 %>">3</span>
+                      </label>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-4', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-4"].to_i == 1 %>">4</span>
+                      </label>
+                      <label class="room-filter">
+                        <%= check_box_tag 'room-5', '1', false %>
+                        <span class="room-filter-label <%= "active" if params["room-5"].to_i == 1 %>">5+</span>
+                      </label>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn white-btn" data-dismiss="modal">Fermer</button>
+              <%= button_tag "Filtrer", id: "submit", class: "btn" %>
+              <!-- <button type="button" class="btn">Filtrer</button> -->
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
       <div class="sortbar">
         <p>Tri :</p>
-        <% if params["sort"] == "a-surface" %>
+        <% if @sort_type == "a-surface" %>
           <%= link_to flats_path(pg: @current_page, sort: "d-surface"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
             Superficie <i class="fa fa-angle-up" aria-hidden="true"></i>
           <% end %>
-        <% elsif params["sort"] == "d-surface" %>
+        <% elsif @sort_type == "d-surface" %>
           <%= link_to flats_path(pg: @current_page, sort: "a-surface"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
           Superficie <i class="fa fa-angle-down" aria-hidden="true"></i>
           <% end %>
@@ -17,11 +104,11 @@
           <%= link_to "Superficie", flats_path(pg: @current_page, sort: "d-surface"), class: "sortbar-i", id: "sortbar-i-surface" %>
         <% end %>
 
-        <% if params["sort"] == "a-price" %>
+        <% if @sort_type == "a-price" %>
           <%= link_to flats_path(pg: @current_page, sort: "d-price"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
             Prix <i class="fa fa-angle-up" aria-hidden="true"></i>
           <% end %>
-        <% elsif params["sort"] == "d-price" %>
+        <% elsif @sort_type == "d-price" %>
           <%= link_to flats_path(pg: @current_page, sort: "a-price"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
             Prix <i class="fa fa-angle-down" aria-hidden="true"></i>
           <% end %>
@@ -29,11 +116,11 @@
           <%= link_to "Prix", flats_path(pg: @current_page, sort: "d-price"), class: "sortbar-i", id: "sortbar-i-price" %>
         <% end %>
 
-        <% if params["sort"] == "a-date" %>
+        <% if @sort_type == "a-date" %>
           <%= link_to flats_path(pg: @current_page, sort: "d-date"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
             Date <i class="fa fa-angle-up" aria-hidden="true"></i>
           <% end %>
-        <% elsif params["sort"] == "d-date" %>
+        <% elsif @sort_type == "d-date" %>
           <%= link_to flats_path(pg: @current_page, sort: "a-date"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
             Date <i class="fa fa-angle-down" aria-hidden="true"></i>
           <% end %>
@@ -41,11 +128,11 @@
           <%= link_to "Date", flats_path(pg: @current_page, sort: "d-date"), class: "sortbar-i", id: "sortbar-i-date" %>
         <% end %>
 
-        <% if params["sort"] == "a-return" %>
+        <% if @sort_type == "a-return" %>
           <%= link_to flats_path(pg: @current_page, sort: "d-return"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
             Rendement <i class="fa fa-angle-up" aria-hidden="true"></i>
           <% end %>
-        <% elsif params["sort"] == "d-return" %>
+        <% elsif @sort_type == "d-return" %>
           <%= link_to flats_path(pg: @current_page, sort: "a-return"), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
             Rendement <i class="fa fa-angle-down" aria-hidden="true"></i>
           <% end %>
@@ -88,7 +175,11 @@
                         <p>
                           <strong>Surface</strong>
                           <br>
-                          <%= flat["surface"] %> m2
+                          <% if flat["surface"] %>
+                           <%= "#{flat["surface"]} m²" %>
+                          <% else %>
+                            n/a
+                          <% end %>
                         </p>
                         <% if flat["plotSurface"] && flat["plotSurface"] > 0 %>
                           <p>

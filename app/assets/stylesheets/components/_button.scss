@@ -8,37 +8,32 @@
   font-size: 14px;
   font-weight: bold;
   text-decoration: none !important;
-  transition-duration: 0.3s;
-  &:hover {
+  transition: all 0.4s ease;
+  &:hover, &:focus, &:active {
     color: white;
     background: $dark-green;
     border-color: $dark-green;
   }
-  &:focus, &:active {
+}
+
+.dark-btn {
+  background-color: $black;
+  border: solid 1px $green;
+  color: white;
+  transition: all 0.4s ease;
+  &:hover, &:focus, &:active {
     background-color: $green;
     color: white;
   }
 }
 
 .white-btn {
-  padding: 0 20px;
-  border-radius: 6px;
-  line-height: 40px;
-  height: 40px;
-  background-color: $black;
+  background-color: white;
   border: solid 1px $green;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none !important;
-  transition-duration: 0.3s;
-  &:hover {
-    color: $green;
-    // background: $dark-green;
-    // border-color: $dark-green;
-  }
-  &:focus, &:active {
-    // background-color: $green;
-    color: $green;
+  color: $green;
+  transition: all 0.4s ease;
+  &:hover, &:focus, &:active {
+    background-color: #e5fff8;
+    color: $dark-green;
   }
 }

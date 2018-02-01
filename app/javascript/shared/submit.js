@@ -1,7 +1,6 @@
 function submit() {
   const formNumber = event.currentTarget.dataset.form;
   const form = document.querySelector(`form[data-form="${formNumber}"]`);
-  console.log(form);
   form.submit();
 }
 
