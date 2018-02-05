@@ -136,8 +136,7 @@
 
 .landing-team {
   min-height: 450px;
-  background-color: $black;
-  color: white;
+  background-color: white;
   .landing-section-content, .landing-section-media {
     height: 450px;
   }
@@ -152,6 +151,7 @@
     flex-direction: column;
     img {
       max-width: 90%;
+      max-height: 70%;
       -webkit-animation-duration: 2s;
       -moz-animation-duration: 2s;
       -o-animation-duration: 2s;
