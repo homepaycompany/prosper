@@ -67,7 +67,8 @@ class FlatsController < ApplicationController
           bid["avg_date"] = @answer["days"] ? @answer["days"] : 0
           if bid["price"] && bid["surface"]
             bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
-            bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"]).to_f / bid["price_per_sq_m"])
+            # Internal rate return depending on reselling price and notarial costs
+            bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"] - bid["avg_price"] * 0.025).to_f / bid["price_per_sq_m"])
           else
             bid["price_per_sq_m"] = 0
             bid["return"] = 0
