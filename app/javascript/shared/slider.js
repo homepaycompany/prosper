@@ -29,12 +29,12 @@ function calculateReturn(price, contribution, interest, loanDuration, refurbishm
 
   // Show the new margin rate and change the class if necessary
   document.querySelector("#flat-return").innerHTML = `${(margin_rate * 100).toFixed(1)}%`
-  if ((margin_rate > 0) && (document.querySelector("#flat-return").classList.value === "flat-negative-return")) {
-    document.querySelector("#flat-return").classList.toggle("flat-positive-return");
-    document.querySelector("#flat-return").classList.toggle("flat-negative-return");
-  } else if ((margin_rate < 0) && (document.querySelector("#flat-return").classList.value === "flat-positive-return")) {
-    document.querySelector("#flat-return").classList.toggle("flat-positive-return");
-    document.querySelector("#flat-return").classList.toggle("flat-negative-return");
+  if ((margin_rate > 0) && (document.querySelector("#flat-return").classList.value === "show-flat-negative-return")) {
+    document.querySelector("#flat-return").classList.toggle("show-flat-positive-return");
+    document.querySelector("#flat-return").classList.toggle("show-flat-negative-return");
+  } else if ((margin_rate < 0) && (document.querySelector("#flat-return").classList.value === "show-flat-positive-return")) {
+    document.querySelector("#flat-return").classList.toggle("show-flat-positive-return");
+    document.querySelector("#flat-return").classList.toggle("show-flat-negative-return");
   }
 }
 
@@ -63,7 +63,7 @@ function setValue() {
   if (eventSlider == "flatPriceSlider") {
     var newPrice = priceSlider.getValue();
     price.innerHTML = numberToString(newPrice);
-    contributionText.innerHTML = numberToString(newPrice);
+    loanText.innerHTML = numberToString(newPrice - contributionN);
     contribution.dataset.sliderMax = newPrice;
     calculateReturn(newPrice, contributionN, interestN, loanDurationN, refurbishmentN, sellingPriceN)
 
@@ -71,6 +71,8 @@ function setValue() {
   } else if (eventSlider == "flatContributionSlider") {
     var newContribution = contributionSlider.getValue();
     contribution.innerHTML = numberToString(newContribution);
+    contributionText.innerHTML = numberToString(newContribution);
+    loanText.innerHTML = numberToString(priceN - newContribution);
     calculateReturn(priceN, newContribution, interestN, loanDurationN, refurbishmentN, sellingPriceN)
 
   // Show the new interest and calculate the new return
