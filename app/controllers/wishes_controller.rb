@@ -46,13 +46,36 @@ class WishesController < ApplicationController
   private
 
   def set_flats
+    @city = current_user.cities.first.name
+    @zipcodes = current_user.cities.first.zip_code.split(', ')
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
-    Net::HTTP.start(uri.host, uri.port,
-      :use_ssl => uri.scheme == 'https') do |http|
-      req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-      req.body = { "City": current_user.city,"ZipCode": current_user.zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
-      res = http.request req
-      @flats = JSON.parse(res.body)["bids"]
+    @flats = []
+
+    # Iterate on the different zip codes of user city
+    @zipcodes.each do |zip_code|
+      Net::HTTP.start(uri.host, uri.port,
+        :use_ssl => uri.scheme == 'https') do |http|
+        req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+        req.body = { "City": @city,"ZipCode": zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
+        res = http.request req
+        @answer = JSON.parse(res.body)
+        @bids = @answer["bids"]
+        # Add price, surface and rooms average for each bid
+        @bids.each do |bid|
+          bid["avg_price"] = @answer["average"]
+          bid["avg_surface"] = @answer["surfaceAverage"]
+          bid["avg_plot_surface"] = @answer["plotsurfaceAverage"]
+          bid["avg_rooms"] = @answer["roomsAverage"]
+          if bid["price"] && bid["surface"]
+            bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
+            bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"]).to_f / bid["price_per_sq_m"])
+          else
+            bid["price_per_sq_m"] = 0
+            bid["return"] = 0
+          end
+          @flats << bid
+        end
+      end
     end
   end
 
@@ -100,8 +123,8 @@ class WishesController < ApplicationController
 
     @flats.select!{|flat| flat['price'] >= @price_min if flat['price']} if @price_min > 0
     @flats.select!{|flat| flat['price'] <= @price_max if flat['price']} if @price_max > 0
-    # @flats.select!{|flat| flat['return'] >= @return_min if flat['return']} if @return_min > 0
-    # @flats.select!{|flat| flat['return'] <= @return_max if flat['return']} if @return_max > 0
+    @flats.select!{|flat| flat['return'] >= @return_min if flat['return']} if @return_min > 0
+    @flats.select!{|flat| flat['return'] <= @return_max if flat['return']} if @return_max > 0
     @flats.select!{|flat| flat['surface'] >= @surface_min if flat['surface']} if @surface_min > 0
     @flats.select!{|flat| flat['surface'] <= @surface_max if flat['surface']} if @surface_max > 0
     @flats.select!{|flat| flat['rooms'] >= @room_nb if flat['rooms']} if @room_nb > 1

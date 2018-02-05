@@ -60,13 +60,17 @@ class FlatsController < ApplicationController
         @bids = @answer["bids"]
         # Add price, surface and rooms average for each bid
         @bids.each do |bid|
-          bid["price_avg"] = @answer["average"]
-          bid["surface_avg"] = @answer["surfaceAverage"]
-          bid["plot_surface_avg"] = @answer["plotsurfaceAverage"]
-          bid["rooms_avg"] = @answer["roomsAverage"]
+          bid["avg_price"] = @answer["average"] ? @answer["average"] : 0
+          bid["avg_surface"] = @answer["surfaceAverage"] ? @answer["surfaceAverage"] : 0
+          bid["avg_plot_surface"] = @answer["plotsurfaceAverage"] ? @answer["plotsurfaceAverage"] : 0
+          bid["avg_rooms"] = @answer["roomsAverage"] ? @answer["roomsAverage"] : 0
+          bid["avg_date"] = @answer["days"] ? @answer["days"] : 0
           if bid["price"] && bid["surface"]
-            price_per_sq_m = bid["price"].to_f / bid["surface"]
-            bid["return"] = ((bid["price_avg"] - price_per_sq_m).to_f / price_per_sq_m)
+            bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
+            bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"]).to_f / bid["price_per_sq_m"])
+          else
+            bid["price_per_sq_m"] = 0
+            bid["return"] = 0
           end
           @flats << bid
         end

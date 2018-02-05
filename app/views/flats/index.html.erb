@@ -63,7 +63,7 @@
                         <p>
                           <strong>Rentabilité</strong>
                           <br>
-                          <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
+                          <span class="<%= flat["return"] > 0 ? 'flat-positive' : 'flat-negative' %>"><%= number_to_percentage(flat["return"] * 100, precision: 1) %></span>
                         </p>
                       </div>
                     </div>
@@ -167,7 +167,7 @@
                           <p>
                             <strong>Rentabilité</strong>
                             <br>
-                            <span class="<%#= flat.return_rate > 0 ? 'flat-card-positive-return' : 'flat-card-negative-return' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
+                            <span class="<%#= flat.return_rate > 0 ? 'flat-positive' : 'flat-negative' %>"><%#= number_to_percentage(flat.return_rate * 100, precision: 1) %></span>
                           </p>
                         </div>
                       </div>

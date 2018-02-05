@@ -222,13 +222,13 @@ body {
     .flat-card-days-alert {
       color: $red;
     }
-    .flat-card-negative-return {
-      color: $red;
-    }
-    .flat-card-positive-return {
-      color: $dark-green;
-    }
   }
+}
+.flat-negative {
+  color: $red;
+}
+.flat-positive {
+  color: $dark-green;
 }
 .flat-cards-headers {
   min-height: 40px;
@@ -239,14 +239,6 @@ body {
   font-weight: bold;
   font-size: 16px;
   display: flex;
-}
-
-.description-renta {
-  color: #34e7b7;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
 
 // Mobile responsiveness of flat cards
