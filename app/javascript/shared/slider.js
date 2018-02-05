@@ -1,3 +1,10 @@
+// Creation of sliders if on page Flat#show
+const priceSlider = new Slider("input#flat-price-slider");
+const contributionSlider = new Slider("input#flat-contribution-slider");
+const interestSlider = new Slider("input#flat-interest-slider");
+const loanDurationSlider = new Slider("input#flat-loan-duration-slider");
+const refurbishmentSlider = new Slider("input#flat-refurbishment-slider");
+const sellingPriceSlider = new Slider("input#flat-selling-price-slider");
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
 
 // Function to add spaces for thousands
@@ -40,6 +47,7 @@ function setValue() {
   const loanDuration = document.querySelector('#js-assumption-loan-duration');
   const refurbishment = document.querySelector('#js-assumption-refurbishment');
   const sellingPrice = document.querySelector('#js-assumption-selling-price');
+
   const priceN = stringToNumber(price.innerHTML);
   const contributionN = stringToNumber(contribution.innerHTML);
   const interestN = stringToNumber(interest.innerHTML);
@@ -47,10 +55,15 @@ function setValue() {
   const refurbishmentN = stringToNumber(refurbishment.innerHTML);
   const sellingPriceN = stringToNumber(sellingPrice.innerHTML);
 
+  const contributionText = document.querySelector('#js-contribution');
+  const loanText = document.querySelector('#js-loan');
+
+
   // Show the new price, define a new maximum for the contribution slider and calculate the new return
   if (eventSlider == "flatPriceSlider") {
     var newPrice = priceSlider.getValue();
     price.innerHTML = numberToString(newPrice);
+    contributionText.innerHTML = numberToString(newPrice);
     contribution.dataset.sliderMax = newPrice;
     calculateReturn(newPrice, contributionN, interestN, loanDurationN, refurbishmentN, sellingPriceN)
 
@@ -86,17 +99,10 @@ function setValue() {
   }
 }
 
+
 // Function to listen events on sliders
 function returnCalculation() {
   if (document.querySelector('.show-flat-card-investment-assumptions') !== null) {
-    // Creation of sliders if on page Flat#show
-    const priceSlider = new Slider("input#flat-price-slider");
-    const contributionSlider = new Slider("input#flat-contribution-slider");
-    const interestSlider = new Slider("input#flat-interest-slider");
-    const loanDurationSlider = new Slider("input#flat-loan-duration-slider");
-    const refurbishmentSlider = new Slider("input#flat-refurbishment-slider");
-    const sellingPriceSlider = new Slider("input#flat-selling-price-slider");
-
     priceSlider.on('slide', setValue);
     contributionSlider.on('slide', setValue);
     interestSlider.on('slide', setValue);
