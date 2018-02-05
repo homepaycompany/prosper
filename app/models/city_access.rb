@@ -1,0 +1,2 @@
+class CityAccess < ApplicationRecord
+end
