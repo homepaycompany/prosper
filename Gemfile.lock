@@ -39,6 +39,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (8.0.0)
+    arel-helpers (2.6.1)
+      activerecord (>= 3.1.0, < 6)
     autoprefixer-rails (7.2.2)
       execjs
     bcrypt (3.1.11)
@@ -70,14 +72,28 @@ GEM
       thor (~> 0.14)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
+    forest_liana (2.2.2)
+      arel-helpers
+      bcrypt
+      groupdate
+      jsonapi-serializers (>= 0.14.0)
+      jwt
+      rack-cors
+      rails (>= 4.0)
+      useragent
     geocoder (1.4.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    groupdate (3.2.0)
+      activesupport (>= 3)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    jsonapi-serializers (1.0.0)
+      activesupport
+    jwt (2.1.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -108,6 +124,7 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.3)
+    rack-cors (1.0.2)
     rack-proxy (0.6.3)
       rack
     rack-test (0.8.2)
@@ -176,6 +193,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.0.2)
       execjs (>= 0.3.0, < 3)
+    useragent (0.16.9)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -203,6 +221,7 @@ DEPENDENCIES
   devise_invitable
   figaro
   font-awesome-sass
+  forest_liana
   geocoder
   jbuilder (~> 2.0)
   listen (~> 3.0.5)

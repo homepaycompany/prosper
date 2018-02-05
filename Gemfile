@@ -26,6 +26,7 @@ gem 'webpacker'
 
 # Admin rights
 gem 'pundit'
+gem 'forest_liana'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
