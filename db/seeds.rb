@@ -20,5 +20,6 @@ p "Destroying city accesses..."
 CityAccess.destroy_all
 
 p "Creating city accesses..."
-access_user_test_1 = CityAccess.create!(city_id: toulouse.id, user_id: user_test_1.id)
-access_user_test_1 = CityAccess.create!(city_id: marseille.id, user_id: user_test_2.id)
+access_user_test_1 = CityAccess.create!(city_id: marseille.id, user_id: user_admin.id)
+access_user_test_2 = CityAccess.create!(city_id: toulouse.id, user_id: user_test_1.id)
+access_user_test_3 = CityAccess.create!(city_id: marseille.id, user_id: user_test_2.id)
