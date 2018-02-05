@@ -36,7 +36,7 @@ class FlatsController < ApplicationController
     @flats_data_hash = {}
     @flats_data_hash['name'] = "flats"
     @flats_data_hash['data'] = []
-    @flats.reject{|flat| flat["id"] == @flat["id"]}.first(3).each do |flat|
+    @flats.reject{|flat| flat["id"] == @flat["id"]}.first(100).each do |flat|
       flat_data = []
       flat_data << flat["price"].to_i if flat["price"] && flat["price"] < 1000000
       flat_data << flat["surface"].to_i if flat["surface"] && flat["surface"] < 500
@@ -45,8 +45,10 @@ class FlatsController < ApplicationController
     @flat_data_hash = {}
     @flat_data_hash['name'] = "flat"
     @flat_data_hash['data'] = []
-    @flat_data_hash['data'] << @flat["price"].to_i if @flat["price"]
-    @flat_data_hash['data'] << @flat["surface"].to_i if @flat["surface"]
+    @flat_data = []
+    @flat_data << @flat["price"].to_i if @flat["price"]
+    @flat_data << @flat["surface"].to_i if @flat["surface"]
+    @flat_data_hash['data'] << @flat_data
 
     @chart_data << @flats_data_hash
     @chart_data << @flat_data_hash

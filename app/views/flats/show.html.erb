@@ -194,10 +194,10 @@
       <!-- Flat card with price history -->
       <div class="col-xs-12 col-sm-6">
         <div class="show-flat-card-header">
-          <h2 class="text-center">Historique du prix</h2>
+          <h2 class="text-center">Comparaison au marché</h2>
         </div>
         <div class="show-flat-card">
-          <div id="flat-chart" style="height: 300px;"></div>
+          <div id="flat-chart" style="height: 280px;"></div>
           <%= javascript_tag do %>
             const data = <%= @chart_data.to_json.html_safe %>;
           <% end %>
@@ -211,17 +211,19 @@
           <i class="fa fa-question-circle" title="La rentabilité théorique est un taux de rentabilité interne qui dépend de la durée du projet, du prix du revente, des coûts de travaux, des coûts de financement et des frais de notaire estimés."></i>
         </div>
         <div class="show-flat-card">
-          <div class="col-xs-6">
-            <p>
-              <strong>Apport :</strong>
-              <span id="js-contribution"><%= number_with_delimiter((@flat["price"] * 0.15).to_i, :delimiter => ' ') %></span> €
-            </p>
-          </div>
-          <div class="col-xs-6">
-            <p>
-              <strong>Emprunt :</strong>
-              <span id="js-loan"><%= number_with_delimiter((@flat["price"] * 0.85).to_i, :delimiter => ' ') %></span> €
-            </p>
+          <div class="show-flat-card-contribution">
+            <div class="col-xs-6">
+              <p>
+                <strong>Apport :</strong>
+                <span id="js-contribution"><%= number_with_delimiter((@flat["price"] * 0.15).to_i, :delimiter => ' ') %></span> €
+              </p>
+            </div>
+            <div class="col-xs-6">
+              <p>
+                <strong>Emprunt :</strong>
+                <span id="js-loan"><%= number_with_delimiter((@flat["price"] * 0.85).to_i, :delimiter => ' ') %></span> €
+              </p>
+            </div>
           </div>
 
           <div class="show-flat-card-investment-assumptions">
