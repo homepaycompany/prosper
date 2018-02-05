@@ -14,8 +14,7 @@ Rails.application.routes.draw do
   post :access_request, controller: :accesses, action: :access_request
 
 
-  resources :flats, only: [:index]
-  post "flats/:id", to: "flats#show", as: "flat"
+  resources :flats, only: [:index, :show]
 
   resources :wishes, only: [:create, :destroy]
   get 'wishlist' => 'wishes#index'
