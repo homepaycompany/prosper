@@ -44,13 +44,21 @@ class FlatsController < ApplicationController
   private
 
   def set_flats
+    @city = current_user.cities.first.name
+    @zipcodes = current_user.cities.first.zip_code.split(', ')
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
-    Net::HTTP.start(uri.host, uri.port,
-      :use_ssl => uri.scheme == 'https') do |http|
-      req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-      req.body = { "City": current_user.city,"ZipCode": current_user.zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
-      res = http.request req
-      @flats = JSON.parse(res.body)["bids"]
+    @flats = []
+
+    # Iterate on the different zip codes of user city
+    @zipcodes.each do |zip_code|
+      Net::HTTP.start(uri.host, uri.port,
+        :use_ssl => uri.scheme == 'https') do |http|
+        req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+        req.body = { "City": @city,"ZipCode": zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
+        res = http.request req
+        @bids = JSON.parse(res.body)["bids"]
+        @bids.each {|bid| @flats << bid}
+      end
     end
   end
 
