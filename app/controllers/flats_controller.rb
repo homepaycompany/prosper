@@ -56,8 +56,20 @@ class FlatsController < ApplicationController
         req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
         req.body = { "City": @city,"ZipCode": zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
         res = http.request req
-        @bids = JSON.parse(res.body)["bids"]
-        @bids.each {|bid| @flats << bid}
+        @answer = JSON.parse(res.body)
+        @bids = @answer["bids"]
+        # Add price, surface and rooms average for each bid
+        @bids.each do |bid|
+          bid["price_avg"] = @answer["average"]
+          bid["surface_avg"] = @answer["surfaceAverage"]
+          bid["plot_surface_avg"] = @answer["plotsurfaceAverage"]
+          bid["rooms_avg"] = @answer["roomsAverage"]
+          if bid["price"] && bid["surface"]
+            price_per_sq_m = bid["price"].to_f / bid["surface"]
+            bid["return"] = ((bid["price_avg"] - price_per_sq_m).to_f / price_per_sq_m)
+          end
+          @flats << bid
+        end
       end
     end
   end
@@ -106,8 +118,8 @@ class FlatsController < ApplicationController
 
     @flats.select!{|flat| flat['price'] >= @price_min if flat['price']} if @price_min > 0
     @flats.select!{|flat| flat['price'] <= @price_max if flat['price']} if @price_max > 0
-    # @flats.select!{|flat| flat['return'] >= @return_min if flat['return']} if @return_min > 0
-    # @flats.select!{|flat| flat['return'] <= @return_max if flat['return']} if @return_max > 0
+    @flats.select!{|flat| flat['return'] >= @return_min if flat['return']} if @return_min > 0
+    @flats.select!{|flat| flat['return'] <= @return_max if flat['return']} if @return_max > 0
     @flats.select!{|flat| flat['surface'] >= @surface_min if flat['surface']} if @surface_min > 0
     @flats.select!{|flat| flat['surface'] <= @surface_max if flat['surface']} if @surface_max > 0
     @flats.select!{|flat| flat['rooms'] >= @room_nb if flat['rooms']} if @room_nb > 1
