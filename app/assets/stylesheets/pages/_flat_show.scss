@@ -45,6 +45,11 @@
   .show-flat-images {
     padding: 0px 0px 0px 50px;
     margin-bottom: 30px;
+    @media (max-width: 732px) {
+      padding: 0px;
+      margin-bottom: 104px;
+      margin-top: 48px;
+    }
     .carousel-inner {
       img {
         max-width: 100%;
@@ -61,6 +66,9 @@
       margin-bottom: 0;
       height: 40px;
       list-style: none;
+      @media (max-width: 732px) {
+        margin-bottom: -45px;
+      }
       li, li.active {
         width: 30px;
         height: 30px;
