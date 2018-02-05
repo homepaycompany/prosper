@@ -197,8 +197,10 @@
           <h2 class="text-center">Historique du prix</h2>
         </div>
         <div class="show-flat-card">
-          <% @price_history = { "01/01/2017": 280, "02/01/2017": 290 } %>
-          <%#= line_chart @price_history %>
+          <div id="flat-chart" style="height: 300px;"></div>
+          <%= javascript_tag do %>
+            const data = <%= @chart_data.to_json.html_safe %>;
+          <% end %>
         </div>
       </div>
 
