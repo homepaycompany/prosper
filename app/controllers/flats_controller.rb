@@ -31,6 +31,28 @@ class FlatsController < ApplicationController
   end
 
   def show
+    # Define points for scatter char
+    @chart_data = []
+    @flats_data_hash = {}
+    @flats_data_hash['name'] = "flats"
+    @flats_data_hash['data'] = []
+    @flats.reject{|flat| flat["id"] == @flat["id"]}.first(100).each do |flat|
+      flat_data = []
+      flat_data << flat["price"].to_i if flat["price"] && flat["price"] < 1000000
+      flat_data << flat["surface"].to_i if flat["surface"] && flat["surface"] < 500
+      @flats_data_hash['data'] << flat_data
+    end
+    @flat_data_hash = {}
+    @flat_data_hash['name'] = "flat"
+    @flat_data_hash['data'] = []
+    @flat_data = []
+    @flat_data << @flat["price"].to_i if @flat["price"]
+    @flat_data << @flat["surface"].to_i if @flat["surface"]
+    @flat_data_hash['data'] << @flat_data
+
+    @chart_data << @flats_data_hash
+    @chart_data << @flat_data_hash
+
     # Define markers for the map
     @markers = @flats.select { |flat| flat["url"] == params[:flat_url] }.map do |flat|
       {
@@ -44,19 +66,37 @@ class FlatsController < ApplicationController
   private
 
   def set_flats
-    uri = URI("https://propertyhubprod.azurewebsites.net/api/RestApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
-    Net::HTTP.start(uri.host, uri.port,
-      :use_ssl => uri.scheme == 'https') do |http|
-      req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-      req.body = { "City": current_user.city,"ZipCode": current_user.zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
-      res = http.request req
-      @flats = JSON.parse(res.body)
+    @city = current_user.cities.first.name
+    @zipcodes = current_user.cities.first.zip_code.split(', ')
+    uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
+    @flats = []
 
-      # Add an id to the different flats obtained from the API
-      i = 0
-      @flats.map do |flat|
-        i += 1
-        flat["id"] = i
+    # Iterate on the different zip codes of user city
+    @zipcodes.each do |zip_code|
+      Net::HTTP.start(uri.host, uri.port,
+        :use_ssl => uri.scheme == 'https') do |http|
+        req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+        req.body = { "City": @city,"ZipCode": zip_code,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
+        res = http.request req
+        @answer = JSON.parse(res.body)
+        @bids = @answer["bids"]
+        # Add price, surface and rooms average for each bid
+        @bids.each do |bid|
+          bid["avg_price"] = @answer["average"] ? @answer["average"] : 0
+          bid["avg_surface"] = @answer["surfaceAverage"] ? @answer["surfaceAverage"] : 0
+          bid["avg_plot_surface"] = @answer["plotsurfaceAverage"] ? @answer["plotsurfaceAverage"] : 0
+          bid["avg_rooms"] = @answer["roomsAverage"] ? @answer["roomsAverage"] : 0
+          bid["avg_date"] = @answer["days"] ? @answer["days"] : 0
+          if bid["price"] && bid["surface"]
+            bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
+            # Internal rate return depending on reselling price and notarial costs
+            bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"] - bid["avg_price"] * 0.025).to_f / bid["price_per_sq_m"])
+          else
+            bid["price_per_sq_m"] = 0
+            bid["return"] = 0
+          end
+          @flats << bid
+        end
       end
     end
   end
@@ -105,8 +145,8 @@ class FlatsController < ApplicationController
 
     @flats.select!{|flat| flat['price'] >= @price_min if flat['price']} if @price_min > 0
     @flats.select!{|flat| flat['price'] <= @price_max if flat['price']} if @price_max > 0
-    # @flats.select!{|flat| flat['return'] >= @return_min if flat['return']} if @return_min > 0
-    # @flats.select!{|flat| flat['return'] <= @return_max if flat['return']} if @return_max > 0
+    @flats.select!{|flat| flat['return'] >= @return_min if flat['return']} if @return_min > 0
+    @flats.select!{|flat| flat['return'] <= @return_max if flat['return']} if @return_max > 0
     @flats.select!{|flat| flat['surface'] >= @surface_min if flat['surface']} if @surface_min > 0
     @flats.select!{|flat| flat['surface'] <= @surface_max if flat['surface']} if @surface_max > 0
     @flats.select!{|flat| flat['rooms'] >= @room_nb if flat['rooms']} if @room_nb > 1
@@ -114,7 +154,7 @@ class FlatsController < ApplicationController
 
   def set_flat
     set_flats
-    @flat = @flats.select { |flat| flat["url"] == params[:flat_url] }.first
+    @flat = @flats.select { |flat| flat["id"] == params[:id] }.first
   end
 
   # Clean unused filters

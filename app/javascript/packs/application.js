@@ -12,17 +12,13 @@ smoothAlert();
 // Javascript for animate.css when scrolling to identified sections
 import "../shared/landing_page.js"
 
-// Javascript for chart
-import { chartJS } from "../shared/chart.js"
-chartJS();
+// Javascript to add chart on Flat#show
+import { addChart } from "../shared/chart.js"
+addChart();
 
 // Javascript to calculate the investment return for sliders on Flat#show
 import { returnCalculation } from "../shared/slider.js"
 returnCalculation();
-
-// Javascript to type automaticly
-// import { loadDynamicBannerText } from '../shared/typed.js';
-// loadDynamicBannerText();
 
 // Javascript to submit forms on Flat#index
 import { formSubmit } from "../shared/submit.js"
