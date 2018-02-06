@@ -1,50 +1,47 @@
-<div class="sortbar">
-  <p>Tri :</p>
-  <% if @sort_type == "a-surface" %>
-    <%= link_to flats_path(pg: @current_page, sort: "d-surface", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
-      Superficie <i class="fa fa-angle-up" aria-hidden="true"></i>
-    <% end %>
-  <% elsif @sort_type == "d-surface" %>
-    <%= link_to flats_path(pg: @current_page, sort: "a-surface", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
-    Superficie <i class="fa fa-angle-down" aria-hidden="true"></i>
-    <% end %>
-  <% else %>
-    <%= link_to "Superficie", flats_path(pg: @current_page, sort: "d-surface", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i", id: "sortbar-i-surface" %>
+<% if @sort_type == "a-surface" %>
+  <%= link_to flats_path(pg: @current_page, sort: "d-surface", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
+    Superficie <i class="fa fa-angle-up" aria-hidden="true"></i>
   <% end %>
+<% elsif @sort_type == "d-surface" %>
+  <%= link_to flats_path(pg: @current_page, sort: "a-surface", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-surface" do %>
+  Superficie <i class="fa fa-angle-down" aria-hidden="true"></i>
+  <% end %>
+<% else %>
+  <%= link_to "Superficie", flats_path(pg: @current_page, sort: "d-surface", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i", id: "sortbar-i-surface" %>
+<% end %>
 
-  <% if @sort_type == "a-price" %>
-    <%= link_to flats_path(pg: @current_page, sort: "d-price", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
-      Prix <i class="fa fa-angle-up" aria-hidden="true"></i>
-    <% end %>
-  <% elsif @sort_type == "d-price" %>
-    <%= link_to flats_path(pg: @current_page, sort: "a-price", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
-      Prix <i class="fa fa-angle-down" aria-hidden="true"></i>
-    <% end %>
-  <% else %>
-    <%= link_to "Prix", flats_path(pg: @current_page, sort: "d-price", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i", id: "sortbar-i-price" %>
+<% if @sort_type == "a-price" %>
+  <%= link_to flats_path(pg: @current_page, sort: "d-price", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
+    Prix <i class="fa fa-angle-up" aria-hidden="true"></i>
   <% end %>
+<% elsif @sort_type == "d-price" %>
+  <%= link_to flats_path(pg: @current_page, sort: "a-price", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-price" do %>
+    Prix <i class="fa fa-angle-down" aria-hidden="true"></i>
+  <% end %>
+<% else %>
+  <%= link_to "Prix", flats_path(pg: @current_page, sort: "d-price", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i", id: "sortbar-i-price" %>
+<% end %>
 
-  <% if @sort_type == "a-date" %>
-    <%= link_to flats_path(pg: @current_page, sort: "d-date", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
-      Date <i class="fa fa-angle-up" aria-hidden="true"></i>
-    <% end %>
-  <% elsif @sort_type == "d-date" %>
-    <%= link_to flats_path(pg: @current_page, sort: "a-date", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
-      Date <i class="fa fa-angle-down" aria-hidden="true"></i>
-    <% end %>
-  <% else %>
-    <%= link_to "Date", flats_path(pg: @current_page, sort: "d-date", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i", id: "sortbar-i-date" %>
+<% if @sort_type == "a-date" %>
+  <%= link_to flats_path(pg: @current_page, sort: "d-date", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
+    Date <i class="fa fa-angle-up" aria-hidden="true"></i>
   <% end %>
+<% elsif @sort_type == "d-date" %>
+  <%= link_to flats_path(pg: @current_page, sort: "a-date", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-date" do %>
+    Date <i class="fa fa-angle-down" aria-hidden="true"></i>
+  <% end %>
+<% else %>
+  <%= link_to "Date", flats_path(pg: @current_page, sort: "d-date", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i", id: "sortbar-i-date" %>
+<% end %>
 
-  <% if @sort_type == "a-return" %>
-    <%= link_to flats_path(pg: @current_page, sort: "d-return", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
-      Rendement <i class="fa fa-angle-up" aria-hidden="true"></i>
-    <% end %>
-  <% elsif @sort_type == "d-return" %>
-    <%= link_to flats_path(pg: @current_page, sort: "a-return", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
-      Rendement <i class="fa fa-angle-down" aria-hidden="true"></i>
-    <% end %>
-  <% else %>
-    <%= link_to "Rendement", flats_path(pg: @current_page, sort: "d-return", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i", id: "sortbar-i-return" %>
+<% if @sort_type == "a-return" %>
+  <%= link_to flats_path(pg: @current_page, sort: "d-return", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
+    Rendement <i class="fa fa-angle-up" aria-hidden="true"></i>
   <% end %>
-</div>
+<% elsif @sort_type == "d-return" %>
+  <%= link_to flats_path(pg: @current_page, sort: "a-return", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i sortbar-i-active", id: "sortbar-i-return" do %>
+    Rendement <i class="fa fa-angle-down" aria-hidden="true"></i>
+  <% end %>
+<% else %>
+  <%= link_to "Rendement", flats_path(pg: @current_page, sort: "d-return", price_min: params['price_min'], price_max: params['price_max'], return_min: params['return_min'], return_max: params['return_max'], surface_min: params['surface_min'], surface_max: params['surface_max'], room_1: params['room_1'], room_2: params['room_2'], room_3: params['room_3'], room_4: params['room_4'], room_5: params['room_5']), class: "sortbar-i", id: "sortbar-i-return" %>
+<% end %>
