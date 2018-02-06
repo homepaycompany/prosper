@@ -39,13 +39,12 @@ footer {
     align-items: center;
     justify-content: center;
   }
-}
-@media (max-width: 768px) {
-  footer {
+  @media (max-width: 768px) {
+    height: 150px;
     h4 {
       font-size: 16px;
     }
-    p {
+    p, a {
       font-size: 12px;
     }
   }

@@ -45,6 +45,15 @@
     max-width: 100%;
     max-height: 100%;
   }
+  @media (max-width: 768px) {
+    text-align: center;
+    h1 {
+      font-size: 36px;
+    }
+    p {
+      font-size: 18px;
+    }
+  }
 }
 
 .landing-section-content {
@@ -82,6 +91,15 @@
       -ms-animation-duration: 2s;
     }
   }
+  @media (max-width: 768px) {
+    .landing-section-content, .landing-section-media {
+      height: 350px;
+    }
+    #landing-real-estate-media {
+      height: 330px;
+      padding: 20px;
+    }
+  }
 }
 
 .landing-studio {
@@ -106,15 +124,27 @@
       -ms-animation-duration: 2s;
     }
   }
+  @media (max-width: 768px) {
+    .landing-section-content, .landing-section-media {
+      height: 350px;
+    }
+    #landing-studio-media {
+      height: 330px;
+      padding: 20px;
+    }
+  }
 }
 
-.landing-products {
+.landing-team {
   min-height: 450px;
   background-color: white;
   .landing-section-content, .landing-section-media {
     height: 450px;
+    @media (max-width: 768px) {
+      height: 250px;
+    }
   }
-  #landing-products-media {
+  #landing-team-media {
     height: 450px;
     background-position: center;
     background-repeat: no-repeat;
@@ -132,30 +162,18 @@
       -ms-animation-duration: 2s;
     }
   }
-}
+  @media (max-width: 768px) {
+    .landing-section-content, .landing-section-media {
+      height: 450px;
+      @media (max-width: 768px) {
+        height: 250px;
+      }
+    }
 
-.landing-team {
-  min-height: 450px;
-  background-color: $black;
-  color: white;
-  .landing-section-content, .landing-section-media {
-    height: 450px;
-  }
-  #landing-team-media {
-    height: 450px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 90%;
-    padding: 50px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    img {
-      max-width: 90%;
-      -webkit-animation-duration: 2s;
-      -moz-animation-duration: 2s;
-      -o-animation-duration: 2s;
-      -ms-animation-duration: 2s;
+
+    #landing-team-media {
+      height: 350px;
+      padding: 20px;
     }
   }
 }
