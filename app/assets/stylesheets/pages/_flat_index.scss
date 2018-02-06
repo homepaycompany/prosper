@@ -84,6 +84,19 @@
     .flat-card-days-alert {
       color: $red;
     }
+    @media (max-width: 732px) {
+      min-height: 340px;
+      .flat-card-image {
+        height: 180px;
+      }
+      i {
+        top: 10px;
+        right: 18px;
+        color: $green;
+        font-size: 18px;
+        font-weight: 400;
+      }
+    }
   }
   @media (max-width: 732px) {
     padding-left: 0px;
