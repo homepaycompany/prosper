@@ -24,16 +24,12 @@
 
 // Flat cards
 .flat-cards {
-  @media (max-width: 732px) {
-    padding-left: 0px;
-    padding-right: 20px;
-  }
   a {
     color: $light-black;
   }
   .flat-card {
     background-color: white;
-    min-height: 377px;
+    min-height: 380px;
     margin-bottom: 30px;
     border-radius: 4px;
     cursor: pointer;
@@ -53,7 +49,6 @@
       overflow: hidden;
       padding: 0px;
       img {
-
         width: 100%;
         opacity: 0.9;
         transition: all ease 0.3s;
@@ -89,6 +84,10 @@
     .flat-card-days-alert {
       color: $red;
     }
+  }
+  @media (max-width: 732px) {
+    padding-left: 0px;
+    padding-right: 20px;
   }
 }
 .flat-negative {
