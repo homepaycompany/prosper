@@ -1,4 +1,7 @@
 class Flat < ApplicationRecord
+
+  belongs_to :city
+
   def return_rate
     @selling_price = (self.size.to_f * self.average_price.to_f)
     @notarial_costs = (0.025 * @selling_price)

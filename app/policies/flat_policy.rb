@@ -1,7 +1,7 @@
 class FlatPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope.where(city: user.cities)
     end
   end
 

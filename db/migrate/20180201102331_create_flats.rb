@@ -13,7 +13,7 @@ class CreateFlats < ActiveRecord::Migration[5.1]
       t.integer :rooms
       t.integer :surface
       t.integer :plotsurface
-      t.string :city
+      t.references :city, foreign_key: true
       t.string :zipcode
       t.float :latitude
       t.float :longitude

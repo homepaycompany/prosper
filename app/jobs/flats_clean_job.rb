@@ -23,6 +23,7 @@ class FlatsCleanJob < ApplicationJob
 
         # Add average value for each bid
         @bids.each do |bid|
+          bid["city"] = City.where("zip_code like ?", "%#{zipcode}%").first.id
           bid["avg_price"] = @answer["average"] ? @answer["average"] : 0
           bid["avg_surface"] = @answer["surfaceAverage"] ? @answer["surfaceAverage"] : 0
           bid["avg_plot_surface"] = @answer["plotsurfaceAverage"] ? @answer["plotsurfaceAverage"] : 0
@@ -55,7 +56,7 @@ class FlatsCleanJob < ApplicationJob
                 rooms: flat['rooms'].to_i,
                 surface: flat['surface'].to_i,
                 plotsurface: flat['plotSurface'].to_i,
-                city: flat['city'],
+                city: flat['city'].to_i,
                 zipcode: flat['zipCode'],
                 latitude: flat['latitude'].to_f,
                 longitude: flat['longitude'].to_f,
@@ -67,7 +68,8 @@ class FlatsCleanJob < ApplicationJob
                 avg_surface: flat['avg_surface'].to_f,
                 avg_plotsurface: flat['avg_plotsurface'].to_f,
                 avg_rooms: flat['avg_rooms'].to_f,
-                avg_date: flat['avg_date'].to_f)
+                avg_date: flat['avg_date'].to_f,
+                investment_return: flat['return'].to_f)
   end
 
   # Task to update the database with a POST request to API Property Hub Staging
@@ -83,6 +85,5 @@ class FlatsCleanJob < ApplicationJob
         create_flat(flat)
       end
     end
-    return @flats.last
   end
 end

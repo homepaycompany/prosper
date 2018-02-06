@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130091900) do
+ActiveRecord::Schema.define(version: 20180201102331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20180130091900) do
     t.integer "rooms"
     t.integer "surface"
     t.integer "plotsurface"
-    t.string "city"
+    t.bigint "city_id"
     t.string "zipcode"
     t.float "latitude"
     t.float "longitude"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180130091900) do
     t.float "avg_rooms"
     t.float "avg_date"
     t.float "investment_return"
+    t.index ["city_id"], name: "index_flats_on_city_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,5 +112,6 @@ ActiveRecord::Schema.define(version: 20180130091900) do
 
   add_foreign_key "city_accesses", "cities"
   add_foreign_key "city_accesses", "users"
+  add_foreign_key "flats", "cities"
   add_foreign_key "wishes", "users"
 end
