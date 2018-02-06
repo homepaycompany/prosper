@@ -21,4 +21,16 @@
       -ms-animation-duration: 2s;
     }
   }
+  @media (max-width: 768px) {
+    text-align: center;
+    h1 {
+      font-size: 36px;
+    }
+    p {
+      font-size: 18px;
+    }
+    .landing-section-content, .landing-section-media {
+      height: 280px;
+    }
+  }
 }
