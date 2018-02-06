@@ -14,11 +14,17 @@ import "../shared/landing_page.js"
 
 // Javascript to add chart on Flat#show
 import { addChart } from "../shared/chart.js"
-addChart();
+if (document.querySelector('#flat-chart') !== null) {
+  addChart();
+}
 
 // Javascript to calculate the investment return for sliders on Flat#show
 import { returnCalculation } from "../shared/slider.js"
-returnCalculation();
+if (document.querySelector('#flat-price-slider') !== null) {
+  console.log(document.querySelector('#flat-price-slider'));
+  console.log(document.querySelector('#flat-price-slider') !== null);
+  returnCalculation();
+}
 
 // Javascript to submit forms on Flat#index
 import { formSubmit } from "../shared/submit.js"
