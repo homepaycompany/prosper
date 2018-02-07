@@ -30,6 +30,9 @@ gem 'webpacker'
 gem 'pundit'
 gem 'forest_liana'
 
+# Error tracking
+gem 'appsignal'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
