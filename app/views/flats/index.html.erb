@@ -17,7 +17,7 @@
       <div id="map" data-markers="<%= @markers.to_json %>"
       ></div>
       <div class="cards-container hidden-xs">
-        <% if @selected_flats.length > 0 %>
+        <% if @selected_flats && @selected_flats.length > 0 %>
           <div class="flat-cards col-xs-12">
             <% @selected_flats.each do |flat| %>
               <%= render "shared/flats/index-card", flat: flat %>
@@ -26,6 +26,10 @@
           <div class="pagination col-xs-12 text-center">
             <%= render "shared/search/pagination" %>
           </div>
+        <% else %>
+          <p class="text-center no-flat-card">
+            Aucune annonce ne correspond à votre recherche.
+          </p>
         <% end %>
       </div>
     </div>
@@ -46,7 +50,7 @@
     </div>
 
     <div class="cards-container visible-xs">
-      <% if @selected_flats.length > 0 %>
+      <% if @selected_flats && @selected_flats.length > 0 %>
         <div class="flat-cards col-xs-12">
           <% @selected_flats.each do |flat| %>
             <%= render "shared/flats/index-card", flat: flat %>
@@ -55,6 +59,10 @@
         <div class="pagination col-xs-12 text-center">
           <%= render "shared/search/pagination" %>
         </div>
+      <% else %>
+        <p class="text-center no-flat-card">
+          Aucune annonce ne correspond à votre recherche.
+        </p>
       <% end %>
     </div>
     <!-- END version mobile -->

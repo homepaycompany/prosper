@@ -20,12 +20,14 @@ class WishesController < ApplicationController
 
 
     # Define markers for the map
-    @markers = @selected_flats.map do |flat|
-      {
-        lat: flat["latitude"],
-        lng: flat["longitude"],
-        infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat["title"] }) }
-      }
+    if @selected_flats && @selected_flats.size > 0
+      @markers = @selected_flats.map do |flat|
+        {
+          lat: flat.latitude,
+          lng: flat.longitude,
+          infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat["title"] }) }
+        }
+      end
     end
   end
 
