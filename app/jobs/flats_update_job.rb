@@ -81,7 +81,7 @@ class FlatsUpdateJob < ApplicationJob
     @flats_to_update = API_request(@zipcodes)
 
     # Update flat database only if the API returns results
-    if @flats_to_update && (@flats_to_update.length > 0)
+    if @flats_to_update && (@flats_to_update.size > 0)
       @flats_to_update.each {|flat| update_flat(flat)}
     end
   end
