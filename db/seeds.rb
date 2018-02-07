@@ -2,7 +2,7 @@ p "Destroying users..."
 User.destroy_all
 
 p "Creating users..."
-user_admin = User.create!(email: "admin@gmail.com", password: "123456")
+user_admin = User.create!(email: "admin@gmail.com", password: "123456", admin: true)
 user_test_1 = User.create!(email: "test1@gmail.com", password: "123456")
 user_test_2 = User.create!(email: "test2@gmail.com", password: "123456")
 
@@ -23,3 +23,6 @@ p "Creating city accesses..."
 access_user_test_1 = CityAccess.create!(city_id: marseille.id, user_id: user_admin.id)
 access_user_test_2 = CityAccess.create!(city_id: toulouse.id, user_id: user_test_1.id)
 access_user_test_3 = CityAccess.create!(city_id: marseille.id, user_id: user_test_2.id)
+
+p "Destroying flats..."
+Flat.destroy_all

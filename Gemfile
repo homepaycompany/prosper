@@ -11,6 +11,9 @@ gem 'pg'
 gem 'puma'
 gem 'rails', '5.1.4'
 gem 'redis'
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
+gem 'whenever'
 
 # Front setup
 gem 'autoprefixer-rails'
@@ -23,8 +26,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 
-
-# Admin rights
+# Admin rights and interface
 gem 'pundit'
 gem 'forest_liana'
 

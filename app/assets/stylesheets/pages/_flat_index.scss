@@ -29,7 +29,7 @@
   }
   .flat-card {
     background-color: white;
-    min-height: 380px;
+    min-height: 320px;
     margin-bottom: 30px;
     border-radius: 4px;
     cursor: pointer;
@@ -85,7 +85,7 @@
       color: $red;
     }
     @media (max-width: 732px) {
-      min-height: 340px;
+      min-height: 300px;
       .flat-card-image {
         height: 180px;
       }
