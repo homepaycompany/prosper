@@ -20,10 +20,11 @@ class FlatsCleanJob < ApplicationJob
         res = http.request req
         @answer = JSON.parse(res.body)
         @bids = @answer["bids"]
+        @city_id = City.where("zip_code like ?", "%#{zipcode}%").first.id
 
         # Add average value for each bid
         @bids.each do |bid|
-          bid["city"] = City.where("zip_code like ?", "%#{zipcode}%").first.id
+          bid["city_id"] = @city_id
           bid["avg_price"] = @answer["average"] ? @answer["average"] : 0
           bid["avg_surface"] = @answer["surfaceAverage"] ? @answer["surfaceAverage"] : 0
           bid["avg_plot_surface"] = @answer["plotsurfaceAverage"] ? @answer["plotsurfaceAverage"] : 0
@@ -46,7 +47,7 @@ class FlatsCleanJob < ApplicationJob
 
   # Create flat in database
   def create_flat(flat)
-    Flat.create(flat_id: flat['id'],
+    flat = Flat.create(flat_id: flat['id'],
                 origin: flat['origin'],
                 date: DateTime.strptime(flat["date"]),
                 url: flat['url'],
@@ -56,7 +57,7 @@ class FlatsCleanJob < ApplicationJob
                 rooms: flat['rooms'].to_i,
                 surface: flat['surface'].to_i,
                 plotsurface: flat['plotSurface'].to_i,
-                city: flat['city'].to_i,
+                city_id: flat['city_id'],
                 zipcode: flat['zipCode'],
                 latitude: flat['latitude'].to_f,
                 longitude: flat['longitude'].to_f,
@@ -75,7 +76,6 @@ class FlatsCleanJob < ApplicationJob
   # Task to update the database with a POST request to API Property Hub Staging
   def perform
     @zipcodes = set_zipcodes
-    p @zipcodes
     @flats = API_request(@zipcodes)
 
     # Update flat database only if the API returns results

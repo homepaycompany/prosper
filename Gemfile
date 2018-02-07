@@ -13,6 +13,7 @@ gem 'rails', '5.1.4'
 gem 'redis'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
+gem 'whenever'
 
 # Front setup
 gem 'autoprefixer-rails'
