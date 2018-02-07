@@ -24,7 +24,7 @@ class FlatsCreateJob < ApplicationJob
 
         # Add additional information if the bid does not exist in the database
         @bids.each do |bid|
-          if Flat.where(flat_id: bid['id']).length = 0
+          if Flat.where(flat_id: bid['id']).length == 0
             bid["city_id"] = @city_id
             bid["avg_price"] = @answer["average"] ? @answer["average"] : 0
             bid["avg_surface"] = @answer["surfaceAverage"] ? @answer["surfaceAverage"] : 0
