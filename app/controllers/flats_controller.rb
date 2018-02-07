@@ -44,7 +44,7 @@ class FlatsController < ApplicationController
   private
 
   def set_flats
-    @flats = policy_scope(Flat.all)
+    @flats = policy_scope(Flat.all).where("investment_return > ?", -0.7).where("investment_return < ?", 0.7)
   end
 
   # Sort flats according to the criteria chosen by the visitor
