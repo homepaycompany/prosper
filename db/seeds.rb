@@ -26,3 +26,6 @@ access_user_test_3 = CityAccess.create!(city_id: marseille.id, user_id: user_tes
 
 p "Destroying flats..."
 Flat.destroy_all
+
+p "Creating flats..."
+FlatsCreateJob.perform_now
