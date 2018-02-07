@@ -8,9 +8,48 @@ class FlatsUpdateJob < ApplicationJob
     @zipcodes.flatten!
   end
 
-  # Create flat in database
-  def create_flat(flat)
-    Flat.create(flat_id: flat['id'],
+  # For each zipcode, perform a POST request to API Property Hub Staging
+  def API_request(zipcodes)
+    uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
+    @flats_to_update = []
+    zipcodes.each do |zipcode|
+      Net::HTTP.start(uri.host, uri.port,
+        :use_ssl => uri.scheme == 'https') do |http|
+        req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+        req.body = { "City": City.where("zip_code like ?", "%#{zipcode}%").first.name,"ZipCode": zipcode,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
+        res = http.request req
+        @answer = JSON.parse(res.body)
+        @bids = @answer["bids"]
+        @city_id = City.where("zip_code like ?", "%#{zipcode}%").first.id
+
+        # Add average value for each bid
+        @bids.each do |bid|
+          if Flat.where(flat_id: bid['id']).length > 0
+            bid["city_id"] = @city_id
+            bid["avg_price"] = @answer["average"] ? @answer["average"] : 0
+            bid["avg_surface"] = @answer["surfaceAverage"] ? @answer["surfaceAverage"] : 0
+            bid["avg_plot_surface"] = @answer["plotsurfaceAverage"] ? @answer["plotsurfaceAverage"] : 0
+            bid["avg_rooms"] = @answer["roomsAverage"] ? @answer["roomsAverage"] : 0
+            bid["avg_date"] = @answer["days"] ? @answer["days"] : 0
+            if bid["price"] && bid["surface"]
+              bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
+              # Internal rate return depending on reselling price and notarial costs
+              bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"] - bid["avg_price"] * 0.025).to_f / bid["price_per_sq_m"])
+            else
+              bid["price_per_sq_m"] = 0
+              bid["return"] = 0
+            end
+          end
+          @flats_to_update << bid
+        end
+      end
+    end
+    return @flats_to_update
+  end
+
+  # Update flat in database
+  def update_flat(flat)
+    flat = Flat.update(flat_id: flat['id'],
                 origin: flat['origin'],
                 date: DateTime.strptime(flat["date"]),
                 url: flat['url'],
@@ -20,7 +59,7 @@ class FlatsUpdateJob < ApplicationJob
                 rooms: flat['rooms'].to_i,
                 surface: flat['surface'].to_i,
                 plotsurface: flat['plotSurface'].to_i,
-                city: flat['city'],
+                city_id: flat['city_id'],
                 zipcode: flat['zipCode'],
                 latitude: flat['latitude'].to_f,
                 longitude: flat['longitude'].to_f,
@@ -32,59 +71,18 @@ class FlatsUpdateJob < ApplicationJob
                 avg_surface: flat['avg_surface'].to_f,
                 avg_plotsurface: flat['avg_plotsurface'].to_f,
                 avg_rooms: flat['avg_rooms'].to_f,
-                avg_date: flat['avg_date'].to_f)
-  end
-
-  # Add local averages to bid
-  def add_average_to_bid(bid, answer)
-    bid["avg_price"] = @answer["average"] ? @answer["average"] : 0
-    bid["avg_surface"] = @answer["surfaceAverage"] ? @answer["surfaceAverage"] : 0
-    bid["avg_plot_surface"] = @answer["plotsurfaceAverage"] ? @answer["plotsurfaceAverage"] : 0
-    bid["avg_rooms"] = @answer["roomsAverage"] ? @answer["roomsAverage"] : 0
-    bid["avg_date"] = @answer["days"] ? @answer["days"] : 0
-    if bid["price"] && bid["surface"]
-      bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
-      # Internal rate return depending on reselling price and notarial costs
-      bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"] - bid["avg_price"] * 0.025).to_f / bid["price_per_sq_m"])
-    else
-      bid["price_per_sq_m"] = 0
-      bid["return"] = 0
-    end
-  end
-
-  # For each zipcode, perform a POST request to API Property Hub Staging
-  def API_request(zipcodes)
-    uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
-    @flats_to_create = []
-    zipcodes.each do |zipcode|
-      Net::HTTP.start(uri.host, uri.port,
-        :use_ssl => uri.scheme == 'https') do |http|
-        req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-        req.body = { "City": City.where("zip_code like ?", "%#{zipcode}%").first.name,"ZipCode": zipcode,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
-        res = http.request req
-        @answer = JSON.parse(res.body)
-        @bids = @answer["bids"]
-
-        # Add average value for each bid
-        @bids.each do |bid|
-          if Flat.where(flat_id: bid['id']).length > 0
-            add_average_to_bid(bid, @answer)
-            @flats_to_create << bid
-          end
-        end
-      end
-    end
-    return @flats_to_create
+                avg_date: flat['avg_date'].to_f,
+                investment_return: flat['return'].to_f)
   end
 
   # Task to update the database with a POST request to API Property Hub Staging
   def perform
     @zipcodes = set_zipcodes
-    @flats_to_create = API_request(@zipcodes)
+    @flats_to_update = API_request(@zipcodes)
 
     # Update flat database only if the API returns results
-    if @flats_to_create && (@flats_to_create.length > 0)
-      @flats_to_create.each{ |flat| create_flat(flat)}
+    if @flats_to_update && (@flats_to_update.length > 0)
+      @flats_to_update.each {|flat| update_flat(flat)}
     end
   end
 end
