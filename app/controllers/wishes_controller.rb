@@ -93,13 +93,13 @@ class WishesController < ApplicationController
       @room_nb = 0
     end
 
-    @flats.select!{|flat| flat.price >= @price_min if flat.price} if @price_min > 0
-    @flats.select!{|flat| flat.price <= @price_max if flat.price} if @price_max > 0
-    @flats.select!{|flat| flat.return >= @return_min if flat.investment_return} if @return_min > 0
-    @flats.select!{|flat| flat.return <= @return_max if flat.investment_return} if @return_max > 0
-    @flats.select!{|flat| flat.surface >= @surface_min if flat.surface} if @surface_min > 0
-    @flats.select!{|flat| flat.surface <= @surface_max if flat.surface} if @surface_max > 0
-    @flats.select!{|flat| flat.rooms >= @room_nb if flat.rooms} if @room_nb > 1
+    @flats = @flats.where("price >= :price_min", price_min: @price_min) if @price_min > 0
+    @flats = @flats.where("price <= :price_max", price_max: @price_max) if @price_max > 0
+    @flats = @flats.where("investment_return >= :return_min", return_min: @return_min) if @return_min > 0
+    @flats = @flats.where("investment_return <= :return_max", return_max: @return_max) if @return_max > 0
+    @flats = @flats.where("surface >= :surface_min", surface_min: @surface_min) if @surface_min > 0
+    @flats = @flats.where("surface <= :surface_max", surface_max: @surface_max) if @surface_max > 0
+    @flats = @flats.where("rooms <= :room_nb", room_nb: @room_nb) if @room_nb > 1
   end
 
   # Clean unused filters

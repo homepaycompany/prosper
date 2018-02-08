@@ -91,7 +91,7 @@ class FlatsController < ApplicationController
       @room_nb = 0
     end
 
-    @flats = @flats.where("price >= :price_min", price_min: @price_max) if @price_min > 0
+    @flats = @flats.where("price >= :price_min", price_min: @price_min) if @price_min > 0
     @flats = @flats.where("price <= :price_max", price_max: @price_max) if @price_max > 0
     @flats = @flats.where("investment_return >= :return_min", return_min: @return_min) if @return_min > 0
     @flats = @flats.where("investment_return <= :return_max", return_max: @return_max) if @return_max > 0
