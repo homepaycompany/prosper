@@ -112,6 +112,12 @@ function returnCalculation() {
   const refurbishmentSlider = new Slider("input#flat-refurbishment-slider");
   const sellingPriceSlider = new Slider("input#flat-selling-price-slider");
 
+  function yo() {
+    console.log("YO");
+  }
+  const slideRound = document.querySelector('#flatLoanSlider .min-slider-handle').getAttribute('aria-valuenow');
+  slideRound.on('input', yo);
+
   priceSlider.on('slide', setValue);
   contributionSlider.on('slide', setValue);
   interestSlider.on('slide', setValue);
