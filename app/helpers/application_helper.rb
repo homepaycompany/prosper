@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def price_per_squared_meter(flat)
-    flat["price"] / flat["surface"]
+    flat["price"] / flat["surface"] if flat["surface"] > 0
   end
 end
