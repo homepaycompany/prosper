@@ -113,11 +113,13 @@ class FlatsController < ApplicationController
     @flats_data_hash = {}
     @flats_data_hash['name'] = "flats"
     @flats_data_hash['data'] = []
-    @flats.reject{|flat| flat.id == @flat.id}.first(100).each do |flat|
-      flat_data = []
-      flat_data << flat.price if flat.price && flat.price < 1000000
-      flat_data << flat.surface if flat.surface && flat.surface < 500
-      @flats_data_hash['data'] << flat_data
+    @flats.reject{|flat| flat.id == @flat.id}.each do |flat|
+      if @flats_data_hash['data'].size <= 100
+        flat_data = []
+        flat_data << flat.price if flat.price && flat.price < 1000000 && flat.price > 0
+        flat_data << flat.surface if flat.surface && flat.surface < 500 && flat.surface > 0
+        @flats_data_hash['data'] << flat_data
+      end
     end
     @flat_data_hash = {}
     @flat_data_hash['name'] = "flat"
