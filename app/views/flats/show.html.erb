@@ -33,8 +33,7 @@
                     <ol class="carousel-indicators">
                       <% @flat.images.each_with_index do |image, index| %>
                         <li data-target="#carousel-flat-images" data-slide-to="<%= index %>" class="<%= "active" if index == 0 %>">
-                          <%= image_tag @flat.images[index], class: "item #{"active" if index == 0}" %>
-
+                          <%= image_tag @flat.images[index], class: "item" %>
                         </li>
                       <% end %>
                     </ol>
