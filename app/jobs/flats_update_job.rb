@@ -13,6 +13,7 @@ class FlatsUpdateJob < ApplicationJob
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
     @flats_to_update = []
     zipcodes.each do |zipcode|
+    # zipcodes.each do |zipcode|
       Net::HTTP.start(uri.host, uri.port,
         :use_ssl => uri.scheme == 'https') do |http|
         req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
