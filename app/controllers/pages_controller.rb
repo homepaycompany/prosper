@@ -12,7 +12,4 @@ class PagesController < ApplicationController
 
   def access
   end
-
-  def contact
-  end
 end
