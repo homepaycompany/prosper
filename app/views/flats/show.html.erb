@@ -33,8 +33,7 @@
                     <ol class="carousel-indicators">
                       <% @flat.images.each_with_index do |image, index| %>
                         <li data-target="#carousel-flat-images" data-slide-to="<%= index %>" class="<%= "active" if index == 0 %>">
-                          <%= image_tag @flat.images[index], class: "item #{"active" if index == 0}" %>
-
+                          <%= image_tag @flat.images[index], class: "item" %>
                         </li>
                       <% end %>
                     </ol>
@@ -169,7 +168,7 @@
                   <div class="col-xs-4">
                     <p>
                       <% if @flat.avg_date %>
-                        <%= (@flat.avg_date / 24.hours).round(0) %>j en moyenne dans le quartier
+                        <%= @flat.avg_date.round(0) %>j
                         <% else %>
                           n/a
                       <% end %>

@@ -2,29 +2,60 @@
   Prosper - Mes favoris
 <% end %>
 
-<div class="section">
+<div class="section section-flats">
   <div class="container">
-    <h1 class="text-center page-title">Mes favoris</h1>
-    <% if @wishes.size == 0 %>
-      <p class="text-center">
-        Vous n'avez pas encore sauvegardé d'annonces
-      </p>
+    <% if @selected_flats.nil? || @selected_flats.size == 0 %>
+      <div class="section-flats-none">
+        <h1 class="text-center page-title">Mes favoris</h1>
+        <p class="text-center">
+          Vous n'avez pas encore sauvegardé d'annonces
+        </p>
+      </div>
     <% else %>
 
-    <!-- START version desktop -->
-    <div class="flats-filters hidden-xs">
-      <%= render "shared/search/filter" %>
-      <div class="sortbar">
-        <p>Tri :</p>
-        <%= render "shared/search/sortbar" %>
+      <!-- START version desktop -->
+      <div class="flats-filters hidden-xs">
+        <%= render "shared/search/filter" %>
+        <div class="sortbar">
+          <p>Tri :</p>
+          <%= render "shared/search/sortbar" %>
+        </div>
       </div>
-    </div>
 
-    <div class="main-container hidden-xs">
-      <!-- Map version desktop -->
-      <div id="map" data-markers="<%= @markers.to_json %>"
-      ></div>
-      <div class="cards-container hidden-xs">
+      <div class="main-container hidden-xs">
+        <!-- Map version desktop -->
+        <div id="map" data-markers="<%= @markers.to_json %>"
+        ></div>
+        <div class="cards-container hidden-xs">
+          <% if @selected_flats.length > 0 %>
+            <div class="flat-cards col-xs-12">
+              <% @selected_flats.each do |flat| %>
+                <%= render "shared/flats/index-card", flat: flat %>
+              <% end %>
+            </div>
+            <div class="pagination col-xs-12 text-center">
+            <%= render "shared/search/pagination" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <!-- END version desktop -->
+
+      <!-- START version mobile -->
+      <div class="flats-filters visible-xs">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <%= render "shared/search/filter" %>
+          </div>
+          <div class="col-xs-12 text-center">
+            <div class="sortbar">
+              <%= render "shared/search/sortbar" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards-container visible-xs">
         <% if @selected_flats.length > 0 %>
           <div class="flat-cards col-xs-12">
             <% @selected_flats.each do |flat| %>
@@ -32,40 +63,11 @@
             <% end %>
           </div>
           <div class="pagination col-xs-12 text-center">
-          <%= render "shared/search/pagination" %>
+            <%= render "shared/search/pagination" %>
           </div>
         <% end %>
       </div>
-    </div>
-    <!-- END version desktop -->
-
-    <!-- START version mobile -->
-    <div class="flats-filters visible-xs">
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <%= render "shared/search/filter" %>
-        </div>
-        <div class="col-xs-12 text-center">
-          <div class="sortbar">
-            <%= render "shared/search/sortbar" %>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cards-container visible-xs">
-      <% if @selected_flats.length > 0 %>
-        <div class="flat-cards col-xs-12">
-          <% @selected_flats.each do |flat| %>
-            <%= render "shared/flats/index-card", flat: flat %>
-          <% end %>
-        </div>
-        <div class="pagination col-xs-12 text-center">
-          <%= render "shared/search/pagination" %>
-        </div>
-      <% end %>
-    </div>
-    <!-- END version mobile -->
+      <!-- END version mobile -->
 
     <% end %>
   </div>
