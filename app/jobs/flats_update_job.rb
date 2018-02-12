@@ -49,6 +49,8 @@ class FlatsUpdateJob < ApplicationJob
 
   # Update flat in database
   def update_flat(flat)
+    p flat['avg_date']
+    p flat['avg_date'].to_f
     flat = Flat.update(flat_id: flat['id'],
                 origin: flat['origin'],
                 date: DateTime.strptime(flat["date"]),
