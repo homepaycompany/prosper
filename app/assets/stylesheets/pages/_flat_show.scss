@@ -229,3 +229,11 @@
     border-top-color: $dark-blue !important;
   }
 }
+
+// Show flat map
+.show-flat-map #map {
+  height: 600px;
+  @media (max-width: 732px) {
+    height: 300px;
+  }
+}

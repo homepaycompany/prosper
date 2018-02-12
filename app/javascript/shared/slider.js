@@ -112,11 +112,16 @@ function returnCalculation() {
   const refurbishmentSlider = new Slider("input#flat-refurbishment-slider");
   const sellingPriceSlider = new Slider("input#flat-selling-price-slider");
 
-  function yo() {
-    console.log("YO");
-  }
-  const slideRound = document.querySelector('#flatLoanSlider .slider-track');
-  slideRound.addEventListener('click', yo);
+
+  // function yo() {
+  //   console.log("YO");
+  // }
+
+  // const slideRound = document.querySelector('#flatLoanSlider .min-slider-handle').getAttribute('aria-valuenow');
+  // const slideRound = document.querySelector('#flat-price-slider');
+  // slideRound.addEventListener('change', yo(), false);
+  // console.log(slideRound);
+  // slideRound.attrchange(yo());
 
   priceSlider.on('slide', setValue);
   contributionSlider.on('slide', setValue);
