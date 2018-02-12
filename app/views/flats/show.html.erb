@@ -169,7 +169,7 @@
                   <div class="col-xs-4">
                     <p>
                       <% if @flat.avg_date %>
-                        <%= (@flat.avg_date / 24.hours).round(0) %>j en moyenne dans le quartier
+                        <%= @flat.avg_date.round(0) %>j
                         <% else %>
                           n/a
                       <% end %>
