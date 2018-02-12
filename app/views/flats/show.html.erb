@@ -215,13 +215,13 @@
             <div class="col-xs-6">
               <p>
                 <strong>Apport :</strong>
-                <span id="js-contribution"><%= number_with_delimiter((@flat.price * 0.15).to_i, :delimiter => ' ') %></span> €
+                <span id="js-contribution"><%= number_with_delimiter((@flat.price * 0.20).to_i, :delimiter => ' ') %></span> €
               </p>
             </div>
             <div class="col-xs-6">
               <p>
                 <strong>Emprunt :</strong>
-                <span id="js-loan"><%= number_with_delimiter((@flat.price * 0.85).to_i, :delimiter => ' ') %></span> €
+                <span id="js-loan"><%= number_with_delimiter((@flat.price * 0.80).to_i, :delimiter => ' ') %></span> €
               </p>
             </div>
           </div>
@@ -240,23 +240,23 @@
             <div class="col-xs-12 col-sm-6">
               <div class="show-flat-card-investment-assumption">
                 <p>Apport personnel</p>
-                <p><span id="js-assumption-contribution"><%= number_with_delimiter((@flat.price * 0.15).to_i, :delimiter => ' ') %></span> €</p>
+                <p><span id="js-assumption-contribution"><%= number_with_delimiter((@flat.price * 0.2).to_i, :delimiter => ' ') %></span> €</p>
               </div>
-              <input id="flat-contribution-slider" data-slider-id='flatContributionSlider' type="text" data-slider-min="0" data-slider-max="<%= @flat.price %>" data-slider-step="5000" data-slider-value="<%= (@flat.price * 0.15).to_i %>"/>
+              <input id="flat-contribution-slider" data-slider-id='flatContributionSlider' type="text" data-slider-min="0" data-slider-max="<%= @flat.price %>" data-slider-step="5000" data-slider-value="<%= (@flat.price * 0.2).to_i %>"/>
             </div>
             <div class="col-xs-12 col-sm-6">
               <div class="show-flat-card-investment-assumption">
                 <p>Taux d'intérêt<p>
-                <p><span id="js-assumption-interest">0%</span></p>
+                <p><span id="js-assumption-interest">3%</span></p>
               </div>
-              <input id="flat-interest-slider" data-slider-id='flatInterestSlider' type="text" data-slider-min="0" data-slider-max="0.1" data-slider-step="0.005" data-slider-value="0"/>
+              <input id="flat-interest-slider" data-slider-id='flatInterestSlider' type="text" data-slider-min="0" data-slider-max="0.2" data-slider-step="0.005" data-slider-value="0.03"/>
             </div>
             <div class="col-xs-12 col-sm-6">
               <div class="show-flat-card-investment-assumption">
                 <p>Durée emprunt</p>
                 <p><span id="js-assumption-loan-duration">12</span> mois</p>
               </div>
-              <input id="flat-loan-duration-slider" data-slider-id='flatLoanSlider' type="text" data-slider-min="0" data-slider-max="24" data-slider-step="1" data-slider-value="12"/>
+              <input id="flat-loan-duration-slider" data-slider-id='flatLoanSlider' type="text" data-slider-min="0" data-slider-max="36" data-slider-step="1" data-slider-value="12"/>
             </div>
             <div class="col-xs-12 col-sm-6">
               <div class="show-flat-card-investment-assumption">
