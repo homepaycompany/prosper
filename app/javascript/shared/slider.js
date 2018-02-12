@@ -115,8 +115,8 @@ function returnCalculation() {
   function yo() {
     console.log("YO");
   }
-  const slideRound = document.querySelector('#flatLoanSlider .min-slider-handle').getAttribute('aria-valuenow');
-  slideRound.on('input', yo);
+  const slideRound = document.querySelector('#flatLoanSlider .slider-track');
+  slideRound.addEventListener('click', yo);
 
   priceSlider.on('slide', setValue);
   contributionSlider.on('slide', setValue);
