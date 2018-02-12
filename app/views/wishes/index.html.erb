@@ -5,10 +5,12 @@
 <div class="section section-flats">
   <div class="container">
     <% if @selected_flats.nil? || @selected_flats.size == 0 %>
-      <h1 class="text-center page-title">Mes favoris</h1>
-      <p class="text-center">
-        Vous n'avez pas encore sauvegardé d'annonces
-      </p>
+      <div class="section-flats-none">
+        <h1 class="text-center page-title">Mes favoris</h1>
+        <p class="text-center">
+          Vous n'avez pas encore sauvegardé d'annonces
+        </p>
+      </div>
     <% else %>
 
       <!-- START version desktop -->
