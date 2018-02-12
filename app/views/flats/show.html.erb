@@ -276,5 +276,16 @@
         </div>
       </div>
     </div>
+
+    <!-- Flat map -->
+    <% if @marker.length > 0 %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="map" data-markers="<%= @marker.to_json %>" style="height: 600px;"
+          ></div>
+        </div>
+      </div>
+    <% end %>
+
   </div>
 </div>
