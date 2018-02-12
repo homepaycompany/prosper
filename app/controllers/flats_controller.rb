@@ -32,14 +32,11 @@ class FlatsController < ApplicationController
   end
 
   def show
-
-    # Define markers for the map
-    @markers = @flats.select { |flat| flat["url"] == params[:flat_url] }.map do |flat|
-      {
-        lat: flat.latitude,
-        lng: flat.longitude,
-        infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat["title"] }) }
-      }
+    # Define flat marker for the map
+    if @flat.latitude && @flat.longitude
+      @marker = [{ lat: @flat.latitude, lng: @flat.longitude, infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: @flat["title"] }) } }]
+    else
+      @marker = []
     end
   end
 
