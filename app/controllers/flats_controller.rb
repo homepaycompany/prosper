@@ -109,52 +109,24 @@ class FlatsController < ApplicationController
 
   # Define points for scatter char
   def set_chart_data
-    # Set data for the first chart (price, size)
-    @chart_data = []
-    @flats_data_hash = {}
-    @flats_data_hash['name'] = "flats"
-    @flats_data_hash['data'] = []
+    # Determine data for the flats presented in charts
+    @flats_data_hash = {name: "flats", data: []}
+    @flats_data_hash_2 = {name: "flats", data: []}
     @flats.reject{|flat| flat.id == @flat.id}.each do |flat|
-      if @flats_data_hash['data'].size <= 100
-        flat_data = []
-        flat_data << flat.price if flat.price && flat.price < 1000000 && flat.price > 0
-        flat_data << flat.surface if flat.surface && flat.surface < 500 && flat.surface > 0
-        @flats_data_hash['data'] << flat_data
+      if @flats_data_hash[:data].size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface && flat.surface < 500 && flat.surface > 0
+        @flats_data_hash[:data] << [flat.price, flat.surface]
+      end
+      if @flats_data_hash_2[:data].size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface < 500 && flat.surface > 0
+        @flats_data_hash_2[:data] << [flat.price / flat.surface, flat.surface]
       end
     end
-    @flat_data_hash = {}
-    @flat_data_hash['name'] = "flat"
-    @flat_data_hash['data'] = []
-    @flat_data = []
-    @flat_data << @flat.price if @flat.price
-    @flat_data << @flat.surface if @flat.surface
-    @flat_data_hash['data'] << @flat_data
-    @chart_data << @flats_data_hash
-    @chart_data << @flat_data_hash
 
+    # Determine data for selected flats presented in charts
+    @flat_data_hash = {name: "flat", data: [[@flat.price, @flat.surface]]}
+    @flat_data_hash_2 = {name: "flat", data: [[@flat.price / @flat.surface, @flat.surface]]} if @flat.surface && @flat.surface > 0
 
-    # Set data for the first chart (price, price per squared meter)
-    @chart_data_size = []
-    @flats_data_size_hash = {}
-    @flats_data_size_hash['name'] = "flats"
-    @flats_data_size_hash['data'] = []
-    @flats.reject{|flat| flat.id == @flat.id}.each do |flat|
-      if @flats_data_size_hash['data'].size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface < 500 && flat.surface > 0
-        flat_data = []
-        flat_data << flat.price / flat.surface
-        flat_data << flat.surface
-        @flats_data_size_hash['data'] << flat_data
-      end
-    end
-    @flat_data_size_hash = {}
-    @flat_data_size_hash['name'] = "flat"
-    @flat_data_size_hash['data'] = []
-    @flat_data_size = []
-    @flat_price_per_surface = (@flat.price / @flat.surface) if @flat.price
-    @flat_data_size << @flat_price_per_surface
-    @flat_data_size << @flat.surface if @flat.surface
-    @flat_data_size_hash['data'] << @flat_data_size
-    @chart_data_size << @flats_data_size_hash
-    @chart_data_size << @flat_data_size_hash
+    # Data for the first chart (price, size)
+    @chart_data = [@flats_data_hash, @flat_data_hash]
+    @chart_2_data = [@flats_data_hash_2, @flat_data_hash_2]
   end
 end

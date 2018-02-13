@@ -201,7 +201,7 @@
           <div id="flat-chart-size" style="height: 200px;"></div>
           <%= javascript_tag do %>
             const data = <%= @chart_data.to_json.html_safe %>;
-            const dataSize = <%= @chart_data_size.to_json.html_safe %>;
+            const dataSize = <%= @chart_2_data.to_json.html_safe %>;
           <% end %>
         </div>
       </div>
