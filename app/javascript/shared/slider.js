@@ -19,19 +19,11 @@ function stringToNumber(string) {
 }
 
 // Function to calculate investment return
-function calculateReturn() {
-  // Definition of variables taken into account in the return calculation
-  const price = priceSlider.dataset.value;
-  const contribution = contributionSlider.dataset.value;
-  const interest = interestSlider.dataset.value;
-  const loanDuration = loanDurationSlider.dataset.value;
-  const refurbishment = refurbishmentSlider.dataset.value;
-  const sellingPrice = sellingPriceSlider.dataset.value;
-
+function calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice) {
   const currentMargin = document.querySelector("#flat-return").innerHTML;
 
   var size = stringToNumber(document.querySelector("#js-size").innerHTML);
-  var interests = interest / 100 * (price - contribution) * loanDuration / 12 ;
+  var interests = interest * (price - contribution) * loanDuration / 12 ;
   var refurbishmentCosts = refurbishment * size;
   var notarialCosts = sellingPrice * 0.025 ;
   var margin = sellingPrice - price - interests - refurbishmentCosts - notarialCosts;
@@ -44,15 +36,18 @@ function calculateReturn() {
 }
 
 // Function to update returns on Flat#show
-function updateReturn() {
+function updateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice) {
   // Definition of variables to update
   const marginHeader = document.querySelector("#flat-return");
   const marginText = document.querySelector('#js-return');
   const marginRateText = document.querySelector('#js-return-rate');
+  const primeCostsText = document.querySelectorAll('#js-prime-costs');
 
   // Definition of variables with margin and margin rate
-  const margin = calculateReturn()[0];
-  const margin_rate = calculateReturn()[1];
+  const margin = calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice)[0];
+  const margin_rate = calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice)[1];
+  const size = stringToNumber(document.querySelector("#js-size").innerHTML);
+  const primeCosts = -(interest * (price - contribution) * loanDuration / 12 + sellingPrice * 0.025 + refurbishment * size).toFixed(0);
 
   // Update the new margin rate in the header and change the class if necessary
   marginHeader.innerHTML = `${(margin_rate * 100).toFixed(1)}%`
@@ -67,6 +62,7 @@ function updateReturn() {
   // Update the margin in the detail of margin calculation
     marginText.innerHTML = numberToString(margin.toFixed(0));
     marginRateText.innerHTML = `${(margin_rate * 100).toFixed(1)}%`;
+    primeCostsText.forEach(element => element.innerHTML = numberToString(primeCosts));
 }
 
 // Function to set values when values on sliders change
@@ -82,9 +78,9 @@ function setValue() {
   const refurbishment = refurbishmentSlider.dataset.value;
   const sellingPrice = sellingPriceSlider.dataset.value;
   const size = stringToNumber(document.querySelector("#js-size").innerHTML);
-  const financingCosts = (-interest * (price - contribution) * loanDuration / 12).toFixed(0);
-  const refurbishmentCosts = refurbishment * size;
-  const notarialCosts = sellingPrice * 0.025;
+  const financingCosts = (- interest * (price - contribution) * loanDuration / 12).toFixed(0);
+  const refurbishmentCosts = - refurbishment * size;
+  const notarialCosts = - sellingPrice * 0.025;
 
   // Definition of assumptions in calculation detail
   const priceText = document.querySelectorAll('#js-price');
@@ -94,12 +90,12 @@ function setValue() {
   const financingText = document.querySelectorAll('#js-financing-costs');
   const interestText = document.querySelectorAll('#js-interest-rate');
   const notarialText = document.querySelectorAll('#js-notarial-costs');
-  const primeCostsText = document.querySelectorAll('#js-prime-costs');
   const sellingPriceText = document.querySelectorAll('#js-selling-price');
+  const loanDurationText = document.querySelectorAll('#js-loan-duration');
 
   // Show the new assumption undertaken by the user
   if (eventSlider == "flatPriceSlider") {
-    priceText.forEach(element => element.innerHTML = numberToString(price)) ;
+    priceText.forEach(element => element.innerHTML = numberToString(price));
     // Define a new maximum for the contribution slider
     // contributionSlider.dataset.sliderMax = price;
 
@@ -112,6 +108,7 @@ function setValue() {
 
   } else if (eventSlider == "flatLoanSlider") {
     financingText.forEach(element => element.innerHTML = numberToString(financingCosts));
+    loanDurationText.forEach(element => element.innerHTML = numberToString(loanDuration));
 
   } else if (eventSlider == "flatRefurbishmentSlider") {
     refurbishmentText.forEach(element => element.innerHTML = numberToString(refurbishmentCosts));
@@ -123,7 +120,7 @@ function setValue() {
   }
 
   // Calculate and show the new return
-  updateReturn();
+  updateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice);
 }
 
 // Function to listen events on sliders
