@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :wishes, dependent: :destroy
   has_many :city_accesses
   has_many :cities, through: :city_accesses
+  has_many :visits
 
   def city
     CityAccess.where(user_id: self).last.city
