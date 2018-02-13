@@ -1,6 +1,14 @@
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
 
-// Function to add spaces for thousands
+// Definition of sliders
+const priceSlider = document.querySelector("#flat-price-slider");
+const contributionSlider = document.querySelector("#flat-contribution-slider");
+const interestSlider = document.querySelector("#flat-interest-slider");
+const loanDurationSlider = document.querySelector("#flat-loan-duration-slider");
+const refurbishmentSlider = document.querySelector("#flat-refurbishment-slider");
+const sellingPriceSlider = document.querySelector("#flat-selling-price-slider");
+
+// Functions to format numbers (from floats to texts and vice versa)
 function numberToString(number) {
   var nStr = number.toString()
   var remainder = nStr.length % 3;
@@ -13,111 +21,124 @@ function stringToNumber(string) {
 // Function to calculate investment return
 function calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice) {
   const currentMargin = document.querySelector("#flat-return").innerHTML;
-  var size = stringToNumber(document.querySelector("#js-assumption-size").innerHTML);
-  var interests = interest / 100 * (price - contribution) * loanDuration / 12 ;
+
+  var size = stringToNumber(document.querySelector("#js-size").innerHTML);
+  var interests = interest * (price - contribution) * loanDuration / 12 ;
   var refurbishmentCosts = refurbishment * size;
   var notarialCosts = sellingPrice * 0.025 ;
   var margin = sellingPrice - price - interests - refurbishmentCosts - notarialCosts;
-  var margin_rate = Math.pow((margin / price), (loanDuration / 12));
-
-  // Show the new margin rate and change the class if necessary
-  document.querySelector("#flat-return").innerHTML = `${(margin_rate * 100).toFixed(1)}%`
-  if ((margin_rate > 0) && (document.querySelector("#flat-return").classList.value === "show-flat-negative-return")) {
-    document.querySelector("#flat-return").classList.toggle("show-flat-positive-return");
-    document.querySelector("#flat-return").classList.toggle("show-flat-negative-return");
-  } else if ((margin_rate < 0) && (document.querySelector("#flat-return").classList.value === "show-flat-positive-return")) {
-    document.querySelector("#flat-return").classList.toggle("show-flat-positive-return");
-    document.querySelector("#flat-return").classList.toggle("show-flat-negative-return");
+  if (margin > 0) {
+    var margin_rate = Math.pow((margin / price), (loanDuration / 12));
+  } else {
+    var margin_rate = - Math.pow(-(margin / price), (loanDuration / 12));
   }
+  return [margin, margin_rate];
+}
+
+// Function to update returns on Flat#show
+function updateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice) {
+  // Definition of variables to update
+  const marginHeader = document.querySelector("#flat-return");
+  const marginText = document.querySelector('#js-return');
+  const marginRateText = document.querySelector('#js-return-rate');
+  const primeCostsText = document.querySelectorAll('#js-prime-costs');
+
+  // Definition of variables with margin and margin rate
+  const margin = calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice)[0];
+  const margin_rate = calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice)[1];
+  const size = stringToNumber(document.querySelector("#js-size").innerHTML);
+  const primeCosts = -(interest * (price - contribution) * loanDuration / 12 + sellingPrice * 0.025 + refurbishment * size).toFixed(0);
+
+  // Update the new margin rate in the header and change the class if necessary
+  marginHeader.innerHTML = `${(margin_rate * 100).toFixed(1)}%`
+  if ((margin_rate > 0) && (marginHeader.classList.value === "show-flat-negative-return")) {
+    marginHeader.classList.toggle("show-flat-positive-return");
+    marginHeader.classList.toggle("show-flat-negative-return");
+  } else if ((margin_rate < 0) && (marginHeader.classList.value === "show-flat-positive-return")) {
+    marginHeader.classList.toggle("show-flat-positive-return");
+    marginHeader.classList.toggle("show-flat-negative-return");
+  }
+
+  // Update the margin in the detail of margin calculation
+    marginText.innerHTML = numberToString(margin.toFixed(0));
+    marginRateText.innerHTML = `${(margin_rate * 100).toFixed(1)}%`;
+    primeCostsText.forEach(element => element.innerHTML = numberToString(primeCosts));
 }
 
 // Function to set values when values on sliders change
 function setValue() {
+  // Definition of the event target
   const eventSlider = event.target.parentNode.id;
-  const price = document.querySelector('#js-assumption-price');
-  const contribution = document.querySelector('#js-assumption-contribution');
-  const interest = document.querySelector('#js-assumption-interest');
-  const loanDuration = document.querySelector('#js-assumption-loan-duration');
-  const refurbishment = document.querySelector('#js-assumption-refurbishment');
-  const sellingPrice = document.querySelector('#js-assumption-selling-price');
 
-  const priceSlider = document.querySelector("#flat-price-slider");
-  const contributionSlider = document.querySelector("#flat-contribution-slider");
-  const interestSlider = document.querySelector("#flat-interest-slider");
-  const loanDurationSlider = document.querySelector("#flat-loan-duration-slider");
-  const refurbishmentSlider = document.querySelector("#flat-refurbishment-slider");
-  const sellingPriceSlider = document.querySelector("#flat-selling-price-slider");
+  // Definition of variables taken into account in the return calculation
+  const price = priceSlider.dataset.value;
+  const contribution = contributionSlider.dataset.value;
+  const interest = interestSlider.dataset.value;
+  const loanDuration = loanDurationSlider.dataset.value;
+  const refurbishment = refurbishmentSlider.dataset.value;
+  const sellingPrice = sellingPriceSlider.dataset.value;
+  const size = stringToNumber(document.querySelector("#js-size").innerHTML);
+  const financingCosts = (- interest * (price - contribution) * loanDuration / 12).toFixed(0);
+  const refurbishmentCosts = - refurbishment * size;
+  const notarialCosts = - sellingPrice * 0.025;
 
-  const priceN = stringToNumber(price.innerHTML);
-  const contributionN = stringToNumber(contribution.innerHTML);
-  const interestN = stringToNumber(interest.innerHTML);
-  const loanDurationN = stringToNumber(loanDuration.innerHTML);
-  const refurbishmentN = stringToNumber(refurbishment.innerHTML);
-  const sellingPriceN = stringToNumber(sellingPrice.innerHTML);
+  // Definition of assumptions in calculation detail
+  const priceText = document.querySelectorAll('#js-price');
+  const contributionText = document.querySelectorAll('#js-contribution');
+  const refurbishmentText = document.querySelectorAll('#js-refurbishment');
+  const refurbishmentPerMeterText = document.querySelectorAll('#js-refurbishment-per-meter');
+  const financingText = document.querySelectorAll('#js-financing-costs');
+  const interestText = document.querySelectorAll('#js-interest-rate');
+  const notarialText = document.querySelectorAll('#js-notarial-costs');
+  const sellingPriceText = document.querySelectorAll('#js-selling-price');
+  const loanDurationText = document.querySelectorAll('#js-loan-duration');
 
-  const contributionText = document.querySelector('#js-contribution');
-  const loanText = document.querySelector('#js-loan');
-
-
-  // Show the new price, define a new maximum for the contribution slider and calculate the new return
+  // Show the new assumption undertaken by the user
   if (eventSlider == "flatPriceSlider") {
-    var newPrice = priceSlider.dataset.value;
-    price.innerHTML = numberToString(newPrice);
-    loanText.innerHTML = numberToString(newPrice - contributionN);
-    contribution.dataset.sliderMax = newPrice;
-    calculateReturn(newPrice, contributionN, interestN, loanDurationN, refurbishmentN, sellingPriceN)
+    priceText.forEach(element => element.innerHTML = numberToString(price));
+    // Define a new maximum for the contribution slider
+    // contributionSlider.dataset.sliderMax = price;
 
-  // Show the new contribution and calculate the new return
   } else if (eventSlider == "flatContributionSlider") {
-    var newContribution = contributionSlider.dataset.value;
-    contribution.innerHTML = numberToString(newContribution);
-    contributionText.innerHTML = numberToString(newContribution);
-    loanText.innerHTML = numberToString(priceN - newContribution);
-    calculateReturn(priceN, newContribution, interestN, loanDurationN, refurbishmentN, sellingPriceN)
+    contributionText.forEach(element => element.innerHTML = numberToString(contribution)) ;
 
-  // Show the new interest and calculate the new return
   } else if (eventSlider == "flatInterestSlider") {
-    var newInterest = interestSlider.dataset.value;
-    interest.innerHTML = `${(newInterest * 100).toFixed(1)}%` ;
-    calculateReturn(priceN, contributionN, newInterest, loanDurationN, refurbishmentN, sellingPriceN)
+    interestText.forEach(element => element.innerHTML = numberToString(`${(interest * 100).toFixed(1)}%`));
+    financingText.forEach(element => element.innerHTML = numberToString(financingCosts));
 
-  // Show the new loan duration and calculate the new return
   } else if (eventSlider == "flatLoanSlider") {
-    var newLoanDuration = loanDurationSlider.dataset.value;
-    loanDuration.innerHTML = numberToString(newLoanDuration);
-    calculateReturn(priceN, contributionN, interestN, newLoanDuration, refurbishmentN, sellingPriceN)
+    financingText.forEach(element => element.innerHTML = numberToString(financingCosts));
+    loanDurationText.forEach(element => element.innerHTML = numberToString(loanDuration));
 
-  // Show the new loan duration and calculate the new return
   } else if (eventSlider == "flatRefurbishmentSlider") {
-    var newRefurbishment = refurbishmentSlider.dataset.value;
-    refurbishment.innerHTML = numberToString(newRefurbishment);
-    calculateReturn(priceN, contributionN, interestN, loanDurationN, newRefurbishment, sellingPriceN)
+    refurbishmentText.forEach(element => element.innerHTML = numberToString(refurbishmentCosts));
+    refurbishmentPerMeterText.forEach(element => element.innerHTML = numberToString((refurbishmentCosts / size).toFixed(0)));
 
-  // Show the new loan duration and calculate the new return
   } else if (eventSlider == "flatSellingPriceSlider") {
-    var newSellingPrice = sellingPriceSlider.dataset.value;
-    sellingPrice.innerHTML = numberToString(newSellingPrice);
-    calculateReturn(priceN, contributionN, interestN, loanDurationN, refurbishmentN, newSellingPrice)
+    sellingPriceText.forEach(element => element.innerHTML = numberToString(sellingPrice));
+    notarialText.forEach(element => element.innerHTML = numberToString(notarialCosts));
   }
-}
 
+  // Calculate and show the new return
+  updateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice);
+}
 
 // Function to listen events on sliders
 function returnCalculation() {
   // Creation of sliders if on page Flat#show
-  const priceSlider = new Slider("input#flat-price-slider");
-  const contributionSlider = new Slider("input#flat-contribution-slider");
-  const interestSlider = new Slider("input#flat-interest-slider");
-  const loanDurationSlider = new Slider("input#flat-loan-duration-slider");
-  const refurbishmentSlider = new Slider("input#flat-refurbishment-slider");
-  const sellingPriceSlider = new Slider("input#flat-selling-price-slider");
+  const priceSliderObject = new Slider("input#flat-price-slider");
+  const contributionSliderObject = new Slider("input#flat-contribution-slider");
+  const interestSliderObject = new Slider("input#flat-interest-slider");
+  const loanDurationSliderObject = new Slider("input#flat-loan-duration-slider");
+  const refurbishmentSliderObject = new Slider("input#flat-refurbishment-slider");
+  const sellingPriceSliderObject = new Slider("input#flat-selling-price-slider");
 
-  priceSlider.on('slide', setValue);
-  contributionSlider.on('slide', setValue);
-  interestSlider.on('slide', setValue);
-  loanDurationSlider.on('slide', setValue);
-  refurbishmentSlider.on('slide', setValue);
-  sellingPriceSlider.on('slide', setValue);
+  priceSliderObject.on('slide', setValue);
+  contributionSliderObject.on('slide', setValue);
+  interestSliderObject.on('slide', setValue);
+  loanDurationSliderObject.on('slide', setValue);
+  refurbishmentSliderObject.on('slide', setValue);
+  sellingPriceSliderObject.on('slide', setValue);
 }
 
 export { returnCalculation };

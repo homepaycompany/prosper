@@ -34,7 +34,7 @@ class FlatsCreateJob < ApplicationJob
             if bid["price"] && bid["surface"]
               bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
               # Internal rate return depending on reselling price and notarial costs
-              bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"] - bid["avg_price"] * 0.025).to_f / bid["price_per_sq_m"])
+              bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"] - bid["avg_price"] * 0.025 - bid["price_per_sq_m"] * 0.2 * 0.03).to_f / bid["price_per_sq_m"])
             else
               bid["price_per_sq_m"] = 0
               bid["return"] = 0
