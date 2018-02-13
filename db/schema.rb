@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213162053) do
+ActiveRecord::Schema.define(version: 20180213162054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 20180213162053) do
     t.float "avg_rooms"
     t.float "avg_date"
     t.float "investment_return"
-    t.boolean "seen", default: false, null: false
     t.index ["city_id"], name: "index_flats_on_city_id"
   end
 
@@ -103,6 +102,15 @@ ActiveRecord::Schema.define(version: 20180213162053) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "visits", force: :cascade do |t|
+    t.bigint "flat_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flat_id"], name: "index_visits_on_flat_id"
+    t.index ["user_id"], name: "index_visits_on_user_id"
+  end
+
   create_table "wishes", force: :cascade do |t|
     t.string "flat_url"
     t.bigint "user_id"
@@ -114,5 +122,7 @@ ActiveRecord::Schema.define(version: 20180213162053) do
   add_foreign_key "city_accesses", "cities"
   add_foreign_key "city_accesses", "users"
   add_foreign_key "flats", "cities"
+  add_foreign_key "visits", "flats"
+  add_foreign_key "visits", "users"
   add_foreign_key "wishes", "users"
 end

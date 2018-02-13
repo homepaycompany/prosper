@@ -33,7 +33,7 @@ class FlatsController < ApplicationController
 
   def show
     # Set flat as seen
-    @flat.update(seen: true)
+    Visit.create(user_id: current_user.id, flat_id: @flat.id)
 
     # Define flat marker for the map
     if @flat.latitude && @flat.longitude
