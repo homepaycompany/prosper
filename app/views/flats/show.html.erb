@@ -197,9 +197,11 @@
           <h2 class="text-center">Comparaison au marché</h2>
         </div>
         <div class="show-flat-card">
-          <div id="flat-chart" style="height: 280px;"></div>
+          <div id="flat-chart" style="height: 200px;"></div>
+          <div id="flat-chart-size" style="height: 200px;"></div>
           <%= javascript_tag do %>
             const data = <%= @chart_data.to_json.html_safe %>;
+            const dataSize = <%= @chart_data_size.to_json.html_safe %>;
           <% end %>
         </div>
       </div>
