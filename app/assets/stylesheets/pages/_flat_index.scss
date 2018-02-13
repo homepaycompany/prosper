@@ -104,6 +104,12 @@
       }
     }
   }
+  .flat-card-seen .flat-card-image img {
+    opacity: 0.5;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
   @media (max-width: 732px) {
     padding-left: 0px;
     padding-right: 20px;
