@@ -24,6 +24,12 @@ if (document.querySelector('#flat-price-slider') !== null) {
   returnCalculation();
 }
 
+// Javascript to show the assumptions undertaken for the calculation of investment return
+import { showAssumptions } from "../shared/assumptions.js"
+if (document.querySelector('#flat-price-slider') !== null) {
+  showAssumptions();
+}
+
 // Javascript to submit forms on Flat#index
 import { formSubmit } from "../shared/submit.js"
 formSubmit();
