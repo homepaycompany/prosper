@@ -30,7 +30,7 @@ function calculateReturn() {
 
   const currentMargin = document.querySelector("#flat-return").innerHTML;
 
-  var size = stringToNumber(document.querySelector("#js-assumption-size").innerHTML);
+  var size = stringToNumber(document.querySelector("#js-size").innerHTML);
   var interests = interest / 100 * (price - contribution) * loanDuration / 12 ;
   var refurbishmentCosts = refurbishment * size;
   var notarialCosts = sellingPrice * 0.025 ;
@@ -80,55 +80,47 @@ function setValue() {
   const interest = interestSlider.dataset.value;
   const loanDuration = loanDurationSlider.dataset.value;
   const refurbishment = refurbishmentSlider.dataset.value;
+  const size = stringToNumber(document.querySelector("#js-size").innerHTML);
   const sellingPrice = sellingPriceSlider.dataset.value;
-
-  // Definition of assumptions undertaken by the user (DOM)
-  const priceT = document.querySelector('#js-assumption-price');
-  const contributionT = document.querySelector('#js-assumption-contribution');
-  const interestT = document.querySelector('#js-assumption-interest');
-  const loanDurationT = document.querySelector('#js-assumption-loan-duration');
-  const refurbishmentT = document.querySelector('#js-assumption-refurbishment');
-  const sellingPriceT = document.querySelector('#js-assumption-selling-price');
+  const financingCosts = (-interest * (price - contribution) * loanDuration / 12).toFixed(0);
+  const refurbishmentCosts = - refurbishment * size;
+  const notarialCosts = - sellingPrice * 0.025;
 
   // Definition of assumptions in calculation detail
-  const priceText = document.querySelector('#js-price');
-  const contributionText = document.querySelector('#js-contribution');
-  const refurbishmentText = document.querySelector('#js-refurbishment');
-  const financingText = document.querySelector('#js-financing-costs');
-  const notarialText = document.querySelector('#js-notarial-costs');
-  const primeCostsText = document.querySelector('#js-prime-costs');
-  const sellingPriceText = document.querySelector('#js-selling-price');
+  const priceText = document.querySelectorAll('#js-price');
+  const contributionText = document.querySelectorAll('#js-contribution');
+  const refurbishmentText = document.querySelectorAll('#js-refurbishment');
+  const loanDurationText = document.querySelector('#js-loan-duration');
+  const financingText = document.querySelectorAll('#js-financing-costs');
+  const interestText = document.querySelector('#js-interest');
+  const notarialText = document.querySelectorAll('#js-notarial-costs');
+  const primeCostsText = document.querySelectorAll('#js-prime-costs');
+  const sellingPriceText = document.querySelectorAll('#js-selling-price');
 
-  // Definition of the flat size
-  const size = stringToNumber(document.querySelector("#js-assumption-size").innerHTML);
 
   // Show the new assumption undertaken by the user
   if (eventSlider == "flatPriceSlider") {
-    priceT.innerHTML = numberToString(price);
-    priceText.innerHTML = numberToString(price);
+    priceText.forEach(element => element.innerHTML = numberToString(price)) ;
     // Define a new maximum for the contribution slider
     // contributionSlider.dataset.sliderMax = price;
 
   } else if (eventSlider == "flatContributionSlider") {
-    contributionT.innerHTML = numberToString(contribution);
-    contributionText.innerHTML = numberToString(contribution);
+    contributionText.forEach(element => element.innerHTML = numberToString(contribution)) ;
 
   } else if (eventSlider == "flatInterestSlider") {
-    interestT.innerHTML = `${(interest * 100).toFixed(1)}%` ;
-    financingText.innerHTML = numberToString((-interest * (price - contribution) * loanDuration / 12).toFixed(0));
+    interestText.forEach(element => element.innerHTML = `${(interest * 100).toFixed(1)}%`);
+    financingText.forEach(element => element.innerHTML = numberToString(financingCosts));
 
   } else if (eventSlider == "flatLoanSlider") {
-    loanDurationT.innerHTML = numberToString(loanDuration);
-    financingText.innerHTML = numberToString((-interest * (price - contribution) * loanDuration / 12).toFixed(0));
+    loanDurationText.forEach(element => element.innerHTML = numberToString(loanDuration));
+    financingText.forEach(element => element.innerHTML = numberToString(financingCosts));
 
   } else if (eventSlider == "flatRefurbishmentSlider") {
-    refurbishmentT.innerHTML = numberToString(refurbishment);
-    refurbishmentText.innerHTML = numberToString(newRefurbishment * size);
+    refurbishmentText.forEach(element => element.innerHTML = numberToString(refurbishmentCosts));
 
   } else if (eventSlider == "flatSellingPriceSlider") {
-    sellingPriceT.innerHTML = numberToString(sellingPrice);
-    sellingPriceText.innerHTML = numberToString(sellingPrice);
-    notarialText.innerHTML = numberToString(newSellingPrice * 0.025);
+    sellingPriceText.forEach(element => element.innerHTML = numberToString(sellingPrice));
+    notarialText.forEach(element => element.innerHTML = numberToString(notarialCosts));
   }
 
   // Calculate and show the new return
