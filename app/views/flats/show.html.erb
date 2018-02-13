@@ -210,23 +210,49 @@
           <h2 class="text-center">Rentabilité potentielle <span id="flat-return" class="<%= @flat.investment_return > 0 ? "show-flat-positive-return" : "show-flat-negative-return" %>"><%= number_to_percentage(@flat.investment_return * 100, precision: 1) %></span></h2>
           <i class="fa fa-question-circle" title="La rentabilité théorique est un taux de rentabilité interne qui dépend de la durée du projet, du prix du revente, des coûts de travaux, des coûts de financement et des frais de notaire estimés."></i>
         </div>
-        <div class="show-flat-card show-flat-card-return">
+        <div class="show-flat-card">
           <div class="show-flat-card-contribution">
-            <div class="col-xs-6">
-              <p>
-                <strong>Apport :</strong>
-                <span id="js-contribution"><%= number_with_delimiter((@flat.price * 0.20).to_i, :delimiter => ' ') %></span> €
-              </p>
-            </div>
-            <div class="col-xs-6">
-              <p>
-                <strong>Emprunt :</strong>
-                <span id="js-loan"><%= number_with_delimiter((@flat.price * 0.80).to_i, :delimiter => ' ') %></span> €
-              </p>
-            </div>
           </div>
 
           <div class="show-flat-card-investment-assumptions">
+            <div class="col-xs-12">
+              <p><strong>Rendement <i class="fa fa-angle-right" aria-hidden="true"></i></strong></p>
+            </div>
+            <div class="col-xs-12">
+              <p>
+                <strong>Prix d'achat :</strong>
+                <span id="js-price"><%= number_with_delimiter((@flat.price).to_i, :delimiter => ' ') %></span> €
+                (apport de <span id="js-contribution"><%= number_with_delimiter((@flat.price * 0.20).to_i, :delimiter => ' ') %></span> €)
+              </p>
+            </div>
+            <div class="col-xs-6">
+              <p>Travaux : <span id="js-refurbishment">0</span> €</p>
+            </div>
+            <div class="col-xs-6">
+              <p>Frais de notaire : <span id="js-notarial-costs"><%= number_with_delimiter((-@flat.avg_price * @flat.surface * 0.025).to_i, :delimiter => ' ') %></span> €</p>
+            </div>
+            <div class="col-xs-6">
+              <p>Frais financiers : <span id="js-financing-costs"><%= number_with_delimiter((- @flat.price * + 0.2 * 0.03).to_i, :delimiter => ' ') %></span> €</p>
+            </div>
+            <div class="col-xs-12">
+              <p>
+                <strong>Coûts de revient :</strong>
+                <span id="js-prime-costs"><%= number_with_delimiter((-0.025 * @flat.avg_price * @flat.surface - @flat.price * 0.2 * 0.03).to_i, :delimiter => ' ') %></span> €
+              </p>
+            </div>
+            <div class="col-xs-12">
+              <p>
+                <strong>Prix de revente :</strong>
+                <span id="js-selling-price"><%= number_with_delimiter((@flat.avg_price * @flat.surface).round(0), :delimiter => ' ') %></span> €
+              </p>
+            </div>
+            <div class="col-xs-12">
+              <p>
+                <strong>Marge nette :</strong>
+                <span id="js-return"><%= number_with_delimiter((@flat.avg_price * @flat.surface * (1 - 0.025) - @flat.price * (1 + 0.2 * 0.03)).to_i, :delimiter => ' ') %></span> €
+                (<span id="js-return-rate"><%= number_to_percentage(@flat.investment_return * 100, precision: 1) %></span>)
+              </p>
+            </div>
             <div class="col-xs-12">
               <p><strong>Hypothèses <i class="fa fa-angle-down" aria-hidden="true"></i></strong></p>
             </div>
@@ -235,7 +261,7 @@
                 <p>Prix</p>
                 <p><span id="js-assumption-price"><%= number_with_delimiter(@flat.price.round(0), :delimiter => ' ') %></span> €</p>
               </div>
-              <input id="flat-price-slider" data-slider-id='flatPriceSlider' type="text" data-slider-min="0" data-slider-max="<%= (@flat.price.to_f * 2).to_i %>" data-slider-step="5000" data-slider-value="<%= @flat.price %>"/>
+              <input id="flat-price-slider" data-slider-id='flatPriceSlider' type="text" data-slider-min="5000" data-slider-max="<%= (@flat.price.to_f * 2).to_i %>" data-slider-step="5000" data-slider-value="<%= @flat.price %>"/>
             </div>
             <div class="col-xs-12 col-sm-6">
               <div class="show-flat-card-investment-assumption">
