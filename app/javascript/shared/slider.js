@@ -47,7 +47,7 @@ function updateReturn(price, contribution, interest, loanDuration, refurbishment
   const margin = calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice)[0];
   const margin_rate = calculateReturn(price, contribution, interest, loanDuration, refurbishment, sellingPrice)[1];
   const size = stringToNumber(document.querySelector("#js-size").innerHTML);
-  const primeCosts = -(interest * (price - contribution) * loanDuration / 12 + sellingPrice * 0.025 + refurbishment * size).toFixed(0);
+  const primeCosts = -price -(interest * (price - contribution) * loanDuration / 12 + sellingPrice * 0.025 + refurbishment * size).toFixed(0);
 
   // Update the new margin rate in the header and change the class if necessary
   marginHeader.innerHTML = `${(margin_rate * 100).toFixed(1)}%`

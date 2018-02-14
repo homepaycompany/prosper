@@ -242,7 +242,7 @@
               <div class="col-xs-12">
                 <p>
                   <strong>Coûts de revient :</strong>
-                  <span id="js-prime-costs"><%= number_with_delimiter((-0.025 * @flat.avg_price * @flat.surface - @flat.price * 0.2 * 0.03).to_i, :delimiter => ' ') %></span> €
+                  <span id="js-prime-costs"><%= number_with_delimiter((-@flat.price + -0.025 * @flat.avg_price * @flat.surface - @flat.price * 0.2 * 0.03).to_i, :delimiter => ' ') %></span> €
                 </p>
               </div>
               <div class="col-xs-12">

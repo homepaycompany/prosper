@@ -27,6 +27,7 @@ class CreateFlats < ActiveRecord::Migration[5.1]
       t.float :avg_rooms
       t.float :avg_date
       t.float :investment_return
+      t.boolean :seen, default: false
     end
   end
 end

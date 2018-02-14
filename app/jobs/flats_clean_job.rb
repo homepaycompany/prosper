@@ -1,4 +1,4 @@
-class FlatsCreateJob < ApplicationJob
+class FlatsCleanJob < ApplicationJob
   queue_as :default
 
   # Get zip codes of available cities
@@ -11,21 +11,21 @@ class FlatsCreateJob < ApplicationJob
   # For each zipcode, perform a POST request to API Property Hub Staging
   def API_request(zipcodes)
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
-    @flats_to_create = []
+    @flats = []
     zipcodes.each do |zipcode|
+    # zipcodes.each do |zipcode|
       Net::HTTP.start(uri.host, uri.port,
         :use_ssl => uri.scheme == 'https') do |http|
         req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
         req.body = { "City": City.where("zip_code like ?", "%#{zipcode}%").first.name,"ZipCode": zipcode,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
         res = http.request req
         answer = JSON.parse(res.body)
-        property_types = ["apartment", "house"]
-        @bids = answer["bids"].select{|bid| property_types.any? {|property_type| bid["propertyType"] == property_type}}
+        @bids = answer["bids"]
         @city_id = City.where("zip_code like ?", "%#{zipcode}%").first.id
 
-        # Add additional information if the bid does not exist in the database
+        # Add average value for each bid
         @bids.each do |bid|
-          if Flat.where(flat_id: bid['id']).length == 0
+          if Flat.where(flat_id: bid['id']).length > 0
             bid["city_id"] = @city_id
             bid["avg_price"] = answer["average"] ? answer["average"] : 0
             bid["avg_surface"] = answer["surfaceAverage"] ? answer["surfaceAverage"] : 0
@@ -40,50 +40,23 @@ class FlatsCreateJob < ApplicationJob
               bid["price_per_sq_m"] = 0
               bid["return"] = 0
             end
-            @flats_to_create << bid
           end
+          @flats << bid
         end
       end
     end
-    @flats_to_create
+    return @flats
   end
 
-  # Create flat in database
-  def create_flat(flat)
-    flat = Flat.create(flat_id: flat['id'],
-                origin: flat['origin'],
-                date: DateTime.strptime(flat["date"]),
-                url: flat['url'],
-                title: flat['title'],
-                description: flat['description'],
-                price: flat['price'].to_i,
-                rooms: flat['rooms'].to_i,
-                surface: flat['surface'].to_i,
-                plotsurface: flat['plotSurface'].to_i,
-                city_id: flat['city_id'],
-                zipcode: flat['zipCode'],
-                latitude: flat['latitude'].to_f,
-                longitude: flat['longitude'].to_f,
-                thumbs: flat['thumbs'],
-                images: flat['images'],
-                propertytype: flat['propertyType'],
-                pricehistory: flat['priceHistory'],
-                avg_price: flat['avg_price'].to_f,
-                avg_surface: flat['avg_surface'].to_f,
-                avg_plotsurface: flat['avg_plotsurface'].to_f,
-                avg_rooms: flat['avg_rooms'].to_f,
-                avg_date: flat['avg_date'].to_f,
-                investment_return: flat['return'].to_f)
-  end
-
-  # Task to update the database with a POST request to API Property Hub Staging
+  # Task to clean the database with a POST request to API Property Hub Staging
   def perform
+    @flats = Flat.all
     @zipcodes = set_zipcodes
-    @flats_to_create = API_request(@zipcodes)
-
-    # Create flats in database only if the API returns results
-    if @flats_to_create && (@flats_to_create.size > 0)
-      @flats_to_create.each{ |flat| create_flat(flat)}
+    @bids = API_request(@zipcodes)
+    @flats.each do |flat|
+      if @bids.select{|bid| bid['url'] == flat['url']}.count == 0
+        flat.destroy
+      end
     end
   end
 end
