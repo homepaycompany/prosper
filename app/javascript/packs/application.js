@@ -14,19 +14,19 @@ import "../shared/landing_page.js"
 
 // Javascript to add chart on Flat#show
 import { addChart } from "../shared/chart.js"
-if (document.querySelector('#flat-chart') !== null) {
+if (document.querySelector('#flat-chart')) {
   addChart();
 }
 
 // Javascript to calculate the investment return for sliders on Flat#show
 import { returnCalculation } from "../shared/slider.js"
-if (document.querySelector('#flat-price-slider') !== null) {
+if (document.querySelector('#flat-price-slider')) {
   returnCalculation();
 }
 
 // Javascript to show the assumptions undertaken for the calculation of investment return
 import { showAssumptions } from "../shared/assumptions.js"
-if (document.querySelector('#flat-price-slider') !== null) {
+if (document.querySelector('#flat-price-slider')) {
   showAssumptions();
 }
 
