@@ -210,6 +210,12 @@
   margin: 10px 0px;
 }
 
+// Chart style
+.highcharts-container a {
+  text-decoration: none !important;
+  color: $black !important;
+}
+
 // Slider style
 .slider {
   .slider-selection {

@@ -115,23 +115,20 @@ class FlatsController < ApplicationController
   # Define points for scatter char
   def set_chart_data
     # Determine data for the flats presented in charts
-    @flats_data_hash = {name: "flats", data: []}
+    @chart_data = []
+    @chart_2_data = []
     @flats_data_hash_2 = {name: "flats", data: []}
     @flats.reject{|flat| flat.id == @flat.id}.each do |flat|
-      if @flats_data_hash[:data].size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface && flat.surface < 500 && flat.surface > 0
-        @flats_data_hash[:data] << [flat.price, flat.surface]
+      if @chart_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface && flat.surface < 500 && flat.surface > 0
+        @chart_data << {name: flat_path(flat.id), data: [[flat.price, flat.surface]], marker: {symbol: "circle"}, color: "#243059"}
       end
-      if @flats_data_hash_2[:data].size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface < 500 && flat.surface > 0
-        @flats_data_hash_2[:data] << [flat.price / flat.surface, flat.surface]
+      if @chart_2_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface < 500 && flat.surface > 0
+        @chart_2_data << {name: flat_path(flat.id), data: [[flat.price / flat.surface, flat.surface]], marker: {symbol: "circle"}, color: "#243059"}
       end
     end
 
     # Determine data for selected flats presented in charts
-    @flat_data_hash = {name: "flat", data: [[@flat.price, @flat.surface]]}
-    @flat_data_hash_2 = {name: "flat", data: [[@flat.price / @flat.surface, @flat.surface]]} if @flat.surface && @flat.surface > 0
-
-    # Data for the first chart (price, size)
-    @chart_data = [@flats_data_hash, @flat_data_hash]
-    @chart_2_data = [@flats_data_hash_2, @flat_data_hash_2]
+    @chart_data << {name: @flat.url, data: [[@flat.price, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
+    @chart_2_data << {name: @flat.url, data: [[@flat.price / @flat.surface, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
   end
 end
