@@ -32,12 +32,12 @@ ActiveRecord::Schema.define(version: 20180213162054) do
   end
 
   create_table "city_accesses", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "city_id"
     t.datetime "starts_at"
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "city_id"
     t.index ["city_id"], name: "index_city_accesses_on_city_id"
     t.index ["user_id"], name: "index_city_accesses_on_user_id"
   end
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 20180213162054) do
     t.integer "rooms"
     t.integer "surface"
     t.integer "plotsurface"
-    t.bigint "city_id"
     t.string "zipcode"
     t.float "latitude"
     t.float "longitude"
@@ -69,6 +68,7 @@ ActiveRecord::Schema.define(version: 20180213162054) do
     t.float "avg_rooms"
     t.float "avg_date"
     t.float "investment_return"
+    t.bigint "city_id"
     t.index ["city_id"], name: "index_flats_on_city_id"
   end
 
@@ -103,19 +103,19 @@ ActiveRecord::Schema.define(version: 20180213162054) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.bigint "flat_id"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "flat_id"
+    t.bigint "user_id"
     t.index ["flat_id"], name: "index_visits_on_flat_id"
     t.index ["user_id"], name: "index_visits_on_user_id"
   end
 
   create_table "wishes", force: :cascade do |t|
     t.string "flat_url"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_wishes_on_user_id"
   end
 
