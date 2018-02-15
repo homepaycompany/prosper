@@ -22,6 +22,7 @@ class FlatsUpdateJob < ApplicationJob
         answer = JSON.parse(res.body)
         property_types = ["apartment", "house"]
         @bids = answer["bids"].select{|bid| property_types.any? {|property_type| bid["propertyType"] == property_type}}
+        @bids.reject!{|bid| bid['surface'] == 0}
         @city_id = City.where("zip_code like ?", "%#{zipcode}%").first.id
 
         # Add average value for each bid
