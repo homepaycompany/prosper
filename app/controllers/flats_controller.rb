@@ -25,7 +25,7 @@ class FlatsController < ApplicationController
         {
           lat: flat.latitude,
           lng: flat.longitude,
-          infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat["title"] }) }
+          infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
         }
       end
     end
@@ -39,7 +39,7 @@ class FlatsController < ApplicationController
 
     # Define flat marker for the map
     if @flat.latitude && @flat.longitude
-      @marker = [{ lat: @flat.latitude, lng: @flat.longitude, infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: @flat["title"] }) } }]
+      @marker = [{ lat: @flat.latitude, lng: @flat.longitude, infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: @flat }) } }]
     else
       @marker = []
     end

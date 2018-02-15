@@ -25,7 +25,7 @@ class WishesController < ApplicationController
         {
           lat: flat.latitude,
           lng: flat.longitude,
-          infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat["title"] }) }
+          infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
         }
       end
     end
