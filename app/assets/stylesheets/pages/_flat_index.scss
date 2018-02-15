@@ -135,6 +135,20 @@
   color: white;
 }
 
+// Flat marker
+.flat-marker {
+  width: 150px;
+  overflow: hidden;
+  a {
+    text-decoration: none;
+    color: $black;
+  }
+  .flat-marker-image img {
+    width: 150px;
+    height: 100px;
+  }
+}
+
 // Pagination style
 .pagination {
   margin: 10px 0px 20px 0px;

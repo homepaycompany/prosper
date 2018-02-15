@@ -1,1 +1,56 @@
-<p><%= flat %></p>
+<div class="flat-marker">
+  <%= link_to flat_path(flat.id) do %>
+    <div class="flat-marker-image">
+      <% if flat["images"].first.nil? %>
+        <%= image_tag "default_flat.png" %>
+      <% else %>
+        <%= image_tag flat["images"].first %>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p><strong><%= flat['title'] %></strong></p>
+      </div>
+      <div class="col-xs-6">
+        <p>
+          <strong>Surface</strong>
+          <br>
+          <% if flat.surface %>
+           <%= "#{flat.surface} m²" %>
+          <% else %>
+            n/a
+          <% end %>
+        </p>
+      </div>
+      <div class="col-xs-6">
+        <p>
+          <strong>Prix</strong>
+          <br>
+          <%= number_with_delimiter((flat.price/1000).round(0), :delimiter => ' ') if !flat.price.nil? %>k€
+        </p>
+      </div>
+      <div class="col-xs-6">
+        <p>
+          <strong>Rentabilité</strong>
+          <br>
+          <span class="<%= flat.investment_return > 0 ? 'flat-positive' : 'flat-negative' %>"><%= number_to_percentage(flat.investment_return * 100, precision: 1) %></span>
+        </p>
+      </div>
+      <div class="col-xs-6">
+        <p>
+          <strong>Date</strong>
+          <br>
+          <span class=" <%= 'flat-card-days-alert' if ((DateTime.now.to_f - flat.date.to_f) / 24.hours).round(0) > 10 %>  " >
+            <% if ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) == 1 %>
+              <%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jour
+            <% elsif ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) > 1 %>
+              <%= ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) %> jours
+            <% elsif ((DateTime.now.to_f - flat.date.to_f  ) / 24.hours).round(0) == 0 %>
+              Aujourd'hui
+            <% end %>
+          </span>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
