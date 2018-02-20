@@ -129,6 +129,8 @@ class FlatsController < ApplicationController
 
     # Determine data for selected flats presented in charts
     @chart_data << {name: @flat.url, data: [[@flat.price, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
-    @chart_2_data << {name: @flat.url, data: [[@flat.price / @flat.surface, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
+    if @flat.surface
+      @chart_2_data << {name: @flat.url, data: [[@flat.price / @flat.surface, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
+    end
   end
 end
