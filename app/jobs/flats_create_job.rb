@@ -111,6 +111,7 @@ class FlatsCreateJob < ApplicationJob
               bid["price_per_sq_m"] = 0
               bid["return"] = 0
             end
+            create_flat(bid)
             @flats_to_create << bid
           end
         end
