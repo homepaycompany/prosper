@@ -69,6 +69,34 @@ class FlatsCreateJob < ApplicationJob
     end
   end
 
+  # Create flat in database
+  def create_flat(flat)
+    flat = Flat.create(flat_id: flat['id'],
+                origin: flat['origin'],
+                date: DateTime.strptime(flat["date"]),
+                url: flat['url'],
+                title: flat['title'],
+                description: flat['description'],
+                price: flat['price'].to_i,
+                rooms: flat['rooms'].to_i,
+                surface: flat['surface'].to_i,
+                plotsurface: flat['plotSurface'].to_i,
+                city_id: flat['city_id'],
+                zipcode: flat['zipCode'],
+                latitude: flat['latitude'].to_f,
+                longitude: flat['longitude'].to_f,
+                thumbs: flat['thumbs'],
+                images: flat['images'],
+                propertytype: flat['propertyType'],
+                pricehistory: flat['priceHistory'],
+                avg_price: flat['avg_price'].to_f,
+                avg_surface: flat['avg_surface'].to_f,
+                avg_plotsurface: flat['avg_plotsurface'].to_f,
+                avg_rooms: flat['avg_rooms'].to_f,
+                avg_date: flat['avg_date'].to_f,
+                investment_return: flat['return'].to_f)
+  end
+
   # For each zipcode, perform a POST request to API Property Hub Staging
   def API_request(zipcodes)
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
@@ -103,6 +131,7 @@ class FlatsCreateJob < ApplicationJob
               bid["avg_price"] = answer["average"] ? answer["average"] : 0
             end
 
+            # Set average price per surface if values exist
             if bid["price"] && bid["surface"]
               bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
               # Internal rate return depending on reselling price and notarial costs
@@ -112,50 +141,16 @@ class FlatsCreateJob < ApplicationJob
               bid["return"] = 0
             end
             create_flat(bid)
-            @flats_to_create << bid
           end
         end
       end
     end
-    @flats_to_create
   end
 
-  # Create flat in database
-  def create_flat(flat)
-    flat = Flat.create(flat_id: flat['id'],
-                origin: flat['origin'],
-                date: DateTime.strptime(flat["date"]),
-                url: flat['url'],
-                title: flat['title'],
-                description: flat['description'],
-                price: flat['price'].to_i,
-                rooms: flat['rooms'].to_i,
-                surface: flat['surface'].to_i,
-                plotsurface: flat['plotSurface'].to_i,
-                city_id: flat['city_id'],
-                zipcode: flat['zipCode'],
-                latitude: flat['latitude'].to_f,
-                longitude: flat['longitude'].to_f,
-                thumbs: flat['thumbs'],
-                images: flat['images'],
-                propertytype: flat['propertyType'],
-                pricehistory: flat['priceHistory'],
-                avg_price: flat['avg_price'].to_f,
-                avg_surface: flat['avg_surface'].to_f,
-                avg_plotsurface: flat['avg_plotsurface'].to_f,
-                avg_rooms: flat['avg_rooms'].to_f,
-                avg_date: flat['avg_date'].to_f,
-                investment_return: flat['return'].to_f)
-  end
 
   # Task to update the database with a POST request to API Property Hub Staging
   def perform
     @zipcodes = set_zipcodes
-    @flats_to_create = API_request(@zipcodes)
-
-    # Create flats in database only if the API returns results
-    # if @flats_to_create && (@flats_to_create.size > 0)
-    #   @flats_to_create.each{ |flat| create_flat(flat)}
-    # end
+    API_request(@zipcodes)
   end
 end
