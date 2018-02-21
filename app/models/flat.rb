@@ -1,6 +1,7 @@
 class Flat < ApplicationRecord
   belongs_to :city
   has_many :visits, dependent: :delete_all
+  validates :url, uniqueness: true
 
   def return_rate
     @selling_price = (self.size.to_f * self.average_price.to_f)
