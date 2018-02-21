@@ -154,8 +154,8 @@ class FlatsCreateJob < ApplicationJob
     @flats_to_create = API_request(@zipcodes)
 
     # Create flats in database only if the API returns results
-    if @flats_to_create && (@flats_to_create.size > 0)
-      @flats_to_create.each{ |flat| create_flat(flat)}
-    end
+    # if @flats_to_create && (@flats_to_create.size > 0)
+    #   @flats_to_create.each{ |flat| create_flat(flat)}
+    # end
   end
 end
