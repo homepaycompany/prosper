@@ -116,32 +116,30 @@ class FlatsCreateJob < ApplicationJob
 
         # Add additional information if the bid does not exist in the database
         @bids.each do |bid|
-          if Flat.where(url: bid['url']).length == 0
-            bid["city_id"] = @city_id
-            bid["avg_surface"] = answer["surfaceAverage"] ? answer["surfaceAverage"] : 0
-            bid["avg_plot_surface"] = answer["plotsurfaceAverage"] ? answer["plotsurfaceAverage"] : 0
-            bid["avg_rooms"] = answer["roomsAverage"] ? answer["roomsAverage"] : 0
-            bid["avg_date"] = answer["days"] ? answer["days"] : 0
+          bid["city_id"] = @city_id
+          bid["avg_surface"] = answer["surfaceAverage"] ? answer["surfaceAverage"] : 0
+          bid["avg_plot_surface"] = answer["plotsurfaceAverage"] ? answer["plotsurfaceAverage"] : 0
+          bid["avg_rooms"] = answer["roomsAverage"] ? answer["roomsAverage"] : 0
+          bid["avg_date"] = answer["days"] ? answer["days"] : 0
 
-            # Set average price depending on the closest area if Toulouse
-            if @city_id == 1
-              set_average_price(@bids, areas)
-            # Set average price obtained from bids if Marseille
-            elsif @city_id == 2
-              bid["avg_price"] = answer["average"] ? answer["average"] : 0
-            end
-
-            # Set average price per surface if values exist
-            if bid["price"] && bid["surface"]
-              bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
-              # Internal rate return depending on reselling price and notarial costs
-              bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"] - bid["avg_price"] * 0.025 - bid["price_per_sq_m"] * 0.2 * 0.03).to_f / bid["price_per_sq_m"])
-            else
-              bid["price_per_sq_m"] = 0
-              bid["return"] = 0
-            end
-            create_flat(bid)
+          # Set average price depending on the closest area if Toulouse
+          if @city_id == 1
+            set_average_price(@bids, areas)
+          # Set average price obtained from bids if Marseille
+          elsif @city_id == 2
+            bid["avg_price"] = answer["average"] ? answer["average"] : 0
           end
+
+          # Set average price per surface if values exist
+          if bid["price"] && bid["surface"]
+            bid["price_per_sq_m"] = bid["price"].to_f / bid["surface"]
+            # Internal rate return depending on reselling price and notarial costs
+            bid["return"] = ((bid["avg_price"] - bid["price_per_sq_m"] - bid["avg_price"] * 0.025 - bid["price_per_sq_m"] * 0.2 * 0.03).to_f / bid["price_per_sq_m"])
+          else
+            bid["price_per_sq_m"] = 0
+            bid["return"] = 0
+          end
+          create_flat(bid)
         end
       end
     end
