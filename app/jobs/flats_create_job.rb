@@ -8,6 +8,62 @@ class FlatsCreateJob < ApplicationJob
     @zipcodes.flatten!
   end
 
+  # Set average by area according to barometre.immobilier.notaires.fr
+  def average_by_area
+    areas = [{area: "Toulouse", average_price: 2580},
+             {area: "Lalande, Toulouse", average_price: 2000},
+             {area: "Les Izards, Toulouse", average_price: 1860},
+             {area: "Croix Daurade, Toulouse", average_price: 2130},
+             {area: "Barrière de Paris, Toulouse", average_price: 2190},
+             {area: "Sept Deniers, Toulouse", average_price: 2620},
+             {area: "Minimes, Toulouse", average_price: 2500},
+             {area: "Bonnefoy, Toulouse", average_price: 2480},
+             {area: "Roseraie, Toulouse", average_price: 2150},
+             {area: "Juncasse, Toulouse", average_price: 2140},
+             {area: "Chateau de l'Hers, Toulouse", average_price: 2270},
+             {area: "La terrasse, Toulouse", average_price: 2500},
+             {area: "Montaudran, Toulouse", average_price: 2350},
+             {area: "Rangueil, Toulouse", average_price: 2710},
+             {area: "Poupourville, Toulouse", average_price: 2800},
+             {area: "La Fourguette, Toulouse", average_price: 1770},
+             {area: "Saint Simon, Toulouse", average_price: 2190},
+             {area: "Basso Cambo, Toulouse", average_price: 2250},
+             {area: "Lardenne, Toulouse", average_price: 2600},
+             {area: "Saint Martin du Touch, Toulouse", average_price: 2170},
+             {area: "Purpan, Toulouse", average_price: 2150},
+             {area: "Marengo, Toulouse", average_price: 2660},
+             {area: "Guilhemery, Toulouse", average_price: 2650},
+             {area: "Cote pavé, Toulouse", average_price: 2850},
+             {area: "Pont des demoiseilles, Toulouse", average_price: 2600},
+             {area: "Sauzelong - Rangueil, Toulouse", average_price: 2090},
+             {area: "Jules Julien, Toulouse", average_price: 2760},
+             {area: "Croix de pierre, Toulouse", average_price: 2070},
+             {area: "La cépière, Toulouse", average_price: 2330},
+             {area: "Casselardit, Toulouse", average_price: 2620},
+             {area: "Amidonniers, Toulouse", average_price: 3000},
+             {area: "Compans, Toulouse", average_price: 3310},
+             {area: "Les chalets, Toulouse", average_price: 3800},
+             {area: "Matabiau, Toulouse", average_price: 3620},
+             {area: "Saint Aubin Dupuy, Toulouse", average_price: 4150},
+             {area: "Le busca, Toulouse", average_price: 3350},
+             {area: "Saint Agne, Toulouse", average_price: 2670},
+             {area: "Arenes, Toulouse", average_price: 2480},
+             {area: "Patte d'oie, Toulouse", average_price: 2780},
+             {area: "Arnaud Bernard, Toulouse", average_price: 3570},
+             {area: "Saint Georges, Toulouse", average_price: 4490},
+             {area: "Saint Etienne, Toulouse", average_price: 4130},
+             {area: "Carmes, Toulouse", average_price: 4230},
+             {area: "Saint Cyprien, Toulouse", average_price: 3670},
+             {area: "Capitole, Toulouse", average_price: 2690},
+             {area: "Soupetard, Toulouse", average_price: 1830}]
+    average_prices = areas.each{|a| a[:latitude] = Geocoder.coordinates(a[:area])[0]}.each{|a| a[:longitude] = Geocoder.coordinates(a[:area])[1]}
+  end
+
+  # Set average price for a specific flat depending on the closest area
+  def set_average_price
+
+  end
+
   # For each zipcode, perform a POST request to API Property Hub Staging
   def API_request(zipcodes)
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
