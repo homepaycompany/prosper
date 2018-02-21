@@ -60,8 +60,13 @@ class FlatsCreateJob < ApplicationJob
   end
 
   # Set average price for a specific flat depending on the closest area
-  def set_average_price
-
+  def set_average_price(bids, areas)
+    bids.each do |bid|
+      bid_lat = bid['latitude'].to_f
+      bid_lng = bid['longitude'].to_f
+      area = areas.min_by{|a| Geocoder::Calculations.distance_between([a[:longitude],a[:latitude]], [bid_lng, bid_lat])}
+      bid["avg_price"] = area[:average_price]
+    end
   end
 
   # For each zipcode, perform a POST request to API Property Hub Staging
@@ -84,7 +89,6 @@ class FlatsCreateJob < ApplicationJob
         @bids.each do |bid|
           if Flat.where(flat_id: bid['id']).length == 0
             bid["city_id"] = @city_id
-            bid["avg_price"] = answer["average"] ? answer["average"] : 0
             bid["avg_surface"] = answer["surfaceAverage"] ? answer["surfaceAverage"] : 0
             bid["avg_plot_surface"] = answer["plotsurfaceAverage"] ? answer["plotsurfaceAverage"] : 0
             bid["avg_rooms"] = answer["roomsAverage"] ? answer["roomsAverage"] : 0
@@ -97,6 +101,16 @@ class FlatsCreateJob < ApplicationJob
               bid["price_per_sq_m"] = 0
               bid["return"] = 0
             end
+
+            # Set average price depending on the closest area if Toulouse
+            if @city_id == 1
+              areas = average_by_area
+              set_average_price(bids, areas)
+            # Set average price obtained from bids if Marseille
+            elsif @city_id == 2
+              bid["avg_price"] = answer["average"] ? answer["average"] : 0
+            end
+
             @flats_to_create << bid
           end
         end
