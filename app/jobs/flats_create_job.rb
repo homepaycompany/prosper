@@ -108,7 +108,7 @@ class FlatsCreateJob < ApplicationJob
         req.body = { "City": City.where("zip_code like ?", "%#{zipcode}%").first.name,"ZipCode": zipcode,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
         res = http.request req
         answer = JSON.parse(res.body)
-        property_types = ["apartment", "house"]
+        property_types = ["apartment"]
         @bids = answer["bids"].select{|bid| property_types.any? {|property_type| bid["propertyType"] == property_type}}
         @bids.reject!{|bid| bid['surface'] == 0}
         @city_id = City.where("zip_code like ?", "%#{zipcode}%").first.id
