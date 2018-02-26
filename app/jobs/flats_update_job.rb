@@ -111,9 +111,12 @@ class FlatsUpdateJob < ApplicationJob
         answer = JSON.parse(res.body)
 
         # Exclude bids for houses and whose surface is nil
-        property_types = ["apartment"]
-        @bids = answer["bids"].select{|bid| property_types.any? {|property_type| bid["propertyType"] == property_type}}
+        property_type = "apartment"
+        @bids = answer["bids"].select{|bid| bid["propertyType"] == property_type}
         @bids.reject!{|bid| bid['surface'] == 0}
+
+        # Exclude bids for flats with no latitude
+        @bids.reject!{|bid| bid['latitude'] == 43.6041  && bid['longitude'] == 1.44067}
 
         # Exclude from bids, flats which have already been recorded
         urls = Flat.all.map{|flat| flat.url}
@@ -148,7 +151,7 @@ class FlatsUpdateJob < ApplicationJob
             bid["price_per_sq_m"] = 0
             bid["return"] = 0
           end
-          create_flat(bid)
+          update_flat(bid)
         end
       end
     end
