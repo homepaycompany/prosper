@@ -118,20 +118,21 @@ class FlatsController < ApplicationController
     @chart_data = []
     @chart_2_data = []
     @flats_data_hash_2 = {name: "flats", data: []}
+    flat_max_size = @flat.surface * 1.2
+    flat_min_size = @flat.surface * 0.8
     Flat.near([@flat.latitude, @flat.longitude], 1).reject{|flat| flat.id == @flat.id}.each do |flat|
-      flat_max_size = @flat.surface * 1.2
-      if @chart_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface && flat.surface < flat_max_size && flat.surface > 0
+      if @chart_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface && flat.surface < flat_max_size && flat.surface > flat_min_size
         @chart_data << {name: flat_path(flat.id), data: [[flat.price, flat.surface]], marker: {symbol: "circle"}, color: "#243059"}
       end
-      if @chart_2_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface < flat_max_size && flat.surface > 0
+      if @chart_2_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface < flat_max_size && flat.surface > flat_min_size
         @chart_2_data << {name: flat_path(flat.id), data: [[flat.price / flat.surface, flat.surface]], marker: {symbol: "circle"}, color: "#243059"}
       end
     end
 
     # Determine data for selected flats presented in charts
-    @chart_data << {name: @flat.url, data: [[@flat.price, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
+    @chart_data << {name: flat_path(@flat.id), data: [[@flat.price, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
     if @flat.surface
-      @chart_2_data << {name: @flat.url, data: [[@flat.price / @flat.surface, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
+      @chart_2_data << {name: flat_path(@flat.id), data: [[@flat.price / @flat.surface, @flat.surface]], marker: {symbol: "circle"}, color: "#20E8B6"}
     end
   end
 end
