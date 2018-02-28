@@ -100,6 +100,10 @@ class FlatsCreateJob < ApplicationJob
   # For each zipcode, perform a POST request to API Property Hub Staging
   def API_request(zipcodes)
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
+
+    # Define the averages by area
+    areas = average_by_area
+
     zipcodes.each do |zipcode|
       Net::HTTP.start(uri.host, uri.port,
         :use_ssl => uri.scheme == 'https') do |http|
@@ -122,9 +126,6 @@ class FlatsCreateJob < ApplicationJob
 
         # Define the City of each flat
         @city_id = City.where("zip_code like ?", "%#{zipcode}%").first.id
-
-        # Setup the averages by area
-        areas = average_by_area
 
         # Add additional information if the bid does not exist in the database
         @bids.each do |bid|
