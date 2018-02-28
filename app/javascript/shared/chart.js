@@ -1,22 +1,20 @@
-// Function to identify the minimum of an array
-Array.min = function( array ){
-  return Math.min.apply( Math, array );
-};
-
-// Minimum value to show on the chart
-const minValues = data.map(function(item) {
-                    return item.data[0][1];
-                  });
-const minY = Array.min(minValues);
-const minValues2 = data2.map(function(item) {
-                    return item.data[0][1];
-                  });
-const minY2 = Array.min(minValues2);
-
-// Function to add charts on Flat#show
 function addChart() {
-  console.log(minValues);
-  console.log(minY);
+  // Function to identify the minimum of an array
+  Array.min = function( array ){
+    return Math.min.apply( Math, array );
+  };
+
+  // Minimum value to show on the chart
+  const minValues = data.map(function(item) {
+                      return item.data[0][1];
+                    });
+  const minY = Array.min(minValues);
+  const minValues2 = data2.map(function(item) {
+                      return item.data[0][1];
+                    });
+  const minY2 = Array.min(minValues2);
+
+  // Create charts
   new Chartkick.ScatterChart(
     "flat-chart",
     data,
