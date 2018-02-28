@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213162054) do
+ActiveRecord::Schema.define(version: 20180228111324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180213162054) do
     t.float "avg_date"
     t.float "investment_return"
     t.bigint "city_id"
+    t.string "address"
     t.index ["city_id"], name: "index_flats_on_city_id"
   end
 
