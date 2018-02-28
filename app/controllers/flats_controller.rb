@@ -118,11 +118,12 @@ class FlatsController < ApplicationController
     @chart_data = []
     @chart_2_data = []
     @flats_data_hash_2 = {name: "flats", data: []}
-    @flats.reject{|flat| flat.id == @flat.id}.each do |flat|
-      if @chart_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface && flat.surface < 500 && flat.surface > 0
+    Flat.near([@flat.longitude, @flat.latitude], 0.1).reject{|flat| flat.id == @flat.id}.each do |flat|
+      flat_max_size = @flat.surface * 1.2
+      if @chart_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface && flat.surface < flat_max_size && flat.surface > 0
         @chart_data << {name: flat_path(flat.id), data: [[flat.price, flat.surface]], marker: {symbol: "circle"}, color: "#243059"}
       end
-      if @chart_2_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface < 500 && flat.surface > 0
+      if @chart_2_data.size <= 100 && flat.price && flat.price < 1000000 && flat.price > 0 && flat.surface < flat_max_size && flat.surface > 0
         @chart_2_data << {name: flat_path(flat.id), data: [[flat.price / flat.surface, flat.surface]], marker: {symbol: "circle"}, color: "#243059"}
       end
     end

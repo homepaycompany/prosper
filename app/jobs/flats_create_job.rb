@@ -100,7 +100,6 @@ class FlatsCreateJob < ApplicationJob
   # For each zipcode, perform a POST request to API Property Hub Staging
   def API_request(zipcodes)
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
-    @flats_to_create = []
     zipcodes.each do |zipcode|
       Net::HTTP.start(uri.host, uri.port,
         :use_ssl => uri.scheme == 'https') do |http|
@@ -108,10 +107,23 @@ class FlatsCreateJob < ApplicationJob
         req.body = { "City": City.where("zip_code like ?", "%#{zipcode}%").first.name,"ZipCode": zipcode,"DateFrom":"0001-01-01T00:00:00","DateTo":"9999-12-31T23:59:59.9999999" }.to_json
         res = http.request req
         answer = JSON.parse(res.body)
-        property_types = ["apartment"]
-        @bids = answer["bids"].select{|bid| property_types.any? {|property_type| bid["propertyType"] == property_type}}
+
+        # Exclude bids for houses and whose surface is nil
+        property_type = "apartment"
+        @bids = answer["bids"].select{|bid| bid["propertyType"] == property_type}
         @bids.reject!{|bid| bid['surface'] == 0}
+
+        # Exclude bids for flats with no latitude
+        @bids.reject!{|bid| bid['latitude'] == 43.6041  && bid['longitude'] == 1.44067}
+
+        # Exclude from bids, flats which have already been recorded
+        urls = Flat.all.map{|flat| flat.url}
+        @bids.reject!{|bid| urls.include?(bid['url'])}
+
+        # Define the City of each flat
         @city_id = City.where("zip_code like ?", "%#{zipcode}%").first.id
+
+        # Setup the averages by area
         areas = average_by_area
 
         # Add additional information if the bid does not exist in the database

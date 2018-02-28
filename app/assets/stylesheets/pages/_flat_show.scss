@@ -174,7 +174,9 @@
     margin-bottom: 10px;
   }
   margin: 20px 0px;
-  min-height: 610px;
+  @media (max-width: 732px) {
+    min-height: 610px;
+  }
 }
 .show-flat-card-investment-assumption {
   display: flex;
