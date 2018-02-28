@@ -100,7 +100,12 @@ class FlatsUpdateJob < ApplicationJob
   # For each zipcode, perform a POST request to API Property Hub Staging
   def API_request(zipcodes)
     uri = URI("https://propertyhubstaging.azurewebsites.net/api/JsonApi?code=#{ENV['PROPERTY_HUB_API_KEY']}")
+
+    # Define the averages by area
+    areas = average_by_area
+
     @flats_to_update = []
+
     zipcodes.each do |zipcode|
     # zipcodes.each do |zipcode|
       Net::HTTP.start(uri.host, uri.port,
