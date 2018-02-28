@@ -3,6 +3,10 @@ class Flat < ApplicationRecord
   has_many :visits, dependent: :delete_all
   validates :url, uniqueness: true
 
+  # Reverse geocoding for Flat
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
+
   def return_rate
     @selling_price = (self.size.to_f * self.average_price.to_f)
     @notarial_costs = (0.025 * @selling_price)
