@@ -3,8 +3,8 @@ function addChart() {
     "flat-chart",
     data,
     { legend: false,
-      xtitle: "Prix",
-      ytitle: "Surface",
+      xtitle: "Prix (€)",
+      ytitle: "Surface (m²)",
       library: {
         tooltip: {
           enabled: true,
@@ -20,8 +20,8 @@ function addChart() {
     "flat-chart-size",
     data2,
     { legend: false,
-      xtitle: "Prix",
-      ytitle: "Surface",
+      xtitle: "Prix (€/m²)",
+      ytitle: "Surface (m²)",
       library: {
         tooltip: {
           enabled: true,
@@ -33,7 +33,6 @@ function addChart() {
         }
       }
     });
-  // new Chartkick.ScatterChart("flat-chart-size", data2, {legend: false, colors: ["#243059", "#20E8B6"], xtitle: "Prix/m²", ytitle: "Surface"});
 }
 
 export { addChart };
