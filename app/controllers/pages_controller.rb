@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def about
+  def pricing
   end
 
   def access
