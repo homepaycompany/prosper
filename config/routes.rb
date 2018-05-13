@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # Marketing pages
   root to: 'pages#home'
-  get 'about' => 'pages#about'
+  get 'pricing' => 'pages#pricing'
   get 'access' => 'pages#access'
   get 'contact' => 'pages#contact'
   post :subscribe, controller: :subscriptions, action: :subscribe
@@ -15,10 +15,10 @@ Rails.application.routes.draw do
 
 
   # Interface
-  resources :flats, only: [:index, :show]
-  resources :wishes, only: [:create, :destroy]
-  get 'wishlist' => 'wishes#index'
-  get 'profile' => 'devise'
+  # resources :flats, only: [:index, :show]
+  # resources :wishes, only: [:create, :destroy]
+  # get 'wishlist' => 'wishes#index'
+  # get 'profile' => 'devise'
 
   # Admin interface
   mount ForestLiana::Engine => '/forest'
